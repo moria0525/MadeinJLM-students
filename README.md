@@ -36,6 +36,7 @@ Please visit our wiki for furthur project info:
 - [Project Inception](../../wiki/Project-Inception-and-Planing)
 - [Software Requirements Specification](../../wiki/srs)
 - [Software Design Specification](../../wiki/sds)
+- [Organization Facebook page] (https://www.facebook.com/MadeinJLM/?fref=ts)
 
 ### Iteration Pages
 - [Iteration 0 - ZFR](../../wiki/iter0-zfr)

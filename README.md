@@ -7,8 +7,11 @@ A web-app for students, helps to find a job in Jerusalem
 ## Please visit our [live application](https://demo.reactstarterkit.com/)
 - Alright, currently only a landing page...
 
-## Our chat
+## Contact Info
+Our chat
 [![Join the chat at https://gitter.im/moria0525/MadeinJLM-students](https://badges.gitter.im/robi-y/seproject-team-template.svg)](https://gitter.im/moria0525/MadeinJLM-students?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+Our Email
+[![madeinjlm.jce@gmail.com](https://github.com/moria0525/MadeinJLM-students/blob/master/email.jpg)]()
 
 ## [Issue Board](https://huboard.com/robi-y/seproject-team-template#/)(soon...)
 

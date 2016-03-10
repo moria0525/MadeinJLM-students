@@ -9,7 +9,7 @@ A template repository with wiki for a team project at JCE's software engineering
 ## Please visit our [live application](https://demo.reactstarterkit.com/)
 - Alright, currently only a landing page...
 
-[![Join the chat at https://gitter.im/robi-y/seproject-team-template](https://badges.gitter.im/robi-y/seproject-team-template.svg)](https://gitter.im/moria0525/MadeinJLM-students?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/moria0525/MadeinJLM-students](https://badges.gitter.im/robi-y/seproject-team-template.svg)](https://gitter.im/moria0525/MadeinJLM-students?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## [Issue Board](https://huboard.com/robi-y/seproject-team-template#/)
 

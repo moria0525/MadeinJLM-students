@@ -1,6 +1,6 @@
 # MadeinJLM-students
 Students web app for finding job
-# seproject-team-template
+
 
 
 ![project logo (is copy from MadeinJLM-facebook)](https://github.com/moria0525/MadeinJLM-students/blob/master/logo.png)

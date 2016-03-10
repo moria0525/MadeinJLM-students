@@ -27,7 +27,7 @@ Please visit our wiki for furthur project info:
 ### [Team Page](../../wiki/team)
 [![Alon](https://avatars1.githubusercontent.com/u/17544440?v=3&s=80)](https://github.com/alonshmilo)
 [![Yoad](https://avatars3.githubusercontent.com/u/17547266?v=3&s=80)](https://github.com/sh00ki)
-[![Moria](https://avatars1.githubusercontent.com/u/17547064?v=3&s=400)](https://github.com/moria0525)
+[![Moria](https://avatars1.githubusercontent.com/u/17547064?v=3&s=80)](https://github.com/moria0525)
 [![Dor](https://avatars1.githubusercontent.com/u/17564511?v=3&s=80)](https://github.com/Dor-H)
 [![Barak](https://avatars2.githubusercontent.com/u/9195309?v=3&s=80)](https://github.com/Think-Smart)
 

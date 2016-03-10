@@ -32,7 +32,7 @@ Please visit our wiki for furthur project info:
 [![Barak](https://avatars2.githubusercontent.com/u/9195309?v=3&s=80)](https://github.com/Think-Smart)
 
 ### Project Documents
-- [Project Idea](docs/idea.pdf) ([Presentation](docs/idea-slides.pdf))
+- [Project Idea](docs/idea.pdf) ([Presentation](docs/Presentation.pdf))
 - [Project Inception](../../wiki/inception)
 - [Software Requirements Specification](../../wiki/srs)
 - [Software Design Specification](../../wiki/sds)

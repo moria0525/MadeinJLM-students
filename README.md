@@ -20,7 +20,7 @@ madeinjlm.jce@gmail.com
 ## [Issue Board](https://huboard.com/robi-y/seproject-team-template#/) (soon...)
 
 ## Disclaimer
-This project is developed as part of the requirements for a [software engineering course](https://github.com/jce-il/se-class/wiki) at the software engineering department - [Azrieli College of Engineering](http://www.jce.ac.il/), Jerusalem, Israel.
+This project is developed as part of the requirements for a [Software Engineering Course](https://github.com/jce-il/se-class/wiki) at the Software Engineering Department - [Azrieli - Jerusalem College of Engineering](http://www.jce.ac.il/), Jerusalem, Israel.
 
 Please visit our wiki for furthur project info: 
 

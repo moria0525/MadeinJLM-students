@@ -1,6 +1,5 @@
 # MadeinJLM-students
-Students web app for finding job
-
+A web-app for students, helps to find a job in Jerusalem
 
 
 ![project logo (is copy from MadeinJLM-facebook)](https://github.com/moria0525/MadeinJLM-students/blob/master/logo.png)

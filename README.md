@@ -1,5 +1,4 @@
 # MadeinJLM-students
-A web-app for students, helps to find a job in Jerusalem
 <br />
 ####You can stop searching...
 ####From now on, the job's will come to you!

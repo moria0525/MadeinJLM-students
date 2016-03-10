@@ -1,12 +1,12 @@
 # MadeinJLM-students
-Students web app for finding job
+Web app for students, finding a job in Jerusalem!
 # seproject-team-template
 
 
 ![project logo (this one is taken from basecamp)](http://klipfolio.com/sites/default/files/integrations/basecamp.png)
 
 ## Please visit our [live application](https://demo.reactstarterkit.com/)
-- Alright, currently only a landing page...
+- Under construction...
 
 [![Join the chat at https://gitter.im/moria0525/MadeinJLM-students](https://badges.gitter.im/robi-y/seproject-team-template.svg)](https://gitter.im/moria0525/MadeinJLM-students?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 

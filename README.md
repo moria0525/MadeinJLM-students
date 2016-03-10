@@ -10,7 +10,7 @@
 - Alright, currently only a landing page...
 
 ## Contact Info
-Our chat
+Our Chat
 [![Join the chat at https://gitter.im/moria0525/MadeinJLM-students](https://badges.gitter.im/robi-y/seproject-team-template.svg)](https://gitter.im/moria0525/MadeinJLM-students?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 <br />
 Our Email

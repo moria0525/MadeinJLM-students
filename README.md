@@ -10,6 +10,7 @@ A web-app for students, helps to find a job in Jerusalem
 ## Contact Info
 Our chat
 [![Join the chat at https://gitter.im/moria0525/MadeinJLM-students](https://badges.gitter.im/robi-y/seproject-team-template.svg)](https://gitter.im/moria0525/MadeinJLM-students?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+<br />
 Our Email
 madeinjlm.jce@gmail.com
 

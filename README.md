@@ -1,6 +1,6 @@
 # MadeinJLM-students
 ####You can stop searching...
-####From now on, the job's will come to you!
+####From now on, jobs will come to you!
 <br />
 
 

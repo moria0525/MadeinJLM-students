@@ -20,14 +20,14 @@ madeinjlm.jce@gmail.com
 ## Disclaimer
 This project is developed as part of the requirements for a [software engineering course](https://github.com/jce-il/se-class/wiki) at the software engineering department - [Azrieli College of Engineering](http://www.jce.ac.il/), Jerusalem, Israel.
 
-Please visit our [wiki](https://github.com/moria0525/MadeinJLM-students/wiki) for furthur project info: 
+Please visit our wiki for furthur project info: 
 
 ### [User Manual](../../wiki/user-manual) (empty)
 
 ### [Team Page](../../wiki/team)
 [![Alon](https://avatars1.githubusercontent.com/u/17544440?v=3&s=80)](https://github.com/alonshmilo)
 [![Yoad](https://avatars3.githubusercontent.com/u/17547266?v=3&s=80)](https://github.com/sh00ki)
-[![Moria](https://avatars1.githubusercontent.com/u/17547064?v=3)](https://github.com/moria0525)
+[![Moria](https://avatars1.githubusercontent.com/u/17547064?v=3&s=80)](https://github.com/moria0525)
 [![Dor](https://avatars1.githubusercontent.com/u/17564511?v=3&s=80)](https://github.com/Dor-H)
 [![Barak](https://avatars2.githubusercontent.com/u/9195309?v=3&s=80)](https://github.com/Think-Smart)
 

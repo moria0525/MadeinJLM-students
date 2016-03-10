@@ -1,5 +1,4 @@
 # MadeinJLM-students
-<br />
 ####You can stop searching...
 ####From now on, the job's will come to you!
 <br />

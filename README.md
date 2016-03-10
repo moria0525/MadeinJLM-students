@@ -2,7 +2,6 @@
 Students web app for finding job
 # seproject-team-template
 
-A template repository with wiki for a team project at JCE's software engineering course
 
 ![project logo (this one is taken from basecamp)](http://klipfolio.com/sites/default/files/integrations/basecamp.png)
 

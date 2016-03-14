@@ -17,7 +17,7 @@ Our Email
 madeinjlm.jce@gmail.com
 
 
-## [Issue Board](https://huboard.com/robi-y/seproject-team-template#/) (soon...)
+## [Issue Board](https://huboard.com/robi-y/seproject-team-template#/) (Coming Soon)
 
 ## Disclaimer
 This project is developed as part of the requirements for a [Software Engineering Course](https://github.com/jce-il/se-class/wiki) at the Software Engineering Department - [Azrieli - Jerusalem College of Engineering](http://www.jce.ac.il/), Jerusalem, Israel.

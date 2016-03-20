@@ -37,7 +37,7 @@ jlm.config(function($routeProvider) {
 });
 
 
-
+// this controller still under construction
 jlm.controller('UserNotConnected', function ($scope, countries){
   /*
   countries.list(function(countries) {
@@ -45,7 +45,7 @@ jlm.controller('UserNotConnected', function ($scope, countries){
   });
   */
 });
-
+// this controller still under construction
 jlm.controller('UserConnected', function ($scope, $routeParams, countries){
   /*
   countries.find($routeParams.countryId, function(country) {
@@ -53,7 +53,7 @@ jlm.controller('UserConnected', function ($scope, $routeParams, countries){
   });
   */
 });
-
+// this factory still under construction
 jlm.factory('countries', function($http){
     var fac = {};
      

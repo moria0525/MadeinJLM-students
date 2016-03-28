@@ -7,3 +7,4 @@
 |17.3.16|requirements and mock-up screens| 7 hours|
 |20.3.16|con- requirements and mock-up screens| 1.5 hours|
 |23.3.16|SRS review fix && meeting #2 with client && SDS| 9 hours|
+|27.3.16|SDS| 2 hours|

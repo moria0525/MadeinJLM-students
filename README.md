@@ -17,14 +17,14 @@ Our Email
 madeinjlm.jce@gmail.com
 
 
-## [Issue Board](https://huboard.com/moria0525/MadeinJLM-students/) (Board is active now)
+## [Issue Board](https://huboard.com/moria0525/MadeinJLM-students/)
 
 ## Disclaimer
 This project is developed as part of the requirements for a [Software Engineering Course](https://github.com/jce-il/se-class/wiki) at the Software Engineering Department - [Azrieli - Jerusalem College of Engineering](http://www.jce.ac.il/), Jerusalem, Israel.
 
 Please visit our wiki for furthur project info: 
 
-### [User Manual](../../wiki/user-manual) (Coming Soon)
+### [User Manual](../../wiki/user-manual) (Under constructions)
 
 ### [Team Page](../../wiki/team)
 [![Alon](https://avatars1.githubusercontent.com/u/17544440?v=3&s=80)](https://github.com/alonshmilo)

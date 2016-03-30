@@ -1,4 +1,3 @@
-//Todo: delete all unnecessary text, add suitable labels (with priotity and estimation), milestone, assignee
 ## Feature:
 
 ## User Story Template

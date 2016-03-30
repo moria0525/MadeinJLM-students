@@ -1,6 +1,7 @@
-Todo: delete all unnecessary text, add suitable labels (with priotity and estimation), milestone, assignee
+//Todo: delete all unnecessary text, add suitable labels (with priotity and estimation), milestone, assignee
+## Feature:
 
-## User Stoty Template
+## User Story Template
 - As a ...
 - I want ...
 - So that ...

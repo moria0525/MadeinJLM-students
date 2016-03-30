@@ -1,14 +1,4 @@
 Todo: delete all unnecessary text, add suitable labels (with priotity and estimation), milestone, assignee
-## Feature Template
-
-### Related Issues/Tasks
-- [ ] #1
-- [ ] #2
-
-### Scenario (test)
-- [ ] Step 1
-- [ ] ...
-- [ ] Expected result
 
 ## User Stoty Template
 - As a ...

@@ -1,17 +1,17 @@
 ## Feature:
 
-## User Story Template
+## User Story:
 - As a ...
 - I want ...
 - So that ...
 
-## Bug Template
+## Bug Handling:
 ### Expected behavior
 ### Actual behavior
 ### Steps to reproduce the behavior
 
-## Project Submission Template
-Checklist, e.g.,:
+## Project Submission
+Checklist:
 - [ ] Test feature scenarios
 - [ ] Update iteration page
   - [ ] Iteration retospective

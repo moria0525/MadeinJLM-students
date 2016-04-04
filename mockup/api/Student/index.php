@@ -34,7 +34,7 @@ class API_Student extends API {
             //Display Errors
             $errors = array();
             foreach($student->log->getErrors() as $err){
-                $errors[] = "<b>Error:</b> {$err}";
+                $errors[] = $err;
             }
             $return_arr =  ['status' => "error",'errors' => $errors];
         }
@@ -64,7 +64,7 @@ class API_Student extends API {
             //Display Errors
             $errors = array();
             foreach($student->log->getErrors() as $err){
-                $errors[] = "<b>Error:</b> {$err}";
+                $errors[] = $err;
             }
             $return_arr =  ['status' => "error",'errors' => $errors];
         }
@@ -85,7 +85,7 @@ class API_Student extends API {
             //Display Errors
             $errors = array();
             foreach($student->log->getErrors() as $err){
-                $errors[] = "<b>Error:</b> {$err}";
+                $errors[] = $err;
             }
             $return_arr =  ['status' => "error",'errors' => $errors];
             

@@ -6,18 +6,19 @@
 		<section class="main-context">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-5 text-center">
+					<div class="col-md-5 text-center" >
 						<h2 class="mb-40">Sign in</h2>
-						<form class="text-left mb-40" ng-submit="login()">
+                        <uib-alert ng-show="alerts.login.msg != null" type="{{alerts.login.type}}" close="closeAlert('login')"><span ng-bind-html="alerts.login.msg"></span></uib-alert>
+                        <form class="text-left mb-40" ng-submit="login()">
 							<div class="form-group">
-								<input type="email" class="form-control" placeholder="Email" ng-model="loginData.Email">
+								<input type="email" class="form-control" placeholder="Email" ng-model="data.login.Email">
 							</div>
 							<div class="form-group">
-								<input type="password" class="form-control" placeholder="Password" ng-model="loginData.Password">
+								<input type="password" class="form-control" placeholder="Password" ng-model="data.login.Password">
 							</div>
 							<div class="checkbox">
 								<label>
-									<input type="checkbox" ng-model="loginData.auto"> Remember me
+									<input type="checkbox" ng-model="data.login.auto"> Remember me
 								</label>
 							</div>
 							<button type="submit" class="btn btn-block btn-jlm">Sign in <i class="fa fa-angle-double-right"></i></button>
@@ -26,21 +27,22 @@
 					</div>
 					<div class="col-md-5 col-md-offset-2 text-center">
 						<h2 class="mb-40">Sign up</h2>
+                        <uib-alert ng-show="alerts.register.msg != null" type="{{alerts.register.type}}" close="closeAlert('register')"><span ng-bind-html="alerts.register.msg"></span></uib-alert>
 						<form class="text-left" ng-submit="register()">
 							<div class="form-group">
-								<input type="text" class="form-control" placeholder="First name" ng-model="registerData.first_name">
+								<input type="text" class="form-control" placeholder="First name" ng-model="data.register.first_name">
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Last name" ng-model="registerData.last_name">
+								<input type="text" class="form-control" placeholder="Last name" ng-model="data.register.last_name">
 							</div>
 							<div class="form-group">
-								<input type="email" class="form-control" placeholder="Email" ng-model="registerData.email">
+								<input type="email" class="form-control" placeholder="Email" ng-model="data.register.email">
 							</div>
 							<div class="form-group">
-								<input type="password" class="form-control" placeholder="Password" ng-model="registerData.passsword">
+								<input type="password" class="form-control" placeholder="Password" ng-model="data.register.passsword">
 							</div>
 							<div class="form-group">
-								<input type="password" class="form-control" placeholder="Confirm password" ng-model="registerData.passsword2">
+								<input type="password" class="form-control" placeholder="Confirm password" ng-model="data.register.passsword2">
 							</div>
 							<button type="submit" class="btn btn-block btn-jlm">Sign up <i class="fa fa-angle-double-right"></i></button>
 						</form>

@@ -1,73 +1,94 @@
 
-var jlm = angular.module('jlm', ['ngRoute','ui.bootstrap']);
+var jlm = angular.module('jlm', ['ngRoute','ngAnimate','ngSanitize', 'ui.bootstrap']);
+
+var studentData = false;
+
 
 jlm.config(function($routeProvider) {
-  $routeProvider.
-    when('/', {
-      templateUrl: 'view/home.html',
-      controller: 'UserNotConnected'
-    }).
-    when('/not-us', {
-      templateUrl: 'view/not-us.html',
-      controller: 'UserNotConnected'
-    }).
-    when('/login', {
-      templateUrl: 'view/login.html',
-      controller: 'UserNotConnected'
-    }).
-    when('/forgot-password', {
-      templateUrl: 'view/forgot-password.html',
-      controller: 'UserNotConnected'
-    }).
-    /*
-	when('/profile', {
-      templateUrl: 'view/profile.html',
-      controller: 'UserConnected'
-    }).
-	*/
-    otherwise({
-      redirectTo: '/'
-    });
+    $routeProvider.
+        when('/', {
+            templateUrl: 'view/home.html',
+            controller: 'UserNotConnected',
+        }).
+        when('/not-us', {
+          templateUrl: 'view/not-us.html',
+            controller: 'UserNotConnected',
+        }).
+        when('/login', {
+          templateUrl: 'view/login.html',
+            controller: 'UserNotConnected',
+        }).
+        when('/activated', {
+          templateUrl: 'view/activated.html',
+            controller: 'UserNotConnected',
+        }).
+        when('/forgot-password', {
+          templateUrl: 'view/forgot-password.html',
+            controller: 'UserNotConnected',
+        }).
+        when('/profile', {
+          templateUrl: 'view/profile.html',
+          controller: 'UserConnected'
+        }).
+        otherwise({
+          redirectTo: '/'
+        });
 });
 
 
-// this controller still under construction
-jlm.controller('UserNotConnected', function ($scope, $http, student){
-  
-    $scope.registerData = {};
+jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $location, student){
+    student.init().success(function(data){
+        studentData = data;
+        if (studentData != false) {
+            $location.path( "/profile" );
+        }
+    });
+    
     $scope.register = function() {
-        student.register($scope.registerData).success(function(data){
-            console.log(data);
+        student.register($scope.data.register).success(function(data){
+            if (data.status == 'error')
+                $scope.alerts.register = {type: 'danger', msg: data.errors.join('<br>')};
+            else {
+                $scope.alerts.register = {type: 'success', msg: 'Success'};
+                // $location.path( "/activated" );
+            }
         });
     };
     
-    $scope.loginData = {};
     $scope.login = function() {
-        student.login($scope.loginData).success(function(data){
-            console.log(data);
+        student.login($scope.data.login).success(function(data){
+            if (data.status == 'error')
+                $scope.alerts.login = {type: 'danger', msg: data.errors.join('<br>')};
+            else {
+                $scope.alerts.login = {type: 'success', msg: 'Success'};
+                $location.path( "/profile" );
+            }
         });
     };
-    
+        
+});
+
+jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location, student){
+    student.init().success(function(data){
+        studentData = data;
+        if (studentData == false) {
+            $location.path( "/login" );
+        }
+    });
     $scope.logOut = function() {
         student.logOut().success(function (data) {
             console.log(data);
+            if (data.status == 'success')
+                $location.path( "/login" );
         });
     };
-        
 });
-// this controller still under construction
-jlm.controller('UserConnected', function ($scope, $http, $routeParams){
-    
-    $scope.logOut = function() {
-        $http({
-            method  : 'POST',
-            url     : 'API/Student/logOut',
-            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
-        }).success(function(data) {
-            console.log(data);
-        });
-        
-    };
+jlm.controller('generalController', function ($scope){
+    $scope.data = {};
+    $scope.alerts = {};
+    $scope.closeAlert = function($index) {
+        $scope.alerts[$index] = {};
+    }
 });
 
 
@@ -77,6 +98,15 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams){
 jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, $httpParamSerializerJQLike) {
 
     return {
+        init: function () {
+            return $http({
+                method  : 'POST',
+                url     : 'API/Student',
+                headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }).success(function(data) {
+                return data;
+            }).error(function () {return false;});
+        },
         login: function (data) {
             return $http({
                 method  : 'POST',

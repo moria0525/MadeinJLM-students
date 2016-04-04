@@ -8,30 +8,30 @@ jlm.config(function($routeProvider) {
     $routeProvider.
         when('/', {
             templateUrl: 'view/home.html',
-            controller: 'UserNotConnected',
+            // controller: 'UserNotConnected',
         }).
         when('/not-us', {
-          templateUrl: 'view/not-us.html',
-            controller: 'UserNotConnected',
+            templateUrl: 'view/not-us.html',
+            // controller: 'UserNotConnected',
         }).
         when('/login', {
-          templateUrl: 'view/login.html',
+            templateUrl: 'view/login.html',
             controller: 'UserNotConnected',
         }).
         when('/activated', {
-          templateUrl: 'view/activated.html',
+            templateUrl: 'view/activated.html',
             controller: 'UserNotConnected',
         }).
         when('/forgot-password', {
-          templateUrl: 'view/forgot-password.html',
+            templateUrl: 'view/forgot-password.html',
             controller: 'UserNotConnected',
         }).
         when('/profile', {
-          templateUrl: 'view/profile.html',
-          controller: 'UserConnected'
+            templateUrl: 'view/profile.html',
+            controller: 'UserConnected'
         }).
         otherwise({
-          redirectTo: '/'
+            redirectTo: '/'
         });
 });
 

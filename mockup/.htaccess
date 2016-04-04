@@ -2,15 +2,13 @@ IndexIgnore .htaccess */.??* *~ *# */HEADER* */README* */_vti*
 
 Options -Indexes
 
-php_value upload_max_filesize 50M
-php_value post_max_size 50M
 
 RewriteEngine on
 
 ErrorDocument 404 /404
 
 
-RewriteRule module\/([^/]+)\/([\d]+)$ api.php?module=$1&id=$2&%{QUERY_STRING}
-RewriteRule module\/([^/]+)\/([^/]+)\/([\d]+)$ api.php?module=$1&fname=$2&id=$3&%{QUERY_STRING}
-RewriteRule module\/([^/]+)\/([^/]+)$ api.php?module=$1&fname=$2&%{QUERY_STRING}
-RewriteRule module\/([^/]+)$ api.php?module=$1&%{QUERY_STRING}
+RewriteRule API\/([^/]+)\/([\d]+)$ api.php?api=$1&id=$2&%{QUERY_STRING}
+RewriteRule API\/([^/]+)\/([^/]+)\/([\d]+)$ api.php?api=$1&fname=$2&id=$3&%{QUERY_STRING}
+RewriteRule API\/([^/]+)\/([^/]+)$ api.php?api=$1&fname=$2&%{QUERY_STRING}
+RewriteRule API\/([^/]+)$ api.php?api=$1&%{QUERY_STRING}

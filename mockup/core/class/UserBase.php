@@ -25,9 +25,9 @@ abstract class UserBase
         ),
         'database'        => array(
             'host'     => 'localhost',
-            'name'     => '',
-            'user'     => '',
-            'password' => '',
+            'name'     => 'jlm_job',
+            'user'     => 'jlm',
+            'password' => 'j-l-m123',
             'dsn'      => '',
             'pdo'      => null,
         )
@@ -40,17 +40,19 @@ abstract class UserBase
     protected $_updates;
     /** @var Collection - default field validations */
     protected $_validations = array(
+        /*
         'Username' => array(
             'limit' => '3-15',
             'regEx' => '/^([a-zA-Z0-9_])+$/'
         ),
-        'Password' => array(
-            'limit' => '3-15',
-            'regEx' => ''
-        ),
+        */
         'Email'    => array(
             'limit' => '4-45',
             'regEx' => '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,63})$/i'
+        ),
+        'Password' => array(
+            'limit' => '3-15',
+            'regEx' => ''
         )
     );
 

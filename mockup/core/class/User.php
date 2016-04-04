@@ -119,7 +119,7 @@ class User extends UserBase
             }
         } else {
             //Credentials Login
-            if ($identifier && $password) {
+            if ($identifier && $password && $identifier != '' && $password != '') {
                 /*
 				if (preg_match($this->_validations->Email->regEx, $identifier)) {
                     //Login using email
@@ -132,9 +132,12 @@ class User extends UserBase
 				$getBy = 'Email';
                 $this->log->report('Credentials received');
             } else {
+                /*
                 if ($identifier && !$password) {
                     $this->log->error(7);
                 }
+                */
+                $this->log->error(7);
                 return false;
             }
         }
@@ -184,6 +187,7 @@ class User extends UserBase
                 if ($userFile->LastLogin == 0) {
                     //Account has not been activated
                     $this->log->formError('Password',$this->errorList[8]);
+                    $this->sendActivated($userFile->Email,$userFile->Confirmation);
                 } else {
                     if (!$userFile->Confirmation) {
                         //Account has been deactivated
@@ -222,7 +226,9 @@ class User extends UserBase
             return false;
         }
     }
-
+    private function sendActivated($to,$confirmation) {
+        sendMail::send($to, 'Activated your account', 'Hi, please click on the link at the bottom to activated your account.<br>click <a href="http://www.baraktech.co.il/API/Student/activated?c=' . $confirmation . '">here</a>');
+    }
     /**
      * Starts and Configures the object
      *
@@ -327,7 +333,20 @@ class User extends UserBase
     {
         return (bool) $this->session->signed;
     }
-
+    
+    /**
+     * Check if a user currently signed-in
+     *
+     * @return user data if signed in
+     */
+    public function userData()
+    {
+        if ((bool) $this->session->signed) {
+            return $this->_data;
+        }
+        return false;
+    }
+    
     /**
      * Register A New User
      * Takes two parameters, the first being required
@@ -344,7 +363,7 @@ class User extends UserBase
      *                        Returns true if second parameter $activation is false
      *                        Returns false on Error
      */
-    public function register($info, $activation = false)
+    public function register($info, $activation = true)
     {
         $this->log->channel('registration'); //Index for Errors and Reports
 

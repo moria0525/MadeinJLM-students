@@ -4,7 +4,9 @@ if (session_status() == PHP_SESSION_NONE)
 
 include_once 'core/functions.php';// data base class
 
-include_once 'core/class/MODULE.php';
+include_once 'core/class/API.php';
+
+include_once 'core/class/sendMail.php';
 
 include_once 'core/class/Collection.php';
 include_once 'core/class/Cookie.php';

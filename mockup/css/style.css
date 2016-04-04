@@ -37,6 +37,11 @@ a:visited {
 a:active {
   color: #000;
 }
+h1 {font-weight: 200;}
+h2, h3, h4 {
+    font-weight: 300;
+}
+
 /* end general style */
 
 /* end btn-jlm style */
@@ -123,10 +128,17 @@ header .header-not-connected h1 {
 header .header-not-connected h2 {
     font-weight: 100;
 }
-h1 {font-weight: 200;}
-h2, h3, h4 {
-    font-weight: 300;
+
+header .header-connected {
+    text-align: center;
+    color: #FFF;
+	padding-bottom: 60px;
 }
+header .header-connected h1 {
+    font-weight: 100;
+    font-size: 86px;
+}
+
 .mb-40 {margin-bottom: 40px;}
 .form-control {
     padding: 10px 10px;

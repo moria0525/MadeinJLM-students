@@ -9,3 +9,13 @@
 |23.3.16|SRS review fix && meeting #2 with client && SDS| 9 hours|
 |27.3.16|con-SDS| 2 hours|
 |30.3.16|ZFR| 6.5 hours|
+|4.4.16|building server side api| 4 hours|
+
+
+
+
+# Barak Turgeman
+| date   | subject         | length  |
+|--------|-----------------|---------|
+|31.3.16  |start            | 3 hours  |
+|4.4.16 |building server side api    | 2 hours |

@@ -19,3 +19,4 @@
 |--------|-----------------|---------|
 |31.3.16  |building server side api            | 3 hours  |
 |4.4.16 |building server side api    | 2 hours |
+|4.4.16 |work on login, register, logout| 3 hours |

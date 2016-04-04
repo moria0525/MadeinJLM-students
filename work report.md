@@ -1,4 +1,4 @@
-
+##The whole team
 | date   | subject         | length  |
 |--------|-----------------|---------|
 |7.3.16  |start            | 1.5 hours  |
@@ -14,9 +14,19 @@
 
 
 
-# Barak Turgeman
+## Barak Turgeman
 | date   | subject         | length  |
 |--------|-----------------|---------|
 |31.3.16  |building server side api            | 3 hours  |
 |4.4.16 |building server side api    | 2 hours |
 |4.4.16 |work on login, register, logout| 3 hours |
+
+## Moria Rabayoff
+| date   | subject         | length  |
+|--------|-----------------|---------|
+|4.4.16  |ZFR improvements and project foundations| 1 hour  |
+
+## Alon Shmilovich
+| date   | subject         | length  |
+|--------|-----------------|---------|
+|4.4.16  |ZFR improvements and Iterations foundations| 1 hour  |

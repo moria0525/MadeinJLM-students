@@ -17,5 +17,5 @@
 # Barak Turgeman
 | date   | subject         | length  |
 |--------|-----------------|---------|
-|31.3.16  |start            | 3 hours  |
+|31.3.16  |building server side api            | 3 hours  |
 |4.4.16 |building server side api    | 2 hours |

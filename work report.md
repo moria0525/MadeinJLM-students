@@ -24,9 +24,9 @@
 ## Moria Rabayoff
 | date   | subject         | length  |
 |--------|-----------------|---------|
-|4.4.16  |ZFR improvements and project foundations| 1 hours  |
+|4.4.16  |ZFR improvements and project foundations| 1 hour  |
 
 ## Alon Shmilovich
 | date   | subject         | length  |
 |--------|-----------------|---------|
-|4.4.16  |ZFR improvements and Iterations foundations| 1 hours  |
+|4.4.16  |ZFR improvements and Iterations foundations| 1 hour  |

@@ -25,9 +25,9 @@ abstract class UserBase
         ),
         'database'        => array(
             'host'     => 'localhost',
-            'name'     => 'jlm_job',
-            'user'     => 'jlm',
-            'password' => 'j-l-m123',
+            'name'     => 'jobmadei_db',
+            'user'     => 'jobmadei_user',
+            'password' => 'q1w2e3r4',
             'dsn'      => '',
             'pdo'      => null,
         )

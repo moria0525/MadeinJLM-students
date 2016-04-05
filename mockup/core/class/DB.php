@@ -13,11 +13,11 @@ class DB
     /** @var string - The server IP or host name */
     private $host = 'localhost';
     /** @var string - The server user to login as */
-    private $user = 'jlm';
+    private $user = 'jobmadei_user';
     /** @var string - The user password */
-    private $password = 'j-l-m123';
+    private $password = 'q1w2e3r4';
     /** @var string - The name of the database */
-    private $dbName = 'jlm_job';
+    private $dbName = 'jobmadei_db';
     /** @var string - Alternative DSN string */
     private $dsn = '';
     /** @var \PDO - The DB connection session */

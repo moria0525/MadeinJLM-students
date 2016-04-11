@@ -11,6 +11,7 @@
 |30.3.16|ZFR| 6.5 hours|
 |4.4.16|building server side api| 4 hours|
 |10.4.16|meeting with Ziv| 0.5 hour|
+|11.4.16|meeting with client && work on project| 1.5 hours|
 
 
 

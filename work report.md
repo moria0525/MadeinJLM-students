@@ -10,6 +10,7 @@
 |27.3.16|con-SDS| 2 hours|
 |30.3.16|ZFR| 6.5 hours|
 |4.4.16|building server side api| 4 hours|
+|10.4.16|meeting with Ziv| 0.5 hour|
 
 
 

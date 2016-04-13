@@ -23,7 +23,7 @@ jlm.config(function($routeProvider) {
             controller: 'UserNotConnected',
         }).
 
-        when ('/change-paddword', {
+        when ('/change-password', {
             templateUrl: 'view/change-password.html',
             controller: 'UserConnected'
         }).
@@ -88,6 +88,14 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
                 $location.path( "/login" );
         });
     };
+
+    $scope.changePassword() = function() {
+        student.changePassword().success(function (data){
+            
+        });
+
+
+    });
 });
 jlm.controller('generalController', function ($scope){
     $scope.data = {};

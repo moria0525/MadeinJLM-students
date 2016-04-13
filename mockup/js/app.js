@@ -14,6 +14,7 @@ jlm.config(function($routeProvider) {
             templateUrl: 'view/not-us.html',
             // controller: 'UserNotConnected',
         }).
+
         when('/login', {
             templateUrl: 'view/login.html',
             controller: 'UserNotConnected',
@@ -26,14 +27,15 @@ jlm.config(function($routeProvider) {
             templateUrl: 'view/forgot-password.html',
             controller: 'UserNotConnected',
         }).
+    when('/termOfUse', {
+        templateUrl: 'view/termOfUse.html',
+        controller: 'UserNotConnected',
+    }).
         when('/profile', {
             templateUrl: 'view/profile.html',
             controller: 'UserConnected'
         }).
-        when('/termOfUse', {
-        templateUrl: 'view/termOfUse.html',
 
-        }).
         otherwise({
             redirectTo: '/'
         });

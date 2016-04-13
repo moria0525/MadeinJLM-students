@@ -30,6 +30,10 @@ jlm.config(function($routeProvider) {
             templateUrl: 'view/profile.html',
             controller: 'UserConnected'
         }).
+        when('/termOfUse', {
+        templateUrl: 'view/termOfUse.html',
+
+        }).
         otherwise({
             redirectTo: '/'
         });

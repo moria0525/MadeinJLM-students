@@ -22,6 +22,12 @@ jlm.config(function($routeProvider) {
             templateUrl: 'view/activated.html',
             controller: 'UserNotConnected',
         }).
+
+        when ('/change-paddword', {
+            templateUrl: 'view/change-password.html',
+            controller: 'UserConnected'
+        }).
+
         when('/forgot-password', {
             templateUrl: 'view/forgot-password.html',
             controller: 'UserNotConnected',

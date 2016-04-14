@@ -99,7 +99,11 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
     };
 
     $scope.changePassword = function () {
+        console.log("asdsad");
         student.changePassword().success(function (data) {
+            if (data.status === 'success') {
+                $location.path("/change-password");
+            }
         });
     };
 });

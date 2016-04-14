@@ -109,7 +109,7 @@ class API_Student extends API {
 
     }
     public function changePassword() {
-
+        echo "sadjksad";
     }
     public function changeStatus() {
 

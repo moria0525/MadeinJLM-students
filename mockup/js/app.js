@@ -1,10 +1,11 @@
 
-var jlm = angular.module('jlm', ['ngRoute','ngAnimate','ngSanitize', 'ui.bootstrap']);
+var jlm = angular.module('jlm', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
 var studentData = false;
 
 
-jlm.config(function($routeProvider) {
+jlm.config(function ($routeProvider) {
+    "use strict";
     $routeProvider.
         when('/', {
             templateUrl: 'view/home.html',
@@ -24,22 +25,22 @@ jlm.config(function($routeProvider) {
             controller: 'UserNotConnected',
         }).
 
-        when ('/change-password', {
+        when('/change-password', {
             templateUrl: 'view/change-password.html',
-            controller: 'UserConnected'
+            controller: 'UserConnected',
         }).
 
         when('/forgot-password', {
             templateUrl: 'view/forgot-password.html',
-            controller: 'UserNotConnected',
+            controller: 'UserNotConnected'
         }).
-    when('/termOfUse', {
+        when('/termOfUse', {
         templateUrl: 'view/termOfUse.html',
         controller: 'UserNotConnected',
-    }).
+        }).
         when('/profile', {
             templateUrl: 'view/profile.html',
-            controller: 'UserConnected'
+            controller: 'UserConnected',
         }).
 
         otherwise({
@@ -48,67 +49,68 @@ jlm.config(function($routeProvider) {
 });
 
 
-jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $location, student){
-    student.init().success(function(data){
+jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $location, student) {
+    "use strict";
+    student.init().success(function (data) {
         studentData = data;
-        if (studentData != false) {
-            $location.path( "/profile" );
+        if (studentData !== false) {
+            $location.path("/profile");
         }
     });
     
-    $scope.register = function() {
-        student.register($scope.data.register).success(function(data){
-            if (data.status == 'error')
+    $scope.register = function () {
+        student.register($scope.data.register).success(function (data) {
+            if (data.status === 'error') {
                 $scope.alerts.register = {type: 'danger', msg: data.errors.join('<br>')};
-            else {
+            } else {
                 $scope.alerts.register = {type: 'success', msg: 'Success'};
                 // $location.path( "/activated" );
             }
         });
     };
     
-    $scope.login = function() {
-        student.login($scope.data.login).success(function(data){
-            if (data.status == 'error')
+    $scope.login = function () {
+        student.login($scope.data.login).success(function (data) {
+            if (data.status === 'error') {
                 $scope.alerts.login = {type: 'danger', msg: data.errors.join('<br>')};
-            else {
+            } else {
                 $scope.alerts.login = {type: 'success', msg: 'Success'};
-                $location.path( "/profile" );
+                $location.path("/profile");
             }
         });
     };
         
 });
 
-jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location, student){
-    student.init().success(function(data){
+jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location, student) {
+    "use strict";
+    student.init().success(function (data) {
         studentData = data;
-        if (studentData == false) {
-            $location.path( "/login" );
+        if (studentData === false) {
+            $location.path("/login");
         }
     });
-    $scope.logOut = function() {
+    $scope.logOut = function () {
         student.logOut().success(function (data) {
             console.log(data);
-            if (data.status == 'success')
-                $location.path( "/login" );
+            if (data.status === 'success') {
+                $location.path("/login");
+            }
         });
     };
 
-    $scope.changePassword() = function() {
-        student.changePassword().success(function (data){
-            
+    $scope.changePassword() = function () {
+        student.changePassword().success(function (data) {
         });
-
-
-    });
+    };
 });
-jlm.controller('generalController', function ($scope){
+jlm.controller('generalController', function ($scope) {
+    "use strict";
     $scope.data = {};
     $scope.alerts = {};
-    $scope.closeAlert = function($index) {
+    $scope.closeAlert = function ($index) {
         $scope.alerts[$index] = {};
-    }
+    };
 });
 
 
@@ -116,16 +118,16 @@ jlm.controller('generalController', function ($scope){
 
 
 jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, $httpParamSerializerJQLike) {
-
+    "use strict";
     return {
         init: function () {
             return $http({
                 method  : 'POST',
                 url     : 'API/Student',
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
-            }).success(function(data) {
+            }).success(function (data) {
                 return data;
-            }).error(function () {return false;});
+            }).error(function () {return false; });
         },
         login: function (data) {
             return $http({
@@ -133,9 +135,9 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
                 url     : 'API/Student/Login',
                 data    : $httpParamSerializerJQLike(data),
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
-            }).success(function(data) {
+            }).success(function (data) {
                 return data;
-            }).error(function () {return {'status': 'error','errors':'Try again letter please.'};});
+            }).error(function () {return {'status': 'error', 'errors': 'Try again letter please.'}; });
         },
         register: function (data) {
             return $http({
@@ -143,18 +145,18 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
                 url     : 'API/Student/register',
                 data    : $httpParamSerializerJQLike(data),  // pass in data as strings
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
-            }).success(function(data) {
+            }).success(function (data) {
                 return data;
-            }).error(function () {return {'status': 'error','errors':'Try again letter please.'};});
+            }).error(function () {return {'status': 'error', 'errors': 'Try again letter please.'}; });
         },
         logOut: function () {
             return $http({
                 method  : 'POST',
                 url     : 'API/Student/logOut',
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
-            }).success(function(data) {
+            }).success(function (data) {
                 return data;
-            }).error(function () {return {'status': 'error','errors':'Try again letter please.'};});
+            }).error(function () {return {'status': 'error', 'errors': 'Try again letter please.'}; });
         },
-    }
+    };
 }]);

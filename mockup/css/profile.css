@@ -16,16 +16,16 @@
             cursor: pointer;
 */
         }
-        .myui-button
-        {
-             border-style: solid;
+.myui-button {
+    font-family: 'Raleway', sans-serif;
+    border-style: solid;
     border-width: 1px;
     border-radius: 20px;
     margin: 2px;
 /*            
             position: relative;*/
 /*            cursor: pointer;*/
-            text-align: center;
+    text-align: center;
 /*            overflow: visible;*/
 /*            background-color: red;*/
 /*            overflow: hidden;*/
@@ -42,7 +42,7 @@
     border-radius: 20px;
     margin: 2px;
     border-color: black;
-    font-family: Tahoma;
+    font-family: 'Raleway', sans-serif;
 /*    text-align: center;*/
 /*    position: relative;*/
     line-height: 180px;

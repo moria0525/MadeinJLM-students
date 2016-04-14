@@ -1,4 +1,3 @@
-
 var jlm = angular.module('jlm', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
 var studentData = false;
@@ -99,7 +98,7 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
         });
     };
 
-    $scope.changePassword() = function () {
+    $scope.changePassword = function () {
         student.changePassword().success(function (data) {
         });
     };

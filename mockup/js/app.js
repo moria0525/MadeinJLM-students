@@ -4,40 +4,7 @@ var studentData = false;
 
 
 
-jlm.directive("passwordVerify", function() {
-    'use strict';
-   return {
-      require: "ngModel",
-      scope: {
-        passwordVerify: '='
-      },
-      link: function(scope, element, attrs, changePassword) {
-        scope.$watch(function() {
-            var combined;
 
-            if (scope.passwordVerify || changePassword.$viewValue) {
-               combined = scope.passwordVerify + '_' + changePassword.$viewValue; 
-            }                    
-            return combined;
-        }, function(value) {
-            if (value) {
-                changePassword.$parsers.unshift(function(viewValue) {
-                    var origin = scope.passwordVerify;
-                    if (origin !== viewValue) {
-                        changePassword.$setValidity("passwordVerify", false);
-                        console.log("22222222222d");
-                        return undefined;
-                    } else {
-                        changePassword.$setValidity("passwordVerify", true);
-                        console.log("asdasdasdasd");
-                        return viewValue;
-                    }
-                });
-            }
-        });
-     }
-   };
-});
 
 
 
@@ -163,6 +130,9 @@ jlm.controller('generalController', function ($scope) {
 
 
 
+
+
+
 jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, $httpParamSerializerJQLike) {
     "use strict";
     return {
@@ -206,3 +176,6 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
         },
     };
 }]);
+
+
+

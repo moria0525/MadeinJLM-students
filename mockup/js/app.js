@@ -99,7 +99,7 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
         });
     };
 
-    $scope.changePassword() = function () {
+    $scope.changePassword = function () {
         student.changePassword().success(function (data) {
         });
     };

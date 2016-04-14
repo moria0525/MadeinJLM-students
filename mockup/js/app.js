@@ -204,5 +204,21 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
                 return data;
             }).error(function () {return {'status': 'error', 'errors': 'Try again letter please.'}; });
         },
+		changePassword: function () {
+            return $http({
+                method  : 'POST',
+                url     : 'API/Student/changePassword',
+                headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }).success(function (data) {
+                return data;
+            }).error(function () {return {'status': 'error', 'errors': 'Try again letter please.'}; });
+        },
+		
+		
+		
+		
+		
+		
+		
     };
 }]);

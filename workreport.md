@@ -27,23 +27,8 @@
 | date   | subject         | length  |
 |--------|-----------------|---------|
 |4.4.16  |ZFR improvements and project foundations| 1 hour  |
-|13.4.16 |Iteration 1 | 4 Hours |
 
 ## Alon Shmilovich
 | date   | subject         | length  |
 |--------|-----------------|---------|
 |4.4.16  |ZFR improvements and Iterations foundations| 1 hour  |
-|13.4.16 |Iteration 1 | 2 Hours |
-
-
-## Dor Harel
-| date   | subject         | length  |
-|--------|-----------------|---------|
-|13.4.16 |Iteration 1 | 4 Hours |
-
-
-## Yoad Shiran
-| date   | subject         | length  |
-|--------|-----------------|---------|
-|13.4.16 |Iteration 1 | 2 Hours |
-

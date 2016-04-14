@@ -36,7 +36,7 @@ jlm.config(function ($routeProvider) {
 
         when('/change-password', {
             templateUrl: 'view/change-password.html',
-            controller: 'UserConnected',
+            controller: 'UserNotConnected',
         }).
 
         when('/forgot-password', {
@@ -88,11 +88,23 @@ jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $locat
             }
         });
     };
+    
+    console.log(student);
+    student.changePassword = function () {
+        console.log("hello 1");
+//        student.changePassword().success(function (data) {
+//            if (data.status === 'success') {
+//                $location.path("/profile");
+//            }
+//        });
+    };
+    
         
 });
 
 jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location, student) {
     "use strict";
+    
     student.init().success(function (data) {
         studentData = data;
         if (studentData === false) {
@@ -107,15 +119,7 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
             }
         });
     };
-
-    student.changePassword = function () {
-        console.log("asdsad");
-        student.changePassword().success(function (data) {
-            if (data.status === 'success') {
-                $location.path("/profile");
-            }
-        });
-    };
+    
 });
 jlm.controller('generalController', function ($scope) {
     "use strict";

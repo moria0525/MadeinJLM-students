@@ -1,4 +1,3 @@
-
 var jlm = angular.module('jlm', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
 var studentData = false;

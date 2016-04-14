@@ -6,7 +6,7 @@
 
 ![project logo (is copy from MadeinJLM-facebook)](https://github.com/moria0525/MadeinJLM-students/blob/master/logo.png)
 
-## Please visit our [live application](http://job.madeinjlm.org/MadeinJLM-students/mockup/#/)
+## Please visit our [live application](http://job.madeinjlm.org/)
 -The application is under construction! You are welcome to follow us developing it, and get ready for a whole other world for Jerusalem High-Tech community...
 
 ## Contact Info

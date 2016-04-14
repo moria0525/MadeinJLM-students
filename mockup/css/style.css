@@ -68,8 +68,31 @@ h2, h3, h4 {
 	background: #1c1c1c;
 	color: #FFF;
 }
-/* end general style */
+ end general style 
 
+.btn.btn-jlm-change {
+    
+    border-style: solid;
+    background-color: transparent;
+    -webkit-transition: 0.1s background-color linear, 0.1s color linear;
+    -moz-transition: 0.1s background-color linear, 0.1s color linear;
+    -o-transition: 0.1s background-color linear, 0.1s color linear;
+    transition: 0.1s background-color linear, 0.1s color linear;
+    color: #1c1c1c;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    border-color: #1c1c1c;
+	
+    font-size: 18px;
+    border-width: 1px;
+    padding: 10px 0;
+    font-weight: 400;
+}
+
+.btn.btn-jlm-change:hover {
+	background: #1c1c1c;
+	color: #FFF;
+}
 /* header style */
 header {
     background: #333 url('../img/strip-background2.jpg');

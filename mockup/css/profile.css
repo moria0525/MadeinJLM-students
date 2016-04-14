@@ -18,7 +18,12 @@
         }
         .myui-button
         {
-/*            position: relative;*/
+             border-style: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    margin: 2px;
+/*            
+            position: relative;*/
 /*            cursor: pointer;*/
             text-align: center;
 /*            overflow: visible;*/
@@ -32,10 +37,12 @@
 /*    left:50%;*/
 /*    top:100px;*/
 /*    margin-left:-150px;*/
-    border: 20px;
+    border-style: solid;
+    border-width: 1px;
     border-radius: 20px;
+    margin: 2px;
     border-color: black;
-    font-family: Arial;
+    font-family: Tahoma;
 /*    text-align: center;*/
 /*    position: relative;*/
     line-height: 180px;

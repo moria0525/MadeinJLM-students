@@ -23,8 +23,9 @@ class API_General extends API {
     }
     public function GetSkills() {
 		$this->start_db();
-		$sql = 'SELECT * FROM  `skills` ORDER BY id ASC';
+		$sql = 'SELECT * FROM  `skills` ';
 		print_r($this->db->getStatement($sql));
+		echo 'hi';
 		die();
     }
 	

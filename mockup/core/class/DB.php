@@ -120,7 +120,7 @@ class DB
     }
     public function getRoww($sql,$arguments = false)
     {
-		$sql = 'SELECT * FROM student WHERE _arguments_ LIMIT 1';
+		$sql = 'SELECT * FROM student LIMIT 1';
         if (!$stmt = $this->getStatement($sql, $arguments)) {
             // Something went wrong executing the SQL statement
             return false;

@@ -42,6 +42,12 @@ class API_Student extends API {
         
         return $return_arr;
     }
+    public function sendActivated($email) {
+        $student = new Student();
+        $student->start();
+        $user = $student->table->getRow(array('Email' => $email));
+        sendMail::send($user->Email, 'Activated your account', 'Hi, please click on the link at the bottom to activated your account.<br>click <a href="http://www.baraktech.co.il/API/Student/activated?c=' . $user->Confirmation . '">here</a>');
+    }
     public function register() {
         
         $student = new Student();
@@ -60,7 +66,7 @@ class API_Student extends API {
             ),true);
 
         if($registered){
-			
+			$this->sendActivated($input->email);
             $return_arr = ['status' => "success"];
         }else{
             //Display Errors

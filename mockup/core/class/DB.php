@@ -118,7 +118,7 @@ class DB
         }
 
     }
-    public function getRoww($sql,$arguments)
+    public function getRoww($sql,$arguments = false)
     {
         if (!$stmt = $this->getStatement($sql, $arguments)) {
             // Something went wrong executing the SQL statement

@@ -106,11 +106,13 @@ jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $locat
 			$scope.alerts.newPassword = {type: 'danger', msg: 'הסיסמאות אינם תואמות'};
 		} else {
 			student.newPassword($routeParams.hash,$scope.data.newPassword.passsword).success(function (data) {
+				/*
 				if (data.status === 'error') {
 					$scope.alerts.newPassword = {type: 'danger', msg: data.errors.join('<br>')};
 				} else {
 					$scope.alerts.newPassword = {type: 'success', msg: 'הסיסמא שונתה בהצלחה'};
 				}
+				*/
 			});
 		}
     };

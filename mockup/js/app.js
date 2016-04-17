@@ -39,8 +39,12 @@ jlm.config(function ($routeProvider) {
             controller: 'UserNotConnected',
         }).
 
-        when('/reset-password/:hash', {
+        when('/reset-password', {
             templateUrl: 'view/reset-password.html',
+            controller: 'UserNotConnected'
+        }).
+        when('/reset-password/:hash', {
+            templateUrl: 'view/reset-password-change.html',
             controller: 'UserNotConnected'
         }).
         when('/termOfUse', {

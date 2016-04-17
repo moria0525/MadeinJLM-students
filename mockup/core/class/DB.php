@@ -118,6 +118,15 @@ class DB
         }
 
     }
+    public function getQuery($sql, $args = false){
+        if (!$stmt = $this->getStatement($sql, $arguments)) {
+            // Something went wrong executing the SQL statement
+            return false;
+        } else {
+            return $stmt->fetch();
+        }
+
+    }
 
     /**
      * Get a PDO statement

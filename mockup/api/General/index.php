@@ -24,8 +24,7 @@ class API_General extends API {
     public function GetSkills() {
 		$this->start_db();
 		$sql = 'SELECT * FROM  skills';
-		print_r($this->db->query($sql));
-		echo 'hi';
+		print_r($this->db->getQuery($sql));
 		die();
     }
 	

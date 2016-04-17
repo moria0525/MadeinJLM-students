@@ -108,7 +108,7 @@ class DB
      */
     public function getRow($table,$arguments)
     {
-        $sql = 'SELECT * FROM ' . $table . '  LIMIT 1';
+        $sql = 'SELECT * FROM ' . $table . '  ';
 
         if (!$stmt = $this->getStatement($sql, $arguments)) {
             // Something went wrong executing the SQL statement

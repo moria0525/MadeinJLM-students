@@ -1,3 +1,4 @@
+// not used - can to delete..
 $(function() {
     $(".inputWrapper").mousedown(function() {
         var button = $(this);

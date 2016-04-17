@@ -45,7 +45,7 @@ class API_Student extends API {
         $student = new Student();
         $student->start();
         $user = $student->table->getRow(array('Email' => $email));
-        sendMail::send($user->Email, 'Activated your account', 'Hi, please click on the link at the bottom to activated your account.<br>click <a href="http://www.baraktech.co.il/API/Student/activated?c=' . $user->Confirmation . '">here</a>');
+        sendMail::send($user->Email, 'Activated your account', 'Hi, please click on the link at the bottom to activated your account.<br>click <a href="http://job.madeinjlm.org/MadeinJLM-students/mockup/API/Student/activated?c=' . $user->Confirmation . '">here</a>');
     }
     public function register() {
         
@@ -88,8 +88,7 @@ class API_Student extends API {
         if ($student->activate($_GET['c'])) 
             $return_arr = ['status' => "success"];
         else {
-            print_r($student->log->getAllReports());
-            print_r($student->log->getReports());
+            
             //Display Errors
             $errors = array();
             foreach($student->log->getErrors() as $err){
@@ -121,6 +120,7 @@ class API_Student extends API {
         //Login with credentials
         if ($data = $student->resetPassword($email)) {
 			// send email to $data->Email whith the confirmation $data->Confirmation
+			sendMail::send($data->Email, 'Reset your password', 'Hi, please click on the link at the bottom to reset your password.<br>click <a href="http://job.madeinjlm.org/MadeinJLM-students/mockup/#forgot-password/' . $data->Confirmation . '">here</a>');
 			$return_arr = ['status' => "success"];
 		} else {
             //Display Errors

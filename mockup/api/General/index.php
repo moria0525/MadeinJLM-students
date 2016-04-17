@@ -32,9 +32,6 @@ class API_General extends API {
 	
 	protected function start_db() {
         if (!($this->db instanceof DB)) {
-            // Updating the predefine error logs
-            $this->log->addPredefinedError($this->errorList);
-
             // Instantiate the Database object
             if ($this->config->database->pdo instanceof \PDO) {
                 // Uses an existing PDO connection

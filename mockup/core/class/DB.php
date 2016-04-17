@@ -118,19 +118,9 @@ class DB
         }
 
     }
-    public function getRoww()
+    public function getQuery($sql,$arguments = false)
     {
-		$sql = 'SELECT * FROM student';
-        if (!$stmt = $this->getStatement($sql)) {
-            // Something went wrong executing the SQL statement
-            return false;
-        } else {
-            return $stmt->fetch();
-        }
-
-    }
-    public function getQuery($sql, $args = false){
-        if (!$stmt = $this->getStatement($sql, $args)) {
+        if (!$stmt = $this->getStatement($sql, $arguments)) {
             // Something went wrong executing the SQL statement
             return false;
         } else {
@@ -138,7 +128,6 @@ class DB
         }
 
     }
-
     /**
      * Get a PDO statement
      *
@@ -159,13 +148,13 @@ class DB
                 $this->log->report("SQL Statement: {$query}");
 
                 // When fetched return an object
-                $stmt->setFetchMode(\PDO::FETCH_INTO, new Collection());
+                $stmt->setFetchMode(\PDO::FETCH_ASSOC);
 
                 // If arguments were passed execute the statement
                 if ($args) {
                     $this->log->report("SQL Data Sent: [" . implode(', ', $args) . "]");
                     $stmt->execute($args);
-                }
+                } else $stmt->execute();
 
                 // Handles any error during execution
                 if ($stmt->errorCode() > 0) {

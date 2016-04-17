@@ -96,10 +96,10 @@ jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $locat
         });
     };
     $scope.newPassword = function () {
-		if($scope.data.newPassword.passsword !== $scope.data.newPassword.passsword2){
+		if($scope.data.newPassword.password !== $scope.data.newPassword.password2){
 			$scope.alerts.newPassword = {type: 'danger', msg: 'הסיסמאות אינם תואמות'};
 		} else {
-			student.newPassword($routeParams.hash,$scope.data.newPassword).success(function (data) {
+			student.newPassword($routeParams.hash,{Password: $scope.data.newPassword.password}).success(function (data) {
 				console.log(data);
 				if (data.status === 'error') {
 					$scope.alerts.newPassword = {type: 'danger', msg: data.errors.join('<br>')};

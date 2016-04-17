@@ -105,15 +105,7 @@ jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $locat
 		if($scope.data.newPassword.passsword !== $scope.data.newPassword.passsword2){
 			$scope.alerts.newPassword = {type: 'danger', msg: 'הסיסמאות אינם תואמות'};
 		} else {
-			student.newPassword($routeParams.hash,$scope.data.newPassword.passsword).success(function (data) {
-				/*
-				if (data.status === 'error') {
-					$scope.alerts.newPassword = {type: 'danger', msg: data.errors.join('<br>')};
-				} else {
-					$scope.alerts.newPassword = {type: 'success', msg: 'הסיסמא שונתה בהצלחה'};
-				}
-				*/
-			});
+			student.newPassword($routeParams.hash,$scope.data.newPassword.passsword);
 		}
     };
     
@@ -217,14 +209,7 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
             }).error(function () {return {'status': 'error', 'errors': 'Try again letter please.'}; });
         },
         newPassword: function (hash,newPass) {
-            return $http({
-                method  : 'POST',
-                url     : 'API/Student/newPassword',
-                data    : $httpParamSerializerJQLike({'hash':hash,'newPass':newPass}),  // pass in data as strings
-                headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
-            }).success(function (data) {
-                return data;
-            }).error(function () {return {'status': 'error', 'errors': 'Try again letter please.'}; });
+            return true;
         },
 		changePassword: function () {
             return $http({

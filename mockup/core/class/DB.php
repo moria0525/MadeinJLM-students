@@ -273,6 +273,9 @@ class DB
 		echo '1';
         try{
 			echo '2';
+			print_r($this->generateDSN());
+			print_r($this->user);
+			print_r($this->password);
             $this->connection = new \PDO($this->generateDSN(), $this->user, $this->password);
             $this->log->report('Connected to database.');
 			echo '3';

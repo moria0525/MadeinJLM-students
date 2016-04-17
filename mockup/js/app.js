@@ -39,8 +39,8 @@ jlm.config(function ($routeProvider) {
             controller: 'UserNotConnected',
         }).
 
-        when('/forgot-password', {
-            templateUrl: 'view/forgot-password.html',
+        when('/reset-password', {
+            templateUrl: 'view/reset-password.html',
             controller: 'UserNotConnected'
         }).
         when('/termOfUse', {
@@ -72,8 +72,7 @@ jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $locat
             if (data.status === 'error') {
                 $scope.alerts.register = {type: 'danger', msg: data.errors.join('<br>')};
             } else {
-                $scope.alerts.register = {type: 'success', msg: 'Success'};
-                // $location.path( "/activated" );
+                $scope.alerts.register = {type: 'success', msg: 'נשלח למייל, מייל אקטיבציה'};
             }
         });
     };
@@ -85,6 +84,16 @@ jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $locat
             } else {
                 $scope.alerts.login = {type: 'success', msg: 'Success'};
                 $location.path("/profile");
+            }
+        });
+    };
+    
+    $scope.resetPassword = function () {
+        student.resetPassword($scope.data.resetPassword.Email).success(function (data) {
+            if (data.status === 'error') {
+                $scope.alerts.resetPassword = {type: 'danger', msg: data.errors.join('<br>')};
+            } else {
+                $scope.alerts.resetPassword = {type: 'success', msg: 'נשלח קישור למייל שלך, שאיתו ניתן לאפס את הסיסמא'};
             }
         });
     };

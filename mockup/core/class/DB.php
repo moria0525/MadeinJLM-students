@@ -132,10 +132,10 @@ class DB
         // The parsed sql statement
         $query = $this->buildQuery($sql, $args);
 		
-        if ($connection = $this->getConnection()) {
+        if ($this->getConnection()) {
             //Prepare the statement
 			echo 'barak-test';
-            if ($stmt = $connection->prepare($query)) {
+            if ($stmt = $this->connection->prepare($query)) {
                 echo $query;
 				//Log the SQL Query first
                 $this->log->report("SQL Statement: {$query}");
@@ -280,7 +280,7 @@ class DB
 		echo '2';
         // Check is the connection to server succeed
         if ($this->connection instanceof \PDO) {
-            return $this->connection;
+            return true;
         } else {
             // There was an error connecting to the DB server
             return false;

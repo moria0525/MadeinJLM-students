@@ -219,11 +219,11 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
         newPassword: function (hash,newPass) {
             console.log(hash);
             console.log(newPass);
-            console.log($httpParamSerializerJQLike({'hash':hash,'newPass':$httpParamSerializerJQLike(newPass)}));
+            console.log($httpParamSerializerJQLike({'hash':hash,'newPass':newPass}));
 			return $http({
                 method  : 'POST',
                 url     : 'API/Student/newPassword',
-                data    : $httpParamSerializerJQLike({'hash':hash,'newPass':$httpParamSerializerJQLike(newPass)}),  // pass in data as strings
+                data    : $httpParamSerializerJQLike({'hash':hash,'newPass':newPass}),  // pass in data as strings
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (data) {
                 return data;

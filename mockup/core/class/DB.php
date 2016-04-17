@@ -119,7 +119,7 @@ class DB
 
     }
     public function getQuery($sql, $args = false){
-        if (!$stmt = $this->getStatement($sql, $arguments)) {
+        if (!$stmt = $this->getStatement($sql, $args)) {
             // Something went wrong executing the SQL statement
             return false;
         } else {

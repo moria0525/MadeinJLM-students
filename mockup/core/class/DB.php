@@ -118,6 +118,16 @@ class DB
         }
 
     }
+    public function getRoww($sql,$arguments)
+    {
+        if (!$stmt = $this->getStatement($sql, $arguments)) {
+            // Something went wrong executing the SQL statement
+            return false;
+        } else {
+            return $stmt->fetch();
+        }
+
+    }
     public function getQuery($sql, $args = false){
         if (!$stmt = $this->getStatement($sql, $args)) {
             // Something went wrong executing the SQL statement

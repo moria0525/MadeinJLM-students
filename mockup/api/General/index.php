@@ -43,12 +43,6 @@ class API_General extends API {
                 } else {
                     $this->db = new DB($this->config->database->host, $this->config->database->name);
                 }
-
-                // Configure the database object
-				/*
-                $this->db->setUser($this->config->database->user);
-                $this->db->setPassword($this->config->database->password);
-				*/
             }
         }
 	}

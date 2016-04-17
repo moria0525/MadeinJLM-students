@@ -134,9 +134,7 @@ class DB
 		
         if ($this->getConnection()) {
             //Prepare the statement
-			echo 'barak-test';
             if ($stmt = $this->connection->prepare($query)) {
-                echo $query;
 				//Log the SQL Query first
                 $this->log->report("SQL Statement: {$query}");
 
@@ -270,23 +268,15 @@ class DB
         }
 
         $this->log->report('Connecting to database...');
-		echo '1';
         try{
-			echo '2';
-			print_r($this->generateDSN());
-			print_r($this->user);
-			print_r($this->password);
             $this->connection = new \PDO($this->generateDSN(), $this->user, $this->password);
             $this->log->report('Connected to database.');
-			echo '3';
         } catch ( \PDOException $e ){
             $this->log->error('Failed to connect to database, [SQLSTATE] ' . $e->getCode());
         }
-		echo '4';
         // Check is the connection to server succeed
         if ($this->connection instanceof \PDO) {
-            echo '5';
-			return true;
+            return true;
         } else {
             // There was an error connecting to the DB server
             return false;

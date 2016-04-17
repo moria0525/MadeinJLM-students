@@ -23,7 +23,7 @@ class API_General extends API {
     }
     public function GetSkills() {
 		$this->start_db();
-		$sql = 'SELECT * FROM  skills';
+		$sql = 'SELECT * FROM student';
 		print_r($this->db->getRow('skills',array('id' => 1)));
 		print_r($this->db->getQuery($sql));
 		die();

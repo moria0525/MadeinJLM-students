@@ -131,7 +131,7 @@ class DB
     {
         // The parsed sql statement
         $query = $this->buildQuery($sql, $args);
-
+		echo $query;
         if ($connection = $this->getConnection()) {
             //Prepare the statement
             if ($stmt = $connection->prepare($query)) {

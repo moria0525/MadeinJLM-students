@@ -144,10 +144,10 @@ class API_Student extends API {
         
         $student = new Student();
         $student->start();
-
+		
         //Login with credentials
         if ($data = $student->newPassword($hash,$newPass)) {
-			$return_arr = ['status' => "success"];
+			$return_arr = ['status' => "success",$newPass];
 		} else {
             //Display Errors
             $errors = array();

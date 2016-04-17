@@ -43,7 +43,7 @@ jlm.config(function ($routeProvider) {
             templateUrl: 'view/reset-password.html',
             controller: 'UserNotConnected'
         }).
-        when('/reset-password/:hash', {
+        when('/reset-password/:Confirmation', {
             templateUrl: 'view/reset-password-change.html',
             controller: 'UserNotConnected'
         }).
@@ -102,6 +102,7 @@ jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $locat
         });
     };
     $scope.resetPasswordChange = function () {
+        console.log($routeParams.Confirmation);
         console.log($scope.data.resetPasswordChange);
 		/*
 		student.resetPassword($scope.data.resetPassword.Email).success(function (data) {

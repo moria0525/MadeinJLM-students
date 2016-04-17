@@ -123,7 +123,7 @@ class DB
             // Something went wrong executing the SQL statement
             return false;
         } else {
-            return $stmt->fetch();
+            return $stmt->fetchAll();
         }
 
     }

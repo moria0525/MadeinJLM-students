@@ -43,8 +43,8 @@ jlm.config(function ($routeProvider) {
             templateUrl: 'view/reset-password.html',
             controller: 'UserNotConnected'
         }).
-        when('/reset-password/:Confirmation', {
-            templateUrl: 'view/reset-password-change.html',
+        when('/new-password/:hash', {
+            templateUrl: 'view/new-password.html',
             controller: 'UserNotConnected'
         }).
         when('/termOfUse', {
@@ -101,18 +101,18 @@ jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $locat
             }
         });
     };
-    $scope.resetPasswordChange = function () {
-        console.log($routeParams.Confirmation);
-        console.log($scope.data.resetPasswordChange);
-		/*
-		student.resetPassword($scope.data.resetPassword.Email).success(function (data) {
-            if (data.status === 'error') {
-                $scope.alerts.resetPassword = {type: 'danger', msg: data.errors.join('<br>')};
-            } else {
-                $scope.alerts.resetPassword = {type: 'success', msg: 'נשלח קישור למייל שלך, שאיתו ניתן לאפס את הסיסמא'};
-            }
-        });
-		*/
+    $scope.newPassword = function () {
+		if($scope.data.newPassword.passsword !== $scope.data.newPassword.passsword2){
+			$scope.alerts.newPassword = {type: 'danger', msg: 'הסיסמאות אינם תואמות'};
+		} else {
+			student.newPassword($routeParams.hash,$scope.data.newPassword.passsword).success(function (data) {
+				if (data.status === 'error') {
+					$scope.alerts.newPassword = {type: 'danger', msg: data.errors.join('<br>')};
+				} else {
+					$scope.alerts.newPassword = {type: 'success', msg: 'הסיסמא שונתה בהצלחה'};
+				}
+			});
+		}
     };
     
     console.log(student);
@@ -209,6 +209,16 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
                 method  : 'POST',
                 url     : 'API/Student/resetPassword',
                 data    : $httpParamSerializerJQLike({'Email':email}),  // pass in data as strings
+                headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }).success(function (data) {
+                return data;
+            }).error(function () {return {'status': 'error', 'errors': 'Try again letter please.'}; });
+        },
+        newPassword: function (hash,newPass) {
+            return $http({
+                method  : 'POST',
+                url     : 'API/Student/newPassword',
+                data    : $httpParamSerializerJQLike({'hash':hash,'newPass':newPass}),  // pass in data as strings
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (data) {
                 return data;

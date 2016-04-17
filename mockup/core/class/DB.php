@@ -275,13 +275,14 @@ class DB
 			echo '2';
             $this->connection = new \PDO($this->generateDSN(), $this->user, $this->password);
             $this->log->report('Connected to database.');
+			echo '3';
         } catch ( \PDOException $e ){
             $this->log->error('Failed to connect to database, [SQLSTATE] ' . $e->getCode());
         }
-		echo '3';
+		echo '4';
         // Check is the connection to server succeed
         if ($this->connection instanceof \PDO) {
-            echo '4';
+            echo '5';
 			return true;
         } else {
             // There was an error connecting to the DB server

@@ -7,16 +7,16 @@ class API_Student extends API {
     }
     public function login() {
         
-        if (isset($_POST['Email']))
-            $username = $_POST['Email'];
+        if (isset($_GET['Email']))
+            $username = $_GET['Email'];
         else $username = '';
         
-        if (isset($_POST['Password']))
-            $password = $_POST['Password'];
+        if (isset($_GET['Password']))
+            $password = $_GET['Password'];
         else $password = '';
         
-        if (isset($_POST['auto']))
-            $auto = $_POST['auto'];  //To remember user with a cookie for autologin
+        if (isset($_GET['auto']))
+            $auto = $_GET['auto'];  //To remember user with a cookie for autologin
         else $auto = false;  //To remember user with a cookie for autologin
 
         $student = new Student();
@@ -32,6 +32,7 @@ class API_Student extends API {
             $return_arr = ['status' => "success"];
         }else{
             //Display Errors
+			print_r($student->log->getErrors());
             $errors = array();
             foreach($student->log->getErrors() as $err){
                 $errors[] = $err;
@@ -59,6 +60,7 @@ class API_Student extends API {
             ),true);
 
         if($registered){
+			
             $return_arr = ['status' => "success"];
         }else{
             //Display Errors
@@ -103,7 +105,27 @@ class API_Student extends API {
         
     }
     public function resetPassword() {
+        if (isset($_POST['Email']))
+            $email = $_POST['Email'];
+        else $email = '';
+        
+        $student = new Student();
+        $student->start();
 
+        //Login with credentials
+        if ($data = $student->resetPassword($email)) {
+			// send email to $data->Email whith the confirmation $data->Confirmation
+			$return_arr = ['status' => "success"];
+		} else {
+            //Display Errors
+            $errors = array();
+            foreach($student->log->getErrors() as $err){
+                $errors[] = $err;
+            }
+            $return_arr =  ['status' => "error",'errors' => $errors];
+		}
+        
+        return $return_arr;
     }
     public function newPassword() {
 

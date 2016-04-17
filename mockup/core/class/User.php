@@ -187,7 +187,7 @@ class User extends UserBase
                 if ($userFile->LastLogin == 0) {
                     //Account has not been activated
                     $this->log->formError('Password',$this->errorList[8]);
-                    $this->sendActivated($userFile->Email,$userFile->Confirmation);
+                    // $this->sendActivated($userFile->Email,$userFile->Confirmation);
                 } else {
                     if (!$userFile->Confirmation) {
                         //Account has been deactivated
@@ -226,9 +226,11 @@ class User extends UserBase
             return false;
         }
     }
+	/*
     private function sendActivated($to,$confirmation) {
         sendMail::send($to, 'Activated your account', 'Hi, please click on the link at the bottom to activated your account.<br>click <a href="http://www.baraktech.co.il/API/Student/activated?c=' . $confirmation . '">here</a>');
     }
+	*/
     /**
      * Starts and Configures the object
      *

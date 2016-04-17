@@ -45,8 +45,10 @@ class API_General extends API {
                 }
 
                 // Configure the database object
+				/*
                 $this->db->setUser($this->config->database->user);
                 $this->db->setPassword($this->config->database->password);
+				*/
             }
         }
 	}

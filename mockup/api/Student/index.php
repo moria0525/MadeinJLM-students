@@ -89,6 +89,7 @@ class API_Student extends API {
             $return_arr = ['status' => "success"];
         else {
             print_r($student->log->getAllReports());
+            print_r($student->log->getReports());
             //Display Errors
             $errors = array();
             foreach($student->log->getErrors() as $err){

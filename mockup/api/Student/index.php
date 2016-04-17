@@ -88,7 +88,7 @@ class API_Student extends API {
         if ($student->activate($_GET['c'])) 
             $return_arr = ['status' => "success"];
         else {
-            print_r($student->getAllReports());
+            print_r($student->log->getAllReports());
             //Display Errors
             $errors = array();
             foreach($student->log->getErrors() as $err){

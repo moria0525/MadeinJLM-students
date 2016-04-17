@@ -33,12 +33,6 @@ jlm.config(function ($routeProvider) {
             templateUrl: 'view/activated.html',
             controller: 'UserNotConnected',
         }).
-
-        when('/change-password', {
-            templateUrl: 'view/change-password.html',
-            controller: 'UserNotConnected',
-        }).
-
         when('/reset-password', {
             templateUrl: 'view/reset-password.html',
             controller: 'UserNotConnected'
@@ -116,14 +110,6 @@ jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $locat
     };
     
     console.log(student);
-    student.changePassword = function () {
-        console.log("hello 1");
-//        student.changePassword().success(function (data) {
-//            if (data.status === 'success') {
-//                $location.path("/profile");
-//            }
-//        });
-    };
     
         
 });
@@ -227,17 +213,6 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
                 return data;
             }).error(function () {return {'status': 'error', 'errors': 'Try again letter please.'}; });
         },
-		changePassword: function () {
-            return $http({
-                method  : 'POST',
-                url     : 'API/Student/changePassword',
-                headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
-            }).success(function (data) {
-                return data;
-            }).error(function () {return {'status': 'error', 'errors': 'Try again letter please.'}; });
-        },
-		
-		
 		
 		
 		

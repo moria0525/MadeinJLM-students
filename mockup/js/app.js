@@ -3,16 +3,6 @@ var jlm = angular.module('jlm', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.boots
 var studentData = false;
 
 
-
-
-
-
-
-
-
-
-
-
 jlm.config(function ($routeProvider) {
     "use strict";
     $routeProvider.
@@ -49,7 +39,6 @@ jlm.config(function ($routeProvider) {
             templateUrl: 'view/profile.html',
             controller: 'UserConnected',
         }).
-
         otherwise({
             redirectTo: '/'
         });
@@ -100,7 +89,6 @@ jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $locat
 			$scope.alerts.newPassword = {type: 'danger', msg: 'הסיסמאות אינם תואמות'};
 		} else {
 			student.newPassword($routeParams.hash,{Password: $scope.data.newPassword.password}).success(function (data) {
-				console.log(data);
 				if (data.status === 'error') {
 					$scope.alerts.newPassword = {type: 'danger', msg: data.errors.join('<br>')};
 				} else {
@@ -111,8 +99,6 @@ jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $locat
     };
     
     console.log(student);
-    
-        
 });
 
 jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location, student) {

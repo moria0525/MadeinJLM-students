@@ -280,6 +280,7 @@ class DB
 
         // Check is the connection to server succeed
         if ($this->connection instanceof \PDO) {
+			echo '23';
             return $this->connection;
         } else {
             // There was an error connecting to the DB server

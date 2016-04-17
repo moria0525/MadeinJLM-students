@@ -120,7 +120,7 @@ class API_Student extends API {
         //Login with credentials
         if ($data = $student->resetPassword($email)) {
 			// send email to $data->Email whith the confirmation $data->Confirmation
-			sendMail::send($data->Email, 'Reset your password', 'Hi, please click on the link at the bottom to reset your password.<br>click <a href="http://job.madeinjlm.org/MadeinJLM-students/mockup/#forgot-password/' . $data->Confirmation . '">here</a>');
+			sendMail::send($data->Email, 'Reset your password', 'Hi, please click on the link at the bottom to reset your password.<br>click <a href="http://job.madeinjlm.org/MadeinJLM-students/mockup/#reset-password/' . $data->Confirmation . '">here</a>');
 			$return_arr = ['status' => "success"];
 		} else {
             //Display Errors

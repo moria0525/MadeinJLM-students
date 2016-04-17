@@ -39,7 +39,7 @@ jlm.config(function ($routeProvider) {
             controller: 'UserNotConnected',
         }).
 
-        when('/reset-password', {
+        when('/reset-password/:hash', {
             templateUrl: 'view/reset-password.html',
             controller: 'UserNotConnected'
         }).
@@ -96,6 +96,18 @@ jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $locat
                 $scope.alerts.resetPassword = {type: 'success', msg: 'נשלח קישור למייל שלך, שאיתו ניתן לאפס את הסיסמא'};
             }
         });
+    };
+    $scope.resetPasswordChange = function () {
+        console.log($scope.data.resetPasswordChange);
+		/*
+		student.resetPassword($scope.data.resetPassword.Email).success(function (data) {
+            if (data.status === 'error') {
+                $scope.alerts.resetPassword = {type: 'danger', msg: data.errors.join('<br>')};
+            } else {
+                $scope.alerts.resetPassword = {type: 'success', msg: 'נשלח קישור למייל שלך, שאיתו ניתן לאפס את הסיסמא'};
+            }
+        });
+		*/
     };
     
     console.log(student);

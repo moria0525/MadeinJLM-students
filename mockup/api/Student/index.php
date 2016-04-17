@@ -134,12 +134,12 @@ class API_Student extends API {
         return $return_arr;
     }
     public function newPassword() {
-        if (isset($_POST['hash']))
-            $hash = $_POST['hash'];
+        if (isset($_GET['hash']))
+            $hash = $_GET['hash'];
         else $hash = '';
         
-        if (isset($_POST['newPass']))
-            $newPass = $_POST['newPass'];
+        if (isset($_GET['newPass']))
+            $newPass = $_GET['newPass'];
         else $newPass = '';
         
         $student = new Student();

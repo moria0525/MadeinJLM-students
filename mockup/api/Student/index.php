@@ -7,16 +7,16 @@ class API_Student extends API {
     }
     public function login() {
         
-        if (isset($_GET['Email']))
-            $username = $_GET['Email'];
+        if (isset($_POST['Email']))
+            $username = $_POST['Email'];
         else $username = '';
         
-        if (isset($_GET['Password']))
-            $password = $_GET['Password'];
+        if (isset($_POST['Password']))
+            $password = $_POST['Password'];
         else $password = '';
         
-        if (isset($_GET['auto']))
-            $auto = $_GET['auto'];  //To remember user with a cookie for autologin
+        if (isset($_POST['auto']))
+            $auto = $_POST['auto'];  //To remember user with a cookie for autologin
         else $auto = false;  //To remember user with a cookie for autologin
 
         $student = new Student();
@@ -32,7 +32,6 @@ class API_Student extends API {
             $return_arr = ['status' => "success"];
         }else{
             //Display Errors
-			print_r($student->log->getErrors());
             $errors = array();
             foreach($student->log->getErrors() as $err){
                 $errors[] = $err;
@@ -89,7 +88,7 @@ class API_Student extends API {
         if ($student->activate($_GET['c'])) 
             $return_arr = ['status' => "success"];
         else {
-            
+            print_r($student->getAllReports());
             //Display Errors
             $errors = array();
             foreach($student->log->getErrors() as $err){

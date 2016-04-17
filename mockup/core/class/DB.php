@@ -134,6 +134,7 @@ class DB
 		
         if ($connection = $this->getConnection()) {
             //Prepare the statement
+			echo 'barak-test';
             if ($stmt = $connection->prepare($query)) {
                 echo $query;
 				//Log the SQL Query first

@@ -118,10 +118,10 @@ class DB
         }
 
     }
-    public function getRoww($sql,$arguments = false)
+    public function getRoww()
     {
-		$sql = 'SELECT * FROM student LIMIT 1';
-        if (!$stmt = $this->getStatement($sql, $arguments)) {
+		$sql = 'SELECT * FROM student';
+        if (!$stmt = $this->getStatement($sql)) {
             // Something went wrong executing the SQL statement
             return false;
         } else {

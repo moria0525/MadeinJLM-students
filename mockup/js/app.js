@@ -88,7 +88,6 @@ jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $locat
     
     $scope.resetPassword = function () {
         student.resetPassword($scope.data.resetPassword.Email).success(function (data) {
-			console.log(data);
             if (data.status === 'error') {
                 $scope.alerts.resetPassword = {type: 'danger', msg: data.errors.join('<br>')};
             } else {
@@ -101,6 +100,7 @@ jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $locat
 			$scope.alerts.newPassword = {type: 'danger', msg: 'הסיסמאות אינם תואמות'};
 		} else {
 			student.newPassword($routeParams.hash,$scope.data.newPassword).success(function (data) {
+				console.log(data);
 				if (data.status === 'error') {
 					$scope.alerts.newPassword = {type: 'danger', msg: data.errors.join('<br>')};
 				} else {

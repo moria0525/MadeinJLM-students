@@ -123,7 +123,16 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
         });
     }; //////////////////////////////////////////////////////////////////////////////////help wanted
     $scope.changePassword = function () {
-        student.changePassword().success
+        if($scope.data.newPassword.password !== $scope.data.newPassword.password2){
+			$scope.alerts.newPassword = {type: 'danger', msg: 'Passwords does not match'};
+		} else {
+            student.changePassword({Password: $scope.data.newPassword.password}).success(function (data) {
+            if (data.status === 'error') {
+                $scope.alerts.changePassword = {type: 'danger', msg: data.errors.join('<br>')};
+            } else {
+                $scope.alerts.changePassword = {type: 'success', msg: 'Your password was change successfully'};
+            }
+        });
     }
      
 });

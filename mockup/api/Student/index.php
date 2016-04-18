@@ -161,7 +161,7 @@ class API_Student extends API {
         $student = new Student();
         
         if ($data = $student->update($updates)) {
-            $return_arr = ['status' => "sucess", $newPass];
+            $return_arr = ['status' => "success", $newPass];
         } else {
              $errors = array();
             foreach($student->log->getErrors() as $err){

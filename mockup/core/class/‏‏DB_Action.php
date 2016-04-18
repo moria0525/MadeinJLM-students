@@ -6,13 +6,22 @@
  * @package ptejada\uFlex
  * @author  Pablo Tejada <pablo@ptejada.com>
  */
-class DB_Table
+class DB_Action
 {
     /** @var  Log - Log errors and report */
     public $log;
     /** @var DB - The DB connection session */
     private $db;
-
+    public $config = array(
+        'database'        => array(
+            'host'     => 'localhost',
+            'name'     => 'jobmadei_db',
+            'user'     => 'jobmadei_user',
+            'password' => 'q1w2e3r4',
+            'dsn'      => '',
+            'pdo'      => null,
+        )
+    );
     /**
      * Initializes a database table object
      *
@@ -21,8 +30,27 @@ class DB_Table
      */
     public function __construct(DB $db)
     {
-        $this->db = new DB();
-        $this->log = $this->db->log;
+        $this->log = new Log('DB_Action');
+		
+        if (!($this->db instanceof DB)) {
+            // Updating the predefine error logs
+            $this->log->addPredefinedError($this->errorList);
+
+            // Instantiate the Database object
+            if ($this->config->database->pdo instanceof \PDO) {
+                // Uses an existing PDO connection
+                $this->db = new DB($this->config->database->pdo);
+            } else {
+                if ($this->config->database->dsn) {
+                    $this->db = new DB($this->config->database->dsn);
+                } else {
+                    $this->db = new DB($this->config->database->host, $this->config->database->name);
+                }
+            }
+			
+            // Link logs
+            $this->db->log = $this->log;
+        }
     }
 
     /**

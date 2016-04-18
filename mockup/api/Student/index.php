@@ -152,18 +152,26 @@ class API_Student extends API {
         return $return_arr;
     }
     public function changePassword() {
-        echo "hello 2";
-                       $_SESSION["userId"] = "24";
-        $conn = mysql_connect("localhost","root","");
-        mysql_select_db("phppot_examples",$conn);
-        if(count($_POST)>0) {
-        $result = mysql_query("SELECT *from users WHERE userId='" . $_SESSION["userId"] . "'");
-        $row=mysql_fetch_array($result);
-        if($_POST["currentPassword"] == $row["password"]) {
-        mysql_query("UPDATE users set password='" . $_POST["newPassword"] . "' WHERE userId='" . $_SESSION["userId"] . "'");
-        $message = "Password Changed";
-        } else $message = "Current Password is not correct";
+       if (isset($_POST['newPass']))
+            $newPass = $_POST['newPass'];
+        else $newPass = '';
+        
+        $updates = array("Password" => $newPass);
+        
+        $student = new Student();
+        $student->start();
+        
+        if ($data = $student->update($updates)) {
+            $return_arr = ['status' => "sucess", $newPass];
+        } else {
+             $errors = array();
+            foreach($student->log->getErrors() as $err){
+                $errors[] = $err;
+            }
+            $return_arr =  ['status' => "error",'errors' => $errors];
         }
+        return $return_arr;
+
     }
     public function changeStatus() {
 

@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * Database Connection Manager
  *
@@ -22,7 +23,6 @@ class DB
     private $dsn = '';
     /** @var \PDO - The DB connection session */
     private $connection;
-
     /**
      * Initializes the Database object
      *
@@ -44,10 +44,8 @@ class DB
             $this->host = $hostOrDSN;
             $this->dbName = $dbName;
         }
-
         $this->log = new Log('DB');
     }
-
     /**
      * Get table object
      *
@@ -59,7 +57,6 @@ class DB
     {
         return new DB_Table($this, $tableName);
     }
-
     /**
      * Set the database username
      *
@@ -69,7 +66,6 @@ class DB
     {
         $this->user = $user;
     }
-
     /**
      * Set the database user password
      *
@@ -79,7 +75,6 @@ class DB
     {
         $this->password = $password;
     }
-
     /**
      * Set the name of the Database to connect to
      * @param string $dbName
@@ -88,7 +83,6 @@ class DB
     {
         $this->dbName = $dbName;
     }
-
     /**
      * Get the record of the last inserted record
      *
@@ -98,7 +92,6 @@ class DB
     {
         return $this->getConnection()->lastInsertId();
     }
-
     /**
      * Gets the connecting to the database
      * Check if the database connection exists if not connects to the database
@@ -110,21 +103,17 @@ class DB
         if (!($this->log instanceof Log)) {
             $this->log = new Log('DB');
         }
-
         // Use cached connection if already connected to server
         if ($this->connection instanceof \PDO) {
             return $this->connection;
         }
-
         $this->log->report('Connecting to database...');
-
         try{
             $this->connection = new \PDO($this->generateDSN(), $this->user, $this->password);
             $this->log->report('Connected to database.');
         } catch ( \PDOException $e ){
             $this->log->error('Failed to connect to database, [SQLSTATE] ' . $e->getCode());
         }
-
         // Check is the connection to server succeed
         if ($this->connection instanceof \PDO) {
             return $this->connection;
@@ -133,7 +122,6 @@ class DB
             return false;
         }
     }
-
     /**
      * Generate the DSN string for the connection
      *
@@ -144,10 +132,8 @@ class DB
         if (!$this->dsn) {
             $this->dsn = "mysql:dbname={$this->dbName};host={$this->host}";
         }
-
         return $this->dsn;
     }
-
     /**
      * Set the connection
      * @param \PDO $connection

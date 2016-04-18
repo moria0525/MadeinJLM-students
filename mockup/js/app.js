@@ -122,7 +122,7 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
             }
         });
     }; //////////////////////////////////////////////////////////////////////////////////help wanted
-    $scope.changePassword = function () {
+   $scope.changePassword = function () {
         if($scope.data.changePassword.password !== $scope.data.changePassword.password2){
 			$scope.alerts.changePassword = {type: 'danger', msg: 'Passwords does not match'};
 		} else {
@@ -133,9 +133,9 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
                 $scope.alerts.changePassword = {type: 'success', msg: 'Your password was change successfully'};
             }
         });
-    }
+    }}
      
-};
+});
 jlm.controller('generalController', function ($scope) {
     "use strict";
     $scope.data = {};
@@ -224,8 +224,8 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
                 headers : { 'Content-Type':  'application/x-www-form-urlencoded' }
             }).success(function (data){
                 return data;
-            }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}})        
-        }
+            }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'};})  ;      
+        },
 		
 		
 		

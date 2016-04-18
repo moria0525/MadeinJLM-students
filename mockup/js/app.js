@@ -225,7 +225,7 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
             }).success(function (data){
                 return data;
             }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}})        
-        },
+        }
 		
 		
 		

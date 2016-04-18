@@ -3,16 +3,6 @@ var jlm = angular.module('jlm', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.boots
 var studentData = false;
 
 
-
-
-
-
-
-
-
-
-
-
 jlm.config(function ($routeProvider) {
     "use strict";
     $routeProvider.
@@ -33,14 +23,12 @@ jlm.config(function ($routeProvider) {
             templateUrl: 'view/activated.html',
             controller: 'UserNotConnected',
         }).
-
-        when('/change-password', {
-            templateUrl: 'view/change-password.html',
-            controller: 'UserNotConnected',
+        when('/reset-password', {
+            templateUrl: 'view/reset-password.html',
+            controller: 'UserNotConnected'
         }).
-
-        when('/forgot-password', {
-            templateUrl: 'view/forgot-password.html',
+        when('/new-password/:hash', {
+            templateUrl: 'view/new-password.html',
             controller: 'UserNotConnected'
         }).
         when('/termOfUse', {
@@ -51,7 +39,6 @@ jlm.config(function ($routeProvider) {
             templateUrl: 'view/profile.html',
             controller: 'UserConnected',
         }).
-
         otherwise({
             redirectTo: '/'
         });
@@ -72,8 +59,7 @@ jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $locat
             if (data.status === 'error') {
                 $scope.alerts.register = {type: 'danger', msg: data.errors.join('<br>')};
             } else {
-                $scope.alerts.register = {type: 'success', msg: 'Success'};
-                // $location.path( "/activated" );
+                $scope.alerts.register = {type: 'success', msg: 'נשלח למייל, מייל אקטיבציה'};
             }
         });
     };
@@ -89,17 +75,30 @@ jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $locat
         });
     };
     
-    console.log(student);
-    student.changePassword = function () {
-        console.log("hello 1");
-//        student.changePassword().success(function (data) {
-//            if (data.status === 'success') {
-//                $location.path("/profile");
-//            }
-//        });
+    $scope.resetPassword = function () {
+        student.resetPassword($scope.data.resetPassword.Email).success(function (data) {
+            if (data.status === 'error') {
+                $scope.alerts.resetPassword = {type: 'danger', msg: data.errors.join('<br>')};
+            } else {
+                $scope.alerts.resetPassword = {type: 'success', msg: 'נשלח קישור למייל שלך, שאיתו ניתן לאפס את הסיסמא'};
+            }
+        });
+    };
+    $scope.newPassword = function () {
+		if($scope.data.newPassword.password !== $scope.data.newPassword.password2){
+			$scope.alerts.newPassword = {type: 'danger', msg: 'הסיסמאות אינם תואמות'};
+		} else {
+			student.newPassword($routeParams.hash,{Password: $scope.data.newPassword.password}).success(function (data) {
+				if (data.status === 'error') {
+					$scope.alerts.newPassword = {type: 'danger', msg: data.errors.join('<br>')};
+				} else {
+					$scope.alerts.newPassword = {type: 'success', msg: 'הסיסמא שונתה בהצלחה'};
+				}
+			});
+		}
     };
     
-        
+    console.log(student);
 });
 
 jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location, student) {
@@ -188,17 +187,19 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
                 return data;
             }).error(function () {return {'status': 'error', 'errors': 'Try again letter please.'}; });
         },
-		changePassword: function () {
-            return $http({
+        newPassword: function (hash,newPass) {
+            console.log(hash);
+            console.log(newPass);
+            console.log($httpParamSerializerJQLike({'hash':hash,'newPass':newPass}));
+			return $http({
                 method  : 'POST',
-                url     : 'API/Student/changePassword',
+                url     : 'API/Student/newPassword',
+                data    : $httpParamSerializerJQLike({'hash':hash,'newPass':newPass}),  // pass in data as strings
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (data) {
                 return data;
             }).error(function () {return {'status': 'error', 'errors': 'Try again letter please.'}; });
         },
-		
-		
 		
 		
 		

@@ -12,6 +12,7 @@
 |4.4.16|building server side api| 4 hours|
 |10.4.16|meeting with Ziv| 0.5 hour|
 |11.4.16|meeting with client && work on project| 1.5 hours|
+|17.4.16|Iteration 1 - MVP|6 hours|
 
 
 

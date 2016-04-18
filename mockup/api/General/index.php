@@ -1,6 +1,17 @@
 <?php
 class API_General extends API {
-    public function index() {}
+    protected $db;
+	protected $config = array(
+        'database'        => array(
+            'host'     => 'localhost',
+            'name'     => 'jobmadei_db',
+            'user'     => 'jobmadei_user',
+            'password' => 'q1w2e3r4',
+            'dsn'      => '',
+            'pdo'      => null,
+        )
+    );
+	public function index() {}
     public function GetCollege() {
 
     }
@@ -11,6 +22,24 @@ class API_General extends API {
 
     }
     public function GetSkills() {
-
+		$this->start_db();
+		$sql = 'SELECT * FROM skills ORDER BY id ASC';
+		return $this->db->getQuery($sql);
     }
+	
+	protected function start_db() {
+        if (!($this->db instanceof DB)) {
+            // Instantiate the Database object
+            if ($this->config->database->pdo instanceof \PDO) {
+                // Uses an existing PDO connection
+                $this->db = new DB($this->config->database->pdo);
+            } else {
+                if ($this->config->database->dsn) {
+                    $this->db = new DB($this->config->database->dsn);
+                } else {
+                    $this->db = new DB($this->config->database->host, $this->config->database->name);
+                }
+            }
+        }
+	}
 }

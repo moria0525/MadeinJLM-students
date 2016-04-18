@@ -120,7 +120,7 @@ class API_Student extends API {
         //Login with credentials
         if ($data = $student->resetPassword($email)) {
 			// send email to $data->Email whith the confirmation $data->Confirmation
-			sendMail::send($data->Email, 'Reset your password', 'Hi, please click on the link at the bottom to reset your password.<br>click <a href="http://job.madeinjlm.org/MadeinJLM-students/mockup/#forgot-password/' . $data->Confirmation . '">here</a>');
+			sendMail::send($data->Email, 'Reset your password', 'Hi, please click on the link at the bottom to reset your password.<br>click <a href="http://job.madeinjlm.org/MadeinJLM-students/mockup/#new-password/' . $data->Confirmation . '">here</a>');
 			$return_arr = ['status' => "success"];
 		} else {
             //Display Errors
@@ -134,7 +134,30 @@ class API_Student extends API {
         return $return_arr;
     }
     public function newPassword() {
-
+        if (isset($_POST['hash']))
+            $hash = $_POST['hash'];
+        else $hash = '';
+        
+        if (isset($_POST['newPass']))
+            $newPass = $_POST['newPass'];
+        else $newPass = '';
+        
+        $student = new Student();
+        $student->start();
+		
+        //Login with credentials
+        if ($data = $student->newPassword($hash,$newPass)) {
+			$return_arr = ['status' => "success",$newPass];
+		} else {
+            //Display Errors
+            $errors = array();
+            foreach($student->log->getErrors() as $err){
+                $errors[] = $err;
+            }
+            $return_arr =  ['status' => "error",'errors' => $errors];
+		}
+        
+        return $return_arr;
     }
     public function changePassword() {
         echo "hello 2";

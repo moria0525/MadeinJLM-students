@@ -159,7 +159,6 @@ class API_Student extends API {
         $updates = array("Password" => $newPass);
         
         $student = new Student();
-        $student->start();
         
         if ($data = $student->update($updates)) {
             $return_arr = ['status' => "sucess", $newPass];

@@ -127,6 +127,7 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
 			$scope.alerts.changePassword = {type: 'danger', msg: 'Passwords does not match'};
 		} else {
             student.changePassword({Password: $scope.data.changePassword.password}).success(function (data) {
+                console.log(data);
             if (data.status === 'error') {
                 $scope.alerts.changePassword = {type: 'danger', msg: data.errors.join('<br>')};
             } else {

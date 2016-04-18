@@ -163,7 +163,7 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (data) {
                 return data;
-            }).error(function () {return {'status': 'error', 'errors': 'Try again letter please.'}; });
+            }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}; });
         },
         register: function (data) {
             return $http({
@@ -173,7 +173,7 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (data) {
                 return data;
-            }).error(function () {return {'status': 'error', 'errors': 'Try again letter please.'}; });
+            }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}; });
         },
         logOut: function () {
             return $http({
@@ -182,7 +182,7 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (data) {
                 return data;
-            }).error(function () {return {'status': 'error', 'errors': 'Try again letter please.'}; });
+            }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}; });
         },
         resetPassword: function (email) {
             return $http({
@@ -192,7 +192,7 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (data) {
                 return data;
-            }).error(function () {return {'status': 'error', 'errors': 'Try again letter please.'}; });
+            }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}; });
         },
         newPassword: function (hash,newPass) {
             console.log(hash);

@@ -63,7 +63,7 @@ jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $locat
             if (data.status === 'error') {
                 $scope.alerts.register = {type: 'danger', msg: data.errors.join('<br>')};
             } else {
-                $scope.alerts.register = {type: 'success', msg: 'נשלח למייל, מייל אקטיבציה'};
+                $scope.alerts.register = {type: 'success', msg: 'Activation mail sent'};
             }
         });
     };
@@ -84,19 +84,19 @@ jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $locat
             if (data.status === 'error') {
                 $scope.alerts.resetPassword = {type: 'danger', msg: data.errors.join('<br>')};
             } else {
-                $scope.alerts.resetPassword = {type: 'success', msg: 'נשלח קישור למייל שלך, שאיתו ניתן לאפס את הסיסמא'};
+                $scope.alerts.resetPassword = {type: 'success', msg: 'A link was sent to your mail, you can reset your password with it'};
             }
         });
     };
     $scope.newPassword = function () {
 		if($scope.data.newPassword.password !== $scope.data.newPassword.password2){
-			$scope.alerts.newPassword = {type: 'danger', msg: 'הסיסמאות אינם תואמות'};
+			$scope.alerts.newPassword = {type: 'danger', msg: 'Passwords does not match'};
 		} else {
 			student.newPassword($routeParams.hash,{Password: $scope.data.newPassword.password}).success(function (data) {
 				if (data.status === 'error') {
 					$scope.alerts.newPassword = {type: 'danger', msg: data.errors.join('<br>')};
 				} else {
-					$scope.alerts.newPassword = {type: 'success', msg: 'הסיסמא שונתה בהצלחה'};
+					$scope.alerts.newPassword = {type: 'success', msg: 'Password changed'};
 				}
 			});
 		}
@@ -121,8 +121,11 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
                 $location.path("/login");
             }
         });
-    };
-    
+    }; //////////////////////////////////////////////////////////////////////////////////help wanted
+    $scope.changePassword = function () {
+        student.changePassword().success
+    }
+     
 });
 jlm.controller('generalController', function ($scope) {
     "use strict";

@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * Database Connection Manager
  *
@@ -22,7 +23,6 @@ class DB
     private $dsn = '';
     /** @var \PDO - The DB connection session */
     private $connection;
-
     /**
      * Initializes the Database object
      *
@@ -44,10 +44,8 @@ class DB
             $this->host = $hostOrDSN;
             $this->dbName = $dbName;
         }
-
         $this->log = new Log('DB');
     }
-
     /**
      * Get table object
      *
@@ -59,7 +57,6 @@ class DB
     {
         return new DB_Table($this, $tableName);
     }
-
     /**
      * Set the database username
      *
@@ -69,7 +66,6 @@ class DB
     {
         $this->user = $user;
     }
-
     /**
      * Set the database user password
      *
@@ -79,7 +75,6 @@ class DB
     {
         $this->password = $password;
     }
-
     /**
      * Set the name of the Database to connect to
      * @param string $dbName
@@ -88,7 +83,6 @@ class DB
     {
         $this->dbName = $dbName;
     }
-
     /**
      * Get the record of the last inserted record
      *
@@ -98,167 +92,6 @@ class DB
     {
         return $this->getConnection()->lastInsertId();
     }
-	
-    /**
-     * Get a single row from the table depending on arguments
-     *
-     * @param array $arguments -  field and value pair set to look up user for
-     *
-     * @return bool|Collection
-     */
-    public function getRow($table,$arguments)
-    {
-        $sql = 'SELECT * FROM ' . $table . ' WHERE _arguments_ LIMIT 1';
-
-        if (!$stmt = $this->getStatement($sql, $arguments)) {
-            // Something went wrong executing the SQL statement
-            return false;
-        } else {
-            return $stmt->fetch();
-        }
-
-    }
-    public function getQuery($sql,$arguments = false)
-    {
-        if (!$stmt = $this->getStatement($sql, $arguments)) {
-            // Something went wrong executing the SQL statement
-            return false;
-        } else {
-            return $stmt->fetchAll();
-        }
-
-    }
-    /**
-     * Get a PDO statement
-     *
-     * @param string       $sql  SQL query string
-     * @param bool|mixed[] $args argument to execute the statement with
-     *
-     * @return bool|\PDOStatement
-     */
-    public function getStatement($sql, $args = false)
-    {
-        // The parsed sql statement
-        $query = $this->buildQuery($sql, $args);
-		
-        if ($this->getConnection()) {
-            //Prepare the statement
-            if ($stmt = $this->connection->prepare($query)) {
-				//Log the SQL Query first
-                $this->log->report("SQL Statement: {$query}");
-
-                // When fetched return an object
-                $stmt->setFetchMode(\PDO::FETCH_ASSOC);
-
-                // If arguments were passed execute the statement
-                if ($args) {
-                    $this->log->report("SQL Data Sent: [" . implode(', ', $args) . "]");
-                    $stmt->execute($args);
-                } else $stmt->execute();
-
-                // Handles any error during execution
-                if ($stmt->errorCode() > 0) {
-                    $error = $stmt->errorInfo();
-                    $this->log->error("PDO({$error[0]})[{$error[1]}] {$error[2]}");
-                    return false;
-                }
-
-                return $stmt;
-            } else {
-                $this->log->error('Failed to create a PDO statement with: ' . $query);
-                return false;
-            }
-        } else {
-            // Failed to connect to the database
-            return false;
-        }
-    }
-
-    /**
-     * Builds a query string with the passed arguments
-     *
-     * @param string $sql
-     * @param array  $arguments - Associative array of fields and values
-     *
-     * @return string
-     */
-    private function buildQuery($sql, $arguments = null)
-    {
-        if (is_array($arguments)) {
-            $finalArgs = array();
-            foreach ($arguments as $field => $val) {
-                // Parametrize the arguments
-                $finalArgs[] = " {$field}=:{$field}";
-            }
-
-            // Join all the arguments as a string
-            $finalArgs = implode(' AND', $finalArgs);
-
-            if (strpos($sql, ' _arguments_')) {
-                // Place the arguments string in the placeholder
-                $sql = str_replace(' _arguments_', $finalArgs, $sql);
-            } else {
-                // Appends the parameters string the sql query
-                // $sql .= $finalArgs; TODO: Watch this expression if it is on use
-            }
-        }
-
-        return $sql;
-    }
-
-    /**
-     * Query the table
-     *
-     * @param      $sql
-     * @param bool $arguments
-     *
-     * @return bool|\PDOStatement
-     */
-    public function query($sql, $arguments = false)
-    {
-        if (!$stmt = $this->getStatement($sql, $arguments)) {
-            // Something went wrong executing the SQL statement
-            return false;
-        } else {
-            return $stmt;
-        }
-    }
-
-    /**
-     * Executes SQL query and checks for success
-     *
-     * @param string     $sql       -  SQL query string
-     * @param array|bool $arguments -  Array of arguments to execute $sql with
-     *
-     * @return bool
-     */
-    public function runQuery($sql, $arguments = false)
-    {
-        if (!$stmt = $this->getStatement($sql, $arguments)) {
-            // Something went wrong executing the SQL statement
-            return false;
-        }
-
-        // If there are no arguments, execute the statement
-        if (!$arguments) {
-            $stmt->execute();
-        }
-
-        $rows = $stmt->rowCount();
-        $rows = ($rows > 0) ? $rows : count($stmt->fetchAll());
-
-        if ($rows > 0) {
-            //Good, Rows where affected
-            $this->log->report("$rows row(s) where Affected");
-            return true;
-        } else {
-            //Bad, No Rows where Affected
-            $this->log->report('No rows were Affected');
-            return false;
-        }
-    }
-	
-	
     /**
      * Gets the connecting to the database
      * Check if the database connection exists if not connects to the database
@@ -270,12 +103,10 @@ class DB
         if (!($this->log instanceof Log)) {
             $this->log = new Log('DB');
         }
-
         // Use cached connection if already connected to server
         if ($this->connection instanceof \PDO) {
             return $this->connection;
         }
-
         $this->log->report('Connecting to database...');
         try{
             $this->connection = new \PDO($this->generateDSN(), $this->user, $this->password);
@@ -285,13 +116,12 @@ class DB
         }
         // Check is the connection to server succeed
         if ($this->connection instanceof \PDO) {
-            return true;
+            return $this->connection;
         } else {
             // There was an error connecting to the DB server
             return false;
         }
     }
-
     /**
      * Generate the DSN string for the connection
      *
@@ -302,10 +132,8 @@ class DB
         if (!$this->dsn) {
             $this->dsn = "mysql:dbname={$this->dbName};host={$this->host}";
         }
-
         return $this->dsn;
     }
-
     /**
      * Set the connection
      * @param \PDO $connection

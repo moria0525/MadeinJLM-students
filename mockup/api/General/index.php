@@ -27,7 +27,6 @@ class API_General extends API {
 		return $this->db->getQuery($sql);
     }
 	
-	
 	protected function start_db() {
         if (!($this->db instanceof DB)) {
             // Instantiate the Database object

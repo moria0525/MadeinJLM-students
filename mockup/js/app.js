@@ -224,7 +224,7 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
                 headers : { 'Content-Type':  'application/x-www-form-urlencoded' }
             }).success(function (data){
                 return data;
-            }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'};})  ;      
+            }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}; });      
         },
 		
 		

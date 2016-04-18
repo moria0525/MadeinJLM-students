@@ -2,7 +2,6 @@
 class API_Student extends API {
     public function index() {
         $student = new Student();
-        $student->start();
         return $student->userData();
     }
     public function login() {
@@ -20,7 +19,6 @@ class API_Student extends API {
         else $auto = false;  //To remember user with a cookie for autologin
 
         $student = new Student();
-        $student->start();
 
         //Login with credentials
         $student->login($username,$password,$auto);
@@ -43,14 +41,12 @@ class API_Student extends API {
     }
     public function sendActivated($email) {
         $student = new Student();
-        $student->start();
         $user = $student->table->getRow(array('Email' => $email));
         sendMail::send($user->Email, 'Activated your account', 'Hi, please click on the link at the bottom to activated your account.<br>click <a href="http://job.madeinjlm.org/MadeinJLM-students/mockup/API/Student/activated?c=' . $user->Confirmation . '">here</a>');
     }
     public function register() {
         
         $student = new Student();
-        $student->start();
         
         $return_arr = array();
         
@@ -81,7 +77,6 @@ class API_Student extends API {
     public function activated() {
         
         $student = new Student();
-        $student->start();
         
         $return_arr = array();
         
@@ -103,7 +98,6 @@ class API_Student extends API {
     public function logOut() {
         
         $student = new Student();
-        $student->start();
         
         $student->logout();
         return ['status' => "success"];
@@ -115,7 +109,6 @@ class API_Student extends API {
         else $email = '';
         
         $student = new Student();
-        $student->start();
 
         //Login with credentials
         if ($data = $student->resetPassword($email)) {
@@ -143,7 +136,6 @@ class API_Student extends API {
         else $newPass = '';
         
         $student = new Student();
-        $student->start();
 		
         //Login with credentials
         if ($data = $student->newPassword($hash,$newPass)) {

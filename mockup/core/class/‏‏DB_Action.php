@@ -98,7 +98,16 @@ class DB_Action
         }
 
     }
+    public function getQuery($sql,$arguments = false)
+    {
+        if (!$stmt = $this->getStatement($sql, $arguments)) {
+            // Something went wrong executing the SQL statement
+            return false;
+        } else {
+            return $stmt->fetchAll();
+        }
 
+    }
     /**
      * Get a PDO statement
      *
@@ -125,7 +134,7 @@ class DB_Action
                 if ($args) {
                     $this->log->report("SQL Data Sent: [" . implode(', ', $args) . "]");
                     $stmt->execute($args);
-                }
+                } else $stmt->execute();
 
                 // Handles any error during execution
                 if ($stmt->errorCode() > 0) {

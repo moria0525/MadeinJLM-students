@@ -39,6 +39,10 @@ jlm.config(function ($routeProvider) {
             templateUrl: 'view/profile.html',
             controller: 'UserConnected',
         }).
+        when('/change-password', {
+            templateUrl: 'view/change-password.html',
+            controller: 'UserConnected',
+        }).
         otherwise({
             redirectTo: '/'
         });

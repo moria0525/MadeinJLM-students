@@ -2,7 +2,6 @@
 class API_Student extends API {
     public function index() {
         $student = new Student();
-        $student->start();
         return $student->userData();
     }
     public function login() {

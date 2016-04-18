@@ -123,10 +123,10 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
         });
     }; //////////////////////////////////////////////////////////////////////////////////help wanted
     $scope.changePassword = function () {
-        if($scope.data.newPassword.password !== $scope.data.newPassword.password2){
-			$scope.alerts.newPassword = {type: 'danger', msg: 'Passwords does not match'};
+        if($scope.data.changePassword.password !== $scope.data.changePassword.password2){
+			$scope.alerts.changePassword = {type: 'danger', msg: 'Passwords does not match'};
 		} else {
-            student.changePassword({Password: $scope.data.newPassword.password}).success(function (data) {
+            student.changePassword({Password: $scope.data.changePassword.password}).success(function (data) {
             if (data.status === 'error') {
                 $scope.alerts.changePassword = {type: 'danger', msg: data.errors.join('<br>')};
             } else {
@@ -135,7 +135,7 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
         });
     }
      
-});
+};
 jlm.controller('generalController', function ($scope) {
     "use strict";
     $scope.data = {};

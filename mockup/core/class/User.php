@@ -487,12 +487,14 @@ class User extends UserBase
                 $updates = $this->_updates;
             } else {
                 // No updates
+                 echo "1";
                 return false;
             }
         }
 
         //Validate All Fields
         if (!$this->validateAll()) {
+            echo "2";
             //There are validations error
             return false;
         }
@@ -510,6 +512,7 @@ class User extends UserBase
         if ($updates->Email) {
             if ($updates->Email != $this->Email) {
                 if ($this->table->isUnique('Email', $updates->Email, 'This Email is Already in Use')) {
+                     echo "3";
                     return false;
                 }
             }
@@ -517,6 +520,7 @@ class User extends UserBase
 
         //Check for errors
         if ($this->log->hasError()) {
+             echo "3";
             return false;
         }
 
@@ -554,6 +558,7 @@ class User extends UserBase
             return true;
         } else {
             $this->log->error(2);
+             echo "4";
             return false;
         }
     }

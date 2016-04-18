@@ -220,7 +220,7 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
         changePassword: function (newPass) {
             return $http({
                 method  : 'POST',
-                url     : 'API/Student/update',
+                url     : 'API/Student/changePassword',
                 data    : $httpParamSerializerJQLike({'newPass':newPass}),
                 headers : { 'Content-Type':  'application/x-www-form-urlencoded' }
             }).success(function (data){

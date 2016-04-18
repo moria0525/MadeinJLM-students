@@ -12,6 +12,7 @@ include_once 'core/class/Collection.php';
 include_once 'core/class/Cookie.php';
 include_once 'core/class/DB.php';
 include_once 'core/class/DB_Table.php';
+include_once 'core/class/DB_Action.php';
 include_once 'core/class/Hash.php';
 include_once 'core/class/LinkedCollection.php';
 include_once 'core/class/Log.php';

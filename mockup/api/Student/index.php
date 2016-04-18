@@ -152,9 +152,9 @@ class API_Student extends API {
         return $return_arr;
     }
     public function changePassword() {
-       if (isset($_POST['newPass']))
-            $newPass = $_POST['newPass'];
-        else $newPass = '';
+//       if (isset($_POST['newPass']))
+//            $newPass = $_POST['newPass'];
+//        else $newPass = '';
         
         $updates = array("Password" => $newPass);
         

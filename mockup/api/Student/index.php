@@ -152,10 +152,13 @@ class API_Student extends API {
         return $return_arr;
     }
     public function changePassword() {
+    	echo "enter to changePassword<br>";
        if (isset($_GET['newPass']))
             $newPass = $_GET['newPass'];
         else $newPass = '';
+        echo "the password is<br>";
         echo $password;
+        echo "the newPass is<br>";
         echo $newPass;
         $updates = array('password' => $newPass);
         

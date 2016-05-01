@@ -121,9 +121,17 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
                 $location.path("/login");
             }
         });
-    }; //////////////////////////////////////////////////////////////////////////////////help wanted
+    };
    $scope.changePassword = function () {
-        console.log($scope.data.changePassword);
+        student.changePassword($scope.data.changePassword).success(function (data) {
+            console.log(data);
+            if (data.status === 'error') {
+                $scope.alerts.changePassword = {type: 'danger', msg: data.errors.join('<br>')};
+            } else {
+                $scope.alerts.changePassword = {type: 'success', msg: 'Your password was change successfully'};
+            }
+        });
+        /*
        if($scope.data.changePassword.password !== $scope.data.changePassword.password2){
 			$scope.alerts.changePassword = {type: 'danger', msg: 'Passwords does not match'};
 		} else {
@@ -135,7 +143,7 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
             } else {
                 $scope.alerts.changePassword = {type: 'success', msg: 'Your password was change successfully'};
             }
-        });
+        */
     }};
      
 });
@@ -219,11 +227,11 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
                 return data;
             }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}; });
         },
-        changePassword: function (oldPassword,Password,Password2) {
+        changePassword: function (data) {
             return $http({
                 method  : 'POST',
                 url     : 'API/Student/changePassword',
-                data    : $httpParamSerializerJQLike({'oldPassword':oldPassword, 'Password': Password, 'Password2': Password2}),
+                data    : $httpParamSerializerJQLike(data),
                 headers : { 'Content-Type':  'application/x-www-form-urlencoded' }
             }).success(function (data){
                 return data;

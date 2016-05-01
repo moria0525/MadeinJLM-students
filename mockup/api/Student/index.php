@@ -152,27 +152,16 @@ class API_Student extends API {
         return $return_arr;
     }
     public function changePassword() {
-    	$log = array();
-        $log[] = "enter to changePassword<br>";
-       if (isset($_POST['Password']))
-            $newPass = $_POST['Password'];
-        else $newPass = '';
-        $log[] =  "the password is<br>";
-        $log[] =  $Password;
-        $log[] =  "the newPass is<br>";
-        $log[] =  $newPass;
-        $updates = array('Password' => $newPass);
-        
         $student = new Student();
         
-        if ($data = $student->update($updates)) {
-            $return_arr = ['status' => "success", $newPass];
+        if ($data = $student->update($_POST)) {
+            $return_arr = ['status' => "success"];
         } else {
              $errors = array();
             foreach($student->log->getErrors() as $err){
                 $errors[] = $err;
             }
-            $return_arr =  ['status' => "error",'errors' => $errors, 'log' => $log];
+            $return_arr =  ['status' => "error",'errors' => $errors];
         }
         return $return_arr;
 

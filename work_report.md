@@ -13,6 +13,7 @@
 |10.4.16|meeting with Ziv| 0.5 hour|
 |11.4.16|meeting with client && work on project| 1.5 hours|
 |17.4.16|Iteration 1 - MVP|6 hours|
+|5.1.16|meeting with client done iteration 1 - MVP and start iteration 2|4.5 hours|
 
 
 
@@ -23,6 +24,7 @@
 |31.3.16  |building server side api            | 3 hours  |
 |4.4.16 |building server side api    | 2 hours |
 |4.4.16 |work on login, register, logout| 3 hours |
+|10.4.16 |buliding network with database class| 7 hours |
 
 ## Moria Rabayoff
 | date   | subject         | length  |
@@ -50,4 +52,4 @@
 | date   | subject         | length  |
 |--------|-----------------|---------|
 |13.4.16 |Iteration 1 | 2 Hours |
-
+|29.4.16 |Iteration 1 | 2 Hours |

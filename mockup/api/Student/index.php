@@ -152,15 +152,16 @@ class API_Student extends API {
         return $return_arr;
     }
     public function changePassword() {
-    	echo "enter to changePassword<br>";
+    	$log = array();
+        $log[] = "enter to changePassword<br>";
        if (isset($_GET['newPass']))
             $newPass = $_GET['newPass'];
         else $newPass = '';
-        echo "the password is<br>";
-        echo $password;
-        echo "the newPass is<br>";
-        echo $newPass;
-        $updates = array('password' => $newPass);
+        $log[] =  "the password is<br>";
+        $log[] =  $password;
+        $log[] =  "the newPass is<br>";
+        $log[] =  $newPass;
+        $updates = array('Password' => $newPass);
         
         $student = new Student();
         
@@ -171,7 +172,7 @@ class API_Student extends API {
             foreach($student->log->getErrors() as $err){
                 $errors[] = $err;
             }
-            $return_arr =  ['status' => "error",'errors' => $errors];
+            $return_arr =  ['status' => "error",'errors' => $errors, 'log' => $log];
         }
         return $return_arr;
 

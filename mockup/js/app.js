@@ -144,7 +144,7 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
                 $scope.alerts.changePassword = {type: 'success', msg: 'Your password was change successfully'};
             }
         */
-    }};
+    };
      
 });
 jlm.controller('generalController', function ($scope) {

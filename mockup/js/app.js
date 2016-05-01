@@ -123,7 +123,8 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
         });
     }; //////////////////////////////////////////////////////////////////////////////////help wanted
    $scope.changePassword = function () {
-        if($scope.data.changePassword.password !== $scope.data.changePassword.password2){
+        console.log($scope.data.changePassword);
+       if($scope.data.changePassword.password !== $scope.data.changePassword.password2){
 			$scope.alerts.changePassword = {type: 'danger', msg: 'Passwords does not match'};
 		} else {
 			console.log($scope.data.changePassword);

@@ -156,7 +156,7 @@ class API_Student extends API {
             $newPass = $_GET['newPass'];
         else $newPass = '';
         
-        $updates = array('Password' => $newPass);
+        $updates = array('password' => $newPass);
         
         $student = new Student();
         

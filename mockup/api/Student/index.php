@@ -154,8 +154,8 @@ class API_Student extends API {
     public function changePassword() {
     	$log = array();
         $log[] = "enter to changePassword<br>";
-       if (isset($_GET['newPass']))
-            $newPass = $_GET['newPass'];
+       if (isset($_POST['Password']))
+            $newPass = $_POST['Password'];
         else $newPass = '';
         $log[] =  "the password is<br>";
         $log[] =  $password;

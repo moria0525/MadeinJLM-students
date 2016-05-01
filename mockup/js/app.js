@@ -126,7 +126,8 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
         if($scope.data.changePassword.password !== $scope.data.changePassword.password2){
 			$scope.alerts.changePassword = {type: 'danger', msg: 'Passwords does not match'};
 		} else {
-            student.changePassword({Password: $scope.data.changePassword.password}).success(function (data) {
+            oldPassword,Password,Password2
+            student.changePassword($scope.data.changePassword.oldPassword, $scope.data.changePassword.password, $scope.data.changePassword.password2).success(function (data) {
                 console.log(data);
             if (data.status === 'error') {
                 $scope.alerts.changePassword = {type: 'danger', msg: data.errors.join('<br>')};
@@ -217,11 +218,11 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
                 return data;
             }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}; });
         },
-        changePassword: function (newPass) {
+        changePassword: function (oldPassword,Password,Password2) {
             return $http({
                 method  : 'POST',
                 url     : 'API/Student/changePassword',
-                data    : $httpParamSerializerJQLike({'newPass':newPass.Password}),
+                data    : $httpParamSerializerJQLike({'oldPassword':oldPassword, 'Password': Password, 'Password2': Password2}),
                 headers : { 'Content-Type':  'application/x-www-form-urlencoded' }
             }).success(function (data){
                 return data;

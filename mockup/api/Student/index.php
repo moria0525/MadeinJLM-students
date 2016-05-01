@@ -158,7 +158,7 @@ class API_Student extends API {
             $newPass = $_POST['Password'];
         else $newPass = '';
         $log[] =  "the password is<br>";
-        $log[] =  $password;
+        $log[] =  $Password;
         $log[] =  "the newPass is<br>";
         $log[] =  $newPass;
         $updates = array('Password' => $newPass);

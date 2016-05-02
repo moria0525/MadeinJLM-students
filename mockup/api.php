@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: application/json');
+// header('Content-Type: application/json');
 include_once('core/config.php');
 
 $api_answer = array();

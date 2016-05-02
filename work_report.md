@@ -25,6 +25,8 @@
 |4.4.16 |building server side api    | 2 hours |
 |4.4.16 |work on login, register, logout| 3 hours |
 |10.4.16 |buliding network with database class| 7 hours |
+|3.5.16 | build new class DB_Action and start design change status | 5 hours |
+
 
 ## Moria Rabayoff
 | date   | subject         | length  |

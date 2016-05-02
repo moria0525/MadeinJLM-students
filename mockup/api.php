@@ -3,10 +3,10 @@ header('Content-Type: application/json');
 include_once('core/config.php');
 
 $api_answer = array();
-print_r('api-files/' . trim($_GET['api']) . '/index.php');
+
 if (isset($_GET['api']) && file_exists('api-files/' . trim($_GET['api']) . '/index.php')) {
     $apiName = trim($_GET['api']);
-    echo 'api-files/' . $apiName . '/index.php';
+    
     include_once 'api-files/' . $apiName . '/index.php';
     
     $apiClass = 'API_' . $apiName;

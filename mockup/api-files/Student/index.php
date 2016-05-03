@@ -166,8 +166,13 @@ class API_Student extends API {
         return $return_arr;
 
     }
-    public function changeStatus() {
-
+    public function changeStatus($reason,$typeReason)
+    {
+		var $typeReason;
+		if($status==0)
+		{
+				
+		}
     }
     public function changeProfileImage() {
 

@@ -237,6 +237,17 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
                 return data;
             }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}; });      
         },
+        
+        changeStatus: function (data) {
+            return $http({
+                method  : 'POST',
+                url     : 'API/Student/changeStatus',
+                data    : $httpParamSerializerJQLike(data),
+                headers : { 'Content-Type':  'application/x-www-form-urlencoded' }
+            }).success(function (data){
+                return data;
+            }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}; });      
+        },
 		
 		
 		

@@ -59,6 +59,7 @@ class User extends UserBase
         15 => 'Can not register a new user, as user is already logged in.',
         16 => 'This Email is already in use',
         17 => 'This Username is not available',
+        18 => 'the change status failed'
     );
 
     /**

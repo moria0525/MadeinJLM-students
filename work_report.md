@@ -26,6 +26,7 @@
 |4.4.16 |work on login, register, logout| 3 hours |
 |10.4.16 |buliding network with database class| 7 hours |
 |3.5.16 | build new class DB_Action and start design change status | 5 hours |
+|3.5.16 |Iteration 2 - bulid activeion mode in profile | 2.5 Hours |
 
 
 ## Moria Rabayoff
@@ -34,6 +35,7 @@
 |4.4.16  |ZFR improvements and project foundations| 1 hour  |
 |13.4.16 |Iteration 1 | 4 Hours |
 |18.4.16|Iteration 1 - MVP-con|6 hours|
+|3.5.16 |Iteration 2 - bulid local server | 1.5 Hours |
 
 ## Alon Shmilovich
 | date   | subject         | length  |
@@ -48,6 +50,7 @@
 |--------|-----------------|---------|
 |13.4.16 |Iteration 1 | 4 Hours |
 |18.4.16|Iteration 1 - MVP-con|6 hours|
+|3.5.16 |Iteration 2 - bulid local server | 1.5 Hours |
 
 
 ## Yoad Shiran
@@ -55,3 +58,4 @@
 |--------|-----------------|---------|
 |13.4.16 |Iteration 1 | 2 Hours |
 |29.4.16 |Iteration 1 | 2 Hours |
+|3.5.16 |Iteration 2 - bulid local server | 1.5 Hours |

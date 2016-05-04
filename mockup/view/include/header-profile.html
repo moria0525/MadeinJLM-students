@@ -1,0 +1,24 @@
+			<div class="container header-connected">
+				<profile-picture></profile-picture>
+				<div id="header-connected-top">
+					<span class="student-hi">Hi {{studentData.first_name}},</span>
+					<div class="student-action">
+						<div ng-controller="DropdownCtrl" tooltip-placement="top-right" uib-tooltip="Click for user actions">
+							<span uib-dropdown on-toggle="toggled(open)">
+							  <a href id="user-setting" uib-dropdown-toggle >
+								<i class="fa fa-cog" aria-hidden="true"></i>
+							  </a>
+							  <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu aria-labelledby="user-setting">
+								<li><a href">Change status</a></li>
+								<li><a href="#/change-password">Change Password</a></li>
+								<li><a href ng-click="logOut()">Log out</a></li>
+							  </ul>
+							</span>
+						</div>
+						<a href id="change-status-btn" tooltip-placement="top-right" uib-tooltip="Click to change your status" ng-class="{'run': studentData.status == '1'}"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+					</div>
+				</div>
+				<div id="header-connected-bottom">
+					איזה מידע חסר..
+				</div>
+			</div>

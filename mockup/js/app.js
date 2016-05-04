@@ -1,7 +1,4 @@
-var jlm = angular.module('jlm', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
-
-var studentData = false;
-
+var jlm = angular.module('jlm', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ngImgCrop']);
 
 jlm.config(function ($routeProvider) {
     "use strict";
@@ -32,8 +29,7 @@ jlm.config(function ($routeProvider) {
             controller: 'UserNotConnected'
         }).
         when('/termOfUse', {
-        templateUrl: 'view/termOfUse.html',
-        controller: 'UserNotConnected',
+        templateUrl: 'view/termOfUse.html'
         }).
         when('/profile', {
             templateUrl: 'view/profile.html',
@@ -48,12 +44,16 @@ jlm.config(function ($routeProvider) {
         });
 });
 
+jlm.run(function ($rootScope) {
+	$rootScope.studentData = false;
+});
 
-jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $location, student) {
+
+jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $location, student, $rootScope) {
     "use strict";
     student.init().success(function (data) {
-        studentData = data;
-        if (studentData !== false) {
+        $rootScope.studentData = data;
+        if ($rootScope.studentData !== false) {
             $location.path("/profile");
         }
     });
@@ -105,12 +105,12 @@ jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $locat
     console.log(student);
 });
 
-jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location, student) {
+jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location, student, $rootScope) {
     "use strict";
     
     student.init().success(function (data) {
-        studentData = data;
-        if (studentData === false) {
+        $rootScope.studentData = data;
+        if ($rootScope.studentData === false) {
             $location.path("/login");
         }
     });
@@ -147,7 +147,7 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
     };
      
 });
-jlm.controller('generalController', function ($scope) {
+jlm.controller('generalController', function ($scope, $rootScope) {
     "use strict";
     $scope.data = {};
     $scope.alerts = {};
@@ -156,10 +156,24 @@ jlm.controller('generalController', function ($scope) {
     };
 });
 
+jlm.controller('DropdownCtrl', function ($scope, $log) {
 
+  $scope.status = {
+    isopen: false
+  };
 
+  $scope.toggled = function(open) {
+    $log.log('Dropdown is now: ', open);
+  };
 
+  $scope.toggleDropdown = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    $scope.status.isopen = !$scope.status.isopen;
+  };
 
+  $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
+});
 
 
 
@@ -237,13 +251,142 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
                 return data;
             }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}; });      
         },
-		
-		
-		
+        uploadProfile: function (picture) {
+			var fd = new FormData();
+			fd.append('picture', picture);
+			return $http.post('API/Student/uploadProfile', fd, {
+				transformRequest: angular.identity,
+				headers: {'Content-Type': undefined,'Process-Data': false}
+			}).success(function(data){
+				return data;
+			}).error(function(){return {'status': 'error', 'errors': 'Please try again later.'}; });
+        }
 		
 		
     };
 }]);
 
+jlm.directive('profilePicture', function() {
+	return {
+		restrict: 'E',
+		controller: 'profilePictureCtrl',
+		templateUrl: 'view/directive/profile-picture.html'
+	};
+});
+jlm.controller('profilePictureCtrl', function ($scope, $uibModal, $log) {
+	
+	$scope.openChangeProfileImage = function () {
+		var modalInstance = $uibModal.open({
+			animation: true,
+			templateUrl: 'view/directive/changeProfileImage.html',
+			controller: 'ModalProfileCtrl',
+			size: 'md'
+		});
 
+		modalInstance.result.then(function (selectedItem) {
+			$scope.selected = selectedItem;
+		}, function () {
+			$log.info('Modal dismissed at: ' + new Date());
+		});
+	};
+		
+		
+});
+jlm.controller('ModalProfileCtrl', ['$scope', '$uibModalInstance', '$log', 'student', '$rootScope', function($scope, $uibModalInstance, $log, student, $rootScope){
 
+	$scope.cancel = function () {
+		$uibModalInstance.dismiss('cancel');
+	};
+	
+	$scope.imageDataURI='';
+	$scope.resImageDataURI='';
+	$scope.onChange=function($dataURI) {
+		console.log('onChange fired');
+	};
+	$scope.onLoadBegin=function() {
+		console.log('onLoadBegin fired');
+	};
+	$scope.onLoadDone=function() {
+		console.log('onLoadDone fired');
+	};
+	$scope.onLoadError=function() {
+		console.log('onLoadError fired');
+	};
+	$scope.$watch('resImageDataURI',function(){
+		// console.log('Res image', $scope.resImageDataURI);
+	});
+   $scope.save = function(){
+        student.uploadProfile($scope.resImageDataURI).success(function (data) {
+            console.log(data);
+			if (data.status === 'error') {
+                $scope.alerts.login = {type: 'danger', msg: data.errors.join('<br>')};
+            } else {
+				//console.log($scope);
+                $rootScope.studentData.profile = $scope.resImageDataURI;
+				$uibModalInstance.close();
+            }
+        });
+   };
+	
+}]);
+
+jlm.directive("fileread", [function () {
+    return {
+        scope: {
+            fileread: "="
+        },
+        link: function (scope, element, attributes) {
+            element.bind("change", function (changeEvent) {
+                var reader = new FileReader();
+                reader.onload = function (loadEvent) {
+                    scope.$apply(function () {
+                        scope.fileread = loadEvent.target.result;
+                    });
+                }
+                reader.readAsDataURL(changeEvent.target.files[0]);
+            });
+        }
+    }
+}]);
+jlm.directive('dragAndDrop', function() {
+	return {
+		restrict: 'A',
+        scope: {
+            dragAndDrop: "="
+        },
+		link: function(scope, elem, attr) {
+			elem.bind('dragover', function (e) {
+				e.stopPropagation();
+				e.preventDefault();
+				//debugger;
+				e.dataTransfer.dropEffect = 'copy';
+			});
+			elem.bind('dragenter', function(e) {
+				e.stopPropagation();
+				e.preventDefault();
+				elem.addClass('on-drag-enter');
+			});
+			elem.bind('dragleave', function(e) {
+				e.stopPropagation();
+				e.preventDefault();
+				elem.removeClass('on-drag-enter');
+			});
+			elem.bind('drop', function(e) {
+				var droppedFiles = e.dataTransfer.files;
+				e.stopPropagation();
+				e.preventDefault();
+				alert('drop!');
+				if (droppedFiles.length > 0) {
+					console.log(droppedFiles);
+					var reader = new FileReader();
+					reader.onload = function (loadEvent) {
+						scope.$apply(function () {
+							scope.dragAndDrop = loadEvent.target.result;
+						});
+					}
+					reader.readAsDataURL(droppedFiles[0]);
+				}
+			});
+		}
+	};
+});

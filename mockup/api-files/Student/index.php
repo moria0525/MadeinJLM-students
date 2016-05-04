@@ -181,4 +181,32 @@ class API_Student extends API {
     public function deleteTableInfo() {
 
     }
+    public function uploadProfile() {
+		$student = new Student();
+		
+		if($student->isSigned()){
+			
+			define('UPLOAD_DIR', 'uploads/profiles/');
+			$base64img = str_replace('data:image/jpeg;base64,', '', $_POST['picture']);
+			$data = base64_decode($base64img);
+			$file = UPLOAD_DIR . $student->ID . '.jpg';
+			file_put_contents($file, $data);
+			if ($data = $student->update(array('profile' => $student->ID . '.jpg')))
+				$return_arr = ['status' => "success"];
+			else $return_arr = ['status' => "error", 'errors' => array('DB Fail')];
+        }else{
+            //Display Errors
+            /*
+			$errors = array();
+            foreach($student->log->getErrors() as $err){
+                $errors[] = $err;
+            }
+			*/
+			$errors = array('User not connected');
+            $return_arr =  ['status' => "error",'errors' => $errors];
+        }
+        
+        return $return_arr;
+		
+    }
 }

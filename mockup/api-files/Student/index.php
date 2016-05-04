@@ -192,9 +192,8 @@ class API_Student extends API {
 			$data = base64_decode($base64img);
 			$file = UPLOAD_DIR . $student->ID . '.jpg';
 			file_put_contents($file, $data);
-			if ($data = $student->update(array('profile' => 'uploads/profiles/' . $student->ID . '.jpg')))
-				$return_arr = ['status' => "success"];
-			else $return_arr = ['status' => "error", 'errors' => array('DB Fail')];
+			$student->update(array('profile' => UPLOAD_DIR . $student->ID . '.jpg'));
+			$return_arr = ['status' => "success"];
         }else{
             //Display Errors
             /*

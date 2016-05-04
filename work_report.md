@@ -27,6 +27,8 @@
 |10.4.16 |buliding network with database class| 7 hours |
 |3.5.16 | build new class DB_Action and start design change status | 5 hours |
 |3.5.16 |Iteration 2 - bulid activeion mode in profile | 2.5 Hours |
+|4.5.16 |Work on profile, profile picture upload, and design the page | 6.5 Hours |
+|5.5.16 |Work on profile, profile picture upload, and design the page | 7 Hours |
 
 
 ## Moria Rabayoff

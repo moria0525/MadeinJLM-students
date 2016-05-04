@@ -319,7 +319,7 @@ jlm.controller('ModalProfileCtrl', ['$scope', '$uibModalInstance', '$log', 'stud
         student.uploadProfile($scope.resImageDataURI).success(function (data) {
             console.log(data);
 			if (data.status === 'error') {
-                $scope.alerts.login = {type: 'danger', msg: data.errors.join('<br>')};
+                // $scope.alerts.login = {type: 'danger', msg: data.errors.join('<br>')};
             } else {
 				//console.log($scope);
                 $rootScope.studentData.profile = $scope.resImageDataURI;

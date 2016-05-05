@@ -1,22 +1,25 @@
-<label class="col-sm-4 profileItemLable" ng-click="showEditZone()" uib-popover="Click for edit" popover-trigger="mouseenter" popover-placement="top-right">{{ title }}:</label>
-<div class="col-sm-8">
-	<div class="no-edit-zone" ng-click="showEditZone()" ng-show="!editZoneShow">
-		{{value}}&nbsp;
-	</div>
-	<div class="edit-zone" ng-show="editZoneShow">
-		<div class="input-group">
-			<input type="text" class="form-control" " ng-model="editValue">
-			<div class="input-group-btn">
-				<button type="button" class="btn btn-default" ng-click="editZoneSave()">Save</button>
-				<button type="button" class="btn btn-default" ng-click="editZoneShow = false">Cancel</button>
+<div ng-mouseleave="editZoneShow = false">
+	<label class="col-sm-4 profileItemLable" ng-mouseover="showEditZone()" ng-click="showEditZone()">{{ title }}:</label>
+	<div class="col-sm-8">
+		<div class="no-edit-zone" ng-mouseover="showEditZone()" ng-show="!editZoneShow">
+			{{value}}&nbsp;
+		</div>
+		<div class="edit-zone" ng-show="editZoneShow">
+			<div class="input-group">
+				<input type="text" class="form-control" " ng-model="editValue">
+				<div class="input-group-btn">
+					<button type="button" class="btn btn-success" ng-click="editZoneSave()" ng-disabled="value == editValue">Save</button>
+					<button type="button" class="btn btn-warning" ng-click="editZoneReset()" ng-disabled="value == editValue">Reset</button>
+					<!-- <button type="button" class="btn btn-default" ng-click="editZoneShow = false">Cancel</button> -->
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
+<!-- ng-mouseover="showEditZone()" uib-popover="Click for edit" popover-trigger="mouseenter" popover-placement="top-right" -->
 <style>
 .profileItemLable {line-height: 46px;text-align: right;cursor: pointer;}
-.no-edit-zone {line-height: 46px;cursor: pointer;}
+.no-edit-zone {line-height: 46px;cursor: pointer;padding-left: 11px;}
 .edit-zone .input-group-btn > .btn {
     padding: 10px 10px;
     font-size: 17px;

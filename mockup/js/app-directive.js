@@ -102,9 +102,16 @@ jlm.directive('profileItem', function($timeout) {
 					$element[0].querySelector('input').focus();
 				});
 			};
+			$scope.editZoneReset = function () {
+				$scope.editValue = $scope.value;
+				$scope.editZoneShow = true;
+				$timeout(function() {
+					$element[0].querySelector('input').focus();
+				});
+			};
 			$scope.editZoneSave = function () {
 				$scope.value = $scope.editValue;
-				$scope.editZoneShow = false;
+				// $scope.editZoneShow = false;
 			};
 		},
 		link: function(scope, elem, attr) {

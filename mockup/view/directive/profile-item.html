@@ -1,0 +1,28 @@
+<label class="col-sm-4 profileItemLable" ng-click="showEditZone()" uib-popover="Click for edit" popover-trigger="mouseenter" popover-placement="top-right">{{ title }}:</label>
+<div class="col-sm-8">
+	<div class="no-edit-zone" ng-click="showEditZone()" ng-show="!editZoneShow">
+		{{value}}&nbsp;
+	</div>
+	<div class="edit-zone" ng-show="editZoneShow">
+		<div class="input-group">
+			<input type="text" class="form-control" " ng-model="editValue">
+			<div class="input-group-btn">
+				<button type="button" class="btn btn-default" ng-click="editZoneSave()">Save</button>
+				<button type="button" class="btn btn-default" ng-click="editZoneShow = false">Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+.profileItemLable {line-height: 46px;text-align: right;cursor: pointer;}
+.no-edit-zone {line-height: 46px;cursor: pointer;}
+.edit-zone .input-group-btn > .btn {
+    padding: 10px 10px;
+    font-size: 17px;
+}
+.edit-zone .input-group-btn > .btn {
+    padding: 10px 10px;
+    font-size: 17px;
+}
+</style>

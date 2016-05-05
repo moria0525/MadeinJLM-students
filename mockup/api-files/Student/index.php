@@ -187,21 +187,17 @@ class API_Student extends API {
 		
 		if($student->isSigned()){
 			
-			define('UPLOAD_DIR', 'uploads/profiles/');
-			$base64img = str_replace('data:image/jpeg;base64,', '', $_POST['picture']);
-			$data = base64_decode($base64img);
-			$file = UPLOAD_DIR . $student->ID . '.jpg';
-			file_put_contents($file, $data);
-			$student->update(array('profile' => UPLOAD_DIR . $student->ID . '.jpg'));
-			$return_arr = ['status' => "success"];
+			if ($data = $student->uploadProfile($_POST['picture'])) {
+				$return_arr = ['status' => "success"];
+			} else {
+				$errors = array();
+				foreach($student->log->getErrors() as $err){
+					$errors[] = $err;
+				}
+				$return_arr =  ['status' => "error",'errors' => $errors];
+			}
         }else{
             //Display Errors
-            /*
-			$errors = array();
-            foreach($student->log->getErrors() as $err){
-                $errors[] = $err;
-            }
-			*/
 			$errors = array('User not connected');
             $return_arr =  ['status' => "error",'errors' => $errors];
         }

@@ -3,9 +3,7 @@
         </div>
         <div class="modal-body">
 			<form ng-show="imageDataURI == ''">
-				<label for="profileSelect">Choose picture:</label>
-				<input type="file" fileread="imageDataURI" accept="image/*" />
-				<div ng-class="divClass" class="drop-zone" drag-and-drop="imageDataURI">or drop picture here</div>
+				<div class="upload-file-zone" upload-file="imageDataURI" upload-file-accept="" upload-file-text="Choose picture:" upload-file-name="picture"></div>
 			</form>
 			<div ng-show="imageDataURI != ''">
 				<div ng-if="true" class="cropArea">

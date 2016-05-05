@@ -1,5 +1,6 @@
 var jlm = angular.module('jlm', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ngImgCrop']);
 
+/* --- routeProvider --- */
 jlm.config(function ($routeProvider) {
     "use strict";
     $routeProvider.
@@ -44,11 +45,12 @@ jlm.config(function ($routeProvider) {
         });
 });
 
+/* --- rootScope --- */
 jlm.run(function ($rootScope) {
 	$rootScope.studentData = false;
 });
 
-
+/* --- controlers --- */
 jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $location, student, $rootScope) {
     "use strict";
     student.init().success(function (data) {
@@ -102,10 +104,9 @@ jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $locat
 		}
     };
     
-    console.log(student);
 });
 
-jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location, student, $rootScope) {
+jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location, student, general, $rootScope) {
     "use strict";
     
     student.init().success(function (data) {
@@ -114,9 +115,12 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
             $location.path("/login");
         }
     });
+	$scope.profileEditFormat = {};
+    general.profileEditFormat().success(function (data) {
+        $scope.profileEditFormat = data;
+    });
     $scope.logOut = function () {
         student.logOut().success(function (data) {
-            console.log(data);
             if (data.status === 'success') {
                 $location.path("/login");
             }
@@ -124,26 +128,12 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
     };
    $scope.changePassword = function () {
         student.changePassword($scope.data.changePassword).success(function (data) {
-            console.log(data);
             if (data.status === 'error') {
                 $scope.alerts.changePassword = {type: 'danger', msg: data.errors.join('<br>')};
             } else {
                 $scope.alerts.changePassword = {type: 'success', msg: 'Your password was change successfully'};
             }
         });
-        /*
-       if($scope.data.changePassword.password !== $scope.data.changePassword.password2){
-			$scope.alerts.changePassword = {type: 'danger', msg: 'Passwords does not match'};
-		} else {
-			console.log($scope.data.changePassword);
-            student.changePassword($scope.data.changePassword.oldPassword, $scope.data.changePassword.password, $scope.data.changePassword.password2).success(function (data) {
-                console.log(data);
-            if (data.status === 'error') {
-                $scope.alerts.changePassword = {type: 'danger', msg: data.errors.join('<br>')};
-            } else {
-                $scope.alerts.changePassword = {type: 'success', msg: 'Your password was change successfully'};
-            }
-        */
     };
      
 });
@@ -158,25 +148,91 @@ jlm.controller('generalController', function ($scope, $rootScope) {
 
 jlm.controller('DropdownCtrl', function ($scope, $log) {
 
-  $scope.status = {
-    isopen: false
-  };
+	$scope.status = {
+		isopen: false
+	};
 
-  $scope.toggled = function(open) {
-    $log.log('Dropdown is now: ', open);
-  };
+	$scope.toggled = function(open) {
+		$log.log('Dropdown is now: ', open);
+	};
 
-  $scope.toggleDropdown = function($event) {
-    $event.preventDefault();
-    $event.stopPropagation();
-    $scope.status.isopen = !$scope.status.isopen;
-  };
+	$scope.toggleDropdown = function($event) {
+		$event.preventDefault();
+		$event.stopPropagation();
+		$scope.status.isopen = !$scope.status.isopen;
+	};
 
-  $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
+	$scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
 });
 
 
+/* --- profile --- */
+jlm.directive('profilePicture', function() {
+	return {
+		restrict: 'E',
+		controller: 'profilePictureCtrl',
+		templateUrl: 'view/directive/profile-picture.html'
+	};
+});
+jlm.controller('profilePictureCtrl', function ($scope, $uibModal, $log) {
+	
+	$scope.openChangeProfileImage = function () {
+		var modalInstance = $uibModal.open({
+			animation: true,
+			templateUrl: 'view/directive/changeProfileImage.html',
+			controller: 'ModalProfileCtrl',
+			size: 'md'
+		});
 
+		modalInstance.result.then(function (selectedItem) {
+			$scope.selected = selectedItem;
+		}, function () {
+			$log.info('Modal dismissed at: ' + new Date());
+		});
+	};
+		
+		
+});
+jlm.controller('ModalProfileCtrl', ['$scope', '$uibModalInstance', '$log', 'student', '$rootScope', function($scope, $uibModalInstance, $log, student, $rootScope){
+
+	$scope.cancel = function () {
+		$uibModalInstance.dismiss('cancel');
+	};
+	$scope.imageDataURI='';
+	$scope.resImageDataURI='';
+	$scope.onChange=function($dataURI) {
+		// console.log('onChange fired');
+	};
+	$scope.onLoadBegin=function() {
+		// console.log('onLoadBegin fired');
+	};
+	$scope.onLoadDone=function() {
+		// console.log('onLoadDone fired');
+	};
+	$scope.onLoadError=function() {
+		// console.log('onLoadError fired');
+	};
+	$scope.$watch('resImageDataURI',function(){
+		// console.log('Res image', $scope.resImageDataURI);
+	});
+	$scope.save = function(){
+		
+        student.uploadProfile($scope.resImageDataURI).success(function (data) {
+			if (data.status === 'error') {
+                // $scope.alerts.login = {type: 'danger', msg: data.errors.join('<br>')};
+				console.log(data.errors);
+            } else {
+                $rootScope.studentData.profile = $scope.resImageDataURI;
+				$uibModalInstance.close();
+            }
+        });
+		
+	};
+
+}]);
+
+
+/* --- services --- */
 jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, $httpParamSerializerJQLike) {
     "use strict";
     return {
@@ -229,9 +285,6 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
             }).error(function () {return {'status': 'error', 'errors': 'Please try again later..'}; });
         },
         newPassword: function (hash,newPass) {
-            console.log(hash);
-            console.log(newPass);
-            console.log($httpParamSerializerJQLike({'hash':hash,'newPass':newPass}));
 			return $http({
                 method  : 'POST',
                 url     : 'API/Student/newPassword',
@@ -261,133 +314,19 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
 				return data;
 			}).error(function(){return {'status': 'error', 'errors': 'Please try again later.'}; });
         }
-		
-		
     };
 }]);
-
-jlm.directive('profilePicture', function() {
+jlm.factory('general', ['$http', '$httpParamSerializerJQLike', function ($http, $httpParamSerializerJQLike) {
+    "use strict";
 	return {
-		restrict: 'E',
-		controller: 'profilePictureCtrl',
-		templateUrl: 'view/directive/profile-picture.html'
-	};
-});
-jlm.controller('profilePictureCtrl', function ($scope, $uibModal, $log) {
-	
-	$scope.openChangeProfileImage = function () {
-		var modalInstance = $uibModal.open({
-			animation: true,
-			templateUrl: 'view/directive/changeProfileImage.html',
-			controller: 'ModalProfileCtrl',
-			size: 'md'
-		});
-
-		modalInstance.result.then(function (selectedItem) {
-			$scope.selected = selectedItem;
-		}, function () {
-			$log.info('Modal dismissed at: ' + new Date());
-		});
-	};
-		
-		
-});
-jlm.controller('ModalProfileCtrl', ['$scope', '$uibModalInstance', '$log', 'student', '$rootScope', function($scope, $uibModalInstance, $log, student, $rootScope){
-
-	$scope.cancel = function () {
-		$uibModalInstance.dismiss('cancel');
-	};
-	
-	$scope.imageDataURI='';
-	$scope.resImageDataURI='';
-	$scope.onChange=function($dataURI) {
-		console.log('onChange fired');
-	};
-	$scope.onLoadBegin=function() {
-		console.log('onLoadBegin fired');
-	};
-	$scope.onLoadDone=function() {
-		console.log('onLoadDone fired');
-	};
-	$scope.onLoadError=function() {
-		console.log('onLoadError fired');
-	};
-	$scope.$watch('resImageDataURI',function(){
-		// console.log('Res image', $scope.resImageDataURI);
-	});
-   $scope.save = function(){
-        student.uploadProfile($scope.resImageDataURI).success(function (data) {
-            console.log(data);
-			if (data.status === 'error') {
-                // $scope.alerts.login = {type: 'danger', msg: data.errors.join('<br>')};
-				
-            } else {
-				//console.log($scope);
-                $rootScope.studentData.profile = $scope.resImageDataURI;
-				$uibModalInstance.close();
-            }
-        });
-   };
-	
-}]);
-
-jlm.directive("fileread", [function () {
-    return {
-        scope: {
-            fileread: "="
+        profileEditFormat: function () {
+            return $http({
+                method  : 'POST',
+                url     : 'API/General/profileEditFormat',
+                headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }).success(function (data) {
+                return data;
+            }).error(function () {return {}; });
         },
-        link: function (scope, element, attributes) {
-            element.bind("change", function (changeEvent) {
-                var reader = new FileReader();
-                reader.onload = function (loadEvent) {
-                    scope.$apply(function () {
-                        scope.fileread = loadEvent.target.result;
-                    });
-                }
-                reader.readAsDataURL(changeEvent.target.files[0]);
-            });
-        }
-    }
+    };
 }]);
-jlm.directive('dragAndDrop', function() {
-	return {
-		restrict: 'A',
-        scope: {
-            dragAndDrop: "="
-        },
-		link: function(scope, elem, attr) {
-			elem.bind('dragover', function (e) {
-				e.stopPropagation();
-				e.preventDefault();
-				//debugger;
-				e.dataTransfer.dropEffect = 'copy';
-			});
-			elem.bind('dragenter', function(e) {
-				e.stopPropagation();
-				e.preventDefault();
-				elem.addClass('on-drag-enter');
-			});
-			elem.bind('dragleave', function(e) {
-				e.stopPropagation();
-				e.preventDefault();
-				elem.removeClass('on-drag-enter');
-			});
-			elem.bind('drop', function(e) {
-				var droppedFiles = e.dataTransfer.files;
-				e.stopPropagation();
-				e.preventDefault();
-				alert('drop!');
-				if (droppedFiles.length > 0) {
-					console.log(droppedFiles);
-					var reader = new FileReader();
-					reader.onload = function (loadEvent) {
-						scope.$apply(function () {
-							scope.dragAndDrop = loadEvent.target.result;
-						});
-					}
-					reader.readAsDataURL(droppedFiles[0]);
-				}
-			});
-		}
-	};
-});

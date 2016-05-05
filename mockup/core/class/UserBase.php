@@ -51,7 +51,7 @@ abstract class UserBase
             'regEx' => '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,63})$/i'
         ),
         'Password' => array(
-            'limit' => '3-15',
+            'limit' => '6-15',
             'regEx' => ''
         )
     );

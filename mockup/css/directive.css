@@ -1,0 +1,15 @@
+/* upload-file */
+.upload-file-zone > div {
+    font-weight: bold;
+    text-align: center;
+    padding: 1em 0;
+    margin: .5em 0;
+    color: #555;
+    border: 2px dashed #555;
+    border-radius: 7px;
+    cursor: pointer;
+}
+.upload-file-zone.on-drag-enter > div {
+    border-style: solid;
+}
+/* upload-file end */

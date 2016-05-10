@@ -1,20 +1,30 @@
 <?php
 class API_General extends API {
 	public function index() {}
+    
+    
     public function GetCollege() {
-
+        $db = new DB_Action();
+		$sql = 'SELECT * FROM college ORDER BY id ASC';
+		return $db->getQuery($sql);
     }
     public function GetDegree() {
-
+        $db = new DB_Action();
+		$sql = 'SELECT * FROM degree ORDER BY id ASC';
+		return $db->getQuery($sql);
     }
     public function GetLanguages() {
-
+        $db = new DB_Action();
+		$sql = 'SELECT * FROM languages ORDER BY id ASC';
+		return $db->getQuery($sql);
     }
     public function GetSkills() {
 		$db = new DB_Action();
 		$sql = 'SELECT * FROM skills ORDER BY id ASC';
 		return $db->getQuery($sql);
     }
+    
+    
     public function profileEditFormat() {
 		header('Content-Type: text/html; charset=utf-8');
 		$pageFormat = array(

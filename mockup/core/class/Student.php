@@ -45,7 +45,7 @@ class Student extends User {
         $data['profile'] = UPLOAD_DIR . $this->ID . '.jpg?' .time();
 		
         //Prepare User Update Query
-        $sql = "UPDATE student SET profile=:profile WHERE ID=:id";
+        $sql = "UPDATE _table_ SET profile=:profile WHERE ID=:id";
 
         //Check for Changes
         if ($this->table->runQuery($sql, $data)) {
@@ -73,9 +73,9 @@ class Student extends User {
 //         echo $new;
          echo $this->_data['status'];
          if ($new_status === $this->_data['status']) {
-             
+             // צריך לשלוח הודעת שגיאה בלוג לא?
              return false;
-         } else {
+         } else { // אם עשיתה return למה יש פה else?
               $data = array();
              $data['id'] = $this->ID;
              $data['status'] = $new_status;
@@ -89,12 +89,12 @@ class Student extends User {
              //              if ($temp->status == $new) {
              //              }
              //**********************************************************
-            
-             $sql = "UPDATE student SET status=:status  WHERE ID=:id";
+            // _table_ - זה אוטומטית מחליף לטבלה הראשית של הסטודנט
+             $sql = "UPDATE _table_ SET status=:status  WHERE ID=:id";
          }
           if ($this->table->runQuery($sql, $data)) {
             $this->log->report('Information Updated(ChangeStatus)');
-
+			// יפה זה חשוב - זה בעצם דואג לעדכן את הסשיין! כל הכבוד שעליתם על זה לבד
             if ($this->clone === 0) {
                 $this->session->update = true;
             }
@@ -104,7 +104,8 @@ class Student extends User {
 
             // Clear the updates stack
             $this->_updates = new Collection();
-
+			// אני רואה שעדין לא הוספתם לטבלה ששומרת את הסיבה לעזיבה
+			// ובכלל לא השתמשתם ב DB_Action
             return true;
         } else {
             $this->log->error(18);

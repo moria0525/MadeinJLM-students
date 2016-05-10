@@ -6,22 +6,42 @@
 <section class="main-context">
 	<div class="container">
 		<div class="row">
-            <ul class="profileEditFormat">
-                <li data-ng-repeat="(key, item) in profileEditFormat" class="row">
-					<div profile-item
-						key="key"
-						title="item.title"
-						data="item.data"
-						multy="item.multy"
-						value="studentData[key]"
-						></div>
-                </li>
-            </ul>
+			<ul class="profileEditFormat">
+				<li profile-item title="'Basic education subject'" value="studentData.basic_education_subject" save-function="updateGeneral"></li>
+				<li profile-item title="'Basic education years'" value="studentData.basic_education_years" save-function="updateGeneral"></li>
+				<li profile-item title="'Skils'" value="studentData.skils" multy="true" save-function="updateSkill"></li>
+				
+			</ul>
+			<!--<div profile-template student-data="studentData"></div>-->
 <style>
 .profileEditFormat {
     padding: 60px 0 0 0;
     list-style: none;
 }
+.profileItemLable {line-height: 46px;text-align: right;cursor: pointer;}
+.no-edit-zone {
+	padding-left: 11px;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+.no-edit-zone > div {
+	line-height: 46px;
+}
+.no-edit-zone > div:after {
+	content: "\00a0";
+}
+.edit-zone .input-group-btn > .btn {
+    padding: 10px 10px;
+    font-size: 17px;
+}
+.edit-zone .input-group-btn > .btn {
+    padding: 10px 10px;
+    font-size: 17px;
+}
+.edit-zone .input-group {
+    margin-bottom: 10px;
+}
+
 </style>
 			<!--
 			<div class="form-horizontal">

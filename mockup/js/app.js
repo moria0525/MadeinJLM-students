@@ -115,10 +115,6 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
             $location.path("/login");
         }
     });
-	$scope.profileEditFormat = {};
-    general.profileEditFormat().success(function (data) {
-        $scope.profileEditFormat = data;
-    });
     $scope.logOut = function () {
         student.logOut().success(function (data) {
             if (data.status === 'success') {
@@ -319,7 +315,8 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
 jlm.factory('general', ['$http', '$httpParamSerializerJQLike', function ($http, $httpParamSerializerJQLike) {
     "use strict";
 	return {
-        profileEditFormat: function () {
+        /*
+		profileEditFormat: function () {
             return $http({
                 method  : 'POST',
                 url     : 'API/General/profileEditFormat',
@@ -328,5 +325,6 @@ jlm.factory('general', ['$http', '$httpParamSerializerJQLike', function ($http, 
                 return data;
             }).error(function () {return {}; });
         },
+		*/
     };
 }]);

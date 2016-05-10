@@ -8,7 +8,14 @@ class Student extends User {
 		// Start object construction
 		$this->start();
 	}
-	
+    public function userData()
+    {
+        if ((bool) $this->session->signed) {
+			$this->_data['skils'] = array('hi1','hi2','hi3');
+            return $this->_data;
+        }
+        return false;
+    }
     public function uploadProfile($profile)
 	{
         $this->log->channel('update profile picture');

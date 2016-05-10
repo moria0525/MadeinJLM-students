@@ -24,7 +24,7 @@ class Student extends User {
             $this->log->error(2);
 		
 		if (strpos($profile, 'data:image/jpeg;base64,') === false)
-            $this->log->error('Profile most be jpeg');
+            $this->log->error('Profile picture must be jpeg');
 		
         //Check for errors
         if ($this->log->hasError()) {
@@ -37,7 +37,7 @@ class Student extends User {
 		$profile_location = UPLOAD_DIR . $this->ID . '.jpg';
 		file_put_contents($profile_location, $profile);
 		
-		$this->log->report('upload profile complate');
+		$this->log->report('upload profile complete');
 
         //Prepare Info for SQL Insertion
         $data = array();

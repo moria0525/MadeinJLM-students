@@ -2,8 +2,8 @@
 class sendMail {
     public static function send($to, $subject, $message) {
         
-        $headers = "From: " . strip_tags('barak@thinksmart.co.il') . "\r\n";
-        $headers .= "Reply-To: ". strip_tags('barak@thinksmart.co.il') . "\r\n";
+        $headers = "From: " . strip_tags('madeinjlm.jce@gmail.com') . "\r\n";
+        $headers .= "Reply-To: ". strip_tags('madeinjlm.jce@gmail.com') . "\r\n";
         // $headers .= "CC: susan@example.com\r\n";
         $headers .= "MIME-Version: 1.0\r\n";
         $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";

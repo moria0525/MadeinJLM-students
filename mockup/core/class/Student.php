@@ -45,7 +45,7 @@ class Student extends User {
         $data['profile'] = UPLOAD_DIR . $this->ID . '.jpg?' .time();
 		
         //Prepare User Update Query
-        $sql = "UPDATE _table_ SET profile=:profile  WHERE ID=:id";
+        $sql = "UPDATE student SET profile=:profile WHERE ID=:id";
 
         //Check for Changes
         if ($this->table->runQuery($sql, $data)) {
@@ -67,5 +67,50 @@ class Student extends User {
             return false;
         }
 	}
+     public function changeStatus($new_status, $reason, $desc) {
+         
+         $new = new DB_Action();
+//         echo $new;
+         echo $this->_data['status'];
+         if ($new_status === $this->_data['status']) {
+             
+             return false;
+         } else {
+              $data = array();
+             $data['id'] = $this->ID;
+             $data['status'] = $new_status;
+             
+             //*****need to cheak old status against the new status******
+             //SELECT status FROM student WHERE ID=30 LIMIT 1
+             //    public function getRow($table, $arguments)
+             //             $temp = $this->table->getRow($this->table, $this->ID);
+             //             echo $temp;
+             //             
+             //              if ($temp->status == $new) {
+             //              }
+             //**********************************************************
+            
+             $sql = "UPDATE student SET status=:status  WHERE ID=:id";
+         }
+          if ($this->table->runQuery($sql, $data)) {
+            $this->log->report('Information Updated(ChangeStatus)');
+
+            if ($this->clone === 0) {
+                $this->session->update = true;
+            }
+
+            // Update the current object with the updated information
+            $this->_data = array_merge($this->_data, $data);
+
+            // Clear the updates stack
+            $this->_updates = new Collection();
+
+            return true;
+        } else {
+            $this->log->error(18);
+            return false;
+        }
+         
+     }
 }
 ?>

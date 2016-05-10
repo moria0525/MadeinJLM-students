@@ -66,9 +66,9 @@ class API_General extends API {
 		foreach ($pageFormat as $item) {
 			$temp_render .= '
                 <li class="row">
-					<label class="col-sm-4 profileItemLable" ng-click="showEditZone()" tooltip-placement="top-right" uib-tooltip="Click for edit">{{ title }}:</label>
+					<label class="col-sm-4 profileItemLable" ng-click="showEditZone()" tooltip-placement="top-right" uib-tooltip="Edit">{{ title }}:</label>
 					<div class="col-sm-8">
-						<div class="no-edit-zone" ng-click="showEditZone()" ng-show="!editZoneShow" tooltip-placement="top-left" uib-tooltip="Click for edit">
+						<div class="no-edit-zone" ng-click="showEditZone()" ng-show="!editZoneShow" tooltip-placement="top-left" uib-tooltip="Edit">
 							{{value}}&nbsp;
 						</div>
 						<div class="edit-zone" ng-show="editZoneShow">';

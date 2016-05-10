@@ -9,13 +9,13 @@
 								<i class="fa fa-cog" aria-hidden="true"></i>
 							  </a>
 							  <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu aria-labelledby="user-setting">
-								<li><a href">Change status</a></li>
+<!--								<li><a >Change status</a></li>-->
 								<li><a href="#/change-password">Change Password</a></li>
 								<li><a href ng-click="logOut()">Log out</a></li>
 							  </ul>
 							</span>
 						</div>
-						<a href id="change-status-btn" tooltip-placement="top-right" uib-tooltip="Click to change your status" ng-class="{'run': studentData.status == '1'}"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+						<a ng-controller="changeColorOfButton" href id="change-status-btn" tooltip-placement="top-right" uib-tooltip="Click to change your status" ng-class="{'run': studentData.status == '1'}"><i class="fa fa-power-off" aria-hidden="true"></i></a>
 					</div>
 				</div>
 				<div id="header-connected-bottom">

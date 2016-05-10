@@ -131,6 +131,15 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
             }
         });
     };
+    $scope.changeStatus = function () {
+        student.changeStatus($scope.data.changeStatus).success(function (data) {
+            if (data.status === 'error') {
+                $scope.alerts.changeStatus = {type: 'danger', msg: data.errors.join('<br>')};
+            } else {
+                $scope.alerts.changeStatus = {type: 'success', msg: 'Your password was change successfully'};
+            }
+        });
+    };
      
 });
 jlm.controller('generalController', function ($scope, $rootScope) {
@@ -144,6 +153,25 @@ jlm.controller('generalController', function ($scope, $rootScope) {
 
 jlm.controller('DropdownCtrl', function ($scope, $log) {
 
+	$scope.status = {
+		isopen: false
+	};
+
+	$scope.toggled = function(open) {
+		$log.log('Dropdown is now: ', open);
+	};
+
+	$scope.toggleDropdown = function($event) {
+		$event.preventDefault();
+		$event.stopPropagation();
+		$scope.status.isopen = !$scope.status.isopen;
+	};
+
+	$scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
+});
+
+jlm.controller('changeColorOfButton', function ($scope, $log) {
+    console.log("enter changeColorOfButton");
 	$scope.status = {
 		isopen: false
 	};
@@ -294,6 +322,16 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
             return $http({
                 method  : 'POST',
                 url     : 'API/Student/changePassword',
+                data    : $httpParamSerializerJQLike(data),
+                headers : { 'Content-Type':  'application/x-www-form-urlencoded' }
+            }).success(function (data){
+                return data;
+            }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}; });      
+        },
+        changeStatus: function (data) {
+            return $http({
+                method  : 'POST',
+                url     : 'API/Student/changeStatus',
                 data    : $httpParamSerializerJQLike(data),
                 headers : { 'Content-Type':  'application/x-www-form-urlencoded' }
             }).success(function (data){

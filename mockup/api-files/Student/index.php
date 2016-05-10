@@ -168,7 +168,26 @@ class API_Student extends API {
     }
     public function changeStatus()
     {
-	
+	   $student = new Student();
+		
+		if($student->isSigned()){
+			if ($data = $student->changeStatus(0,$_GET['reason']=1,1)) {
+				$return_arr = ['status' => "success"];
+			} else {
+				$errors = array();
+				foreach($student->log->getErrors() as $err){
+					$errors[] = $err;
+				}
+				$return_arr =  ['status' => "error",'errors' => $errors];
+			}
+        }else{
+            //Display Errors
+			$errors = array('User not connected');
+            $return_arr =  ['status' => "error",'errors' => $errors];
+        }
+        
+        return $return_arr;
+		
     }
     public function changeProfileImage() {
 

@@ -189,11 +189,19 @@ class API_Student extends API {
         return $return_arr;
 		
     }
-    public function changeProfileImage() {
-
-    }
     public function update() {
-
+        $student = new Student();
+        
+        if ($data = $student->update($_POST)) {
+            $return_arr = ['status' => "success"];
+        } else {
+             $errors = array();
+            foreach($student->log->getErrors() as $err){
+                $errors[] = $err;
+            }
+            $return_arr =  ['status' => "error",'errors' => $errors];
+        }
+        return $return_arr;
     }
     public function managementTableInfo() {
 

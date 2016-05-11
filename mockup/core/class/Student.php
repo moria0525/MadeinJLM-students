@@ -10,9 +10,16 @@ class Student extends User {
 	}
     public function userData()
     {
+		// header('Content-Type: text/html; charset=utf-8');
         if ((bool) $this->session->signed) {
-			$this->_data['skils'] = array('hi1','hi2','hi3');
-            return $this->_data;
+			$db_action = new DB_Action();
+			// get student skills
+			$sql = 'SELECT student_skills.id,student_skills.skill_id,student_skills.years,skills.name
+					FROM student_skills INNER JOIN skills ON student_skills.skill_id=skills.id
+					WHERE student_id=' . $this->_data['ID'] . ' ORDER BY id ASC';
+			$this->_data['skils'] = $db_action->getQuery($sql);
+            // print_r($this->_data);
+			return $this->_data;
         }
         return false;
     }

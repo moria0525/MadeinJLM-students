@@ -83,6 +83,7 @@ jlm.directive('profileItem', function() {
 	return {
 		restrict: 'A',
         scope: {
+            directiveName: "@profileItem",
             value: "=",
             title: "=",
             multy: "=",
@@ -159,6 +160,33 @@ jlm.directive('multyData', function ($compile) {
         }
 	};
 });
+jlm.directive('multyDataEdit', function ($compile) {
+	return {
+        restrict: 'EA',
+        scope: false,
+		controller: function ($scope,$element) {
+			$scope.removeItem = function (key) {
+				$scope.value.splice(key, 1);
+			};
+			$scope.add = function() {
+				console.log('add new');
+				$scope.value.push({});
+				return false;
+			}
+		},
+        link: function (scope, element, attrs) {
+			var innerHtml = element[0].innerHTML;
+			if (scope.multy == '1')
+				var html ='<div><div ng-repeat="(key,value) in value"><div ' + scope.directiveName + '="value"></div></div><button type="button" class="btn btn-link" ng-click="add();">add</button></div>';
+			else {
+				var html ='<div input-text="value"></div>';
+			}
+            var e =$compile(html)(scope);
+            element.replaceWith(e);
+			
+        }
+	};
+});
 jlm.directive('inputText', function () {
 	return {
         restrict: 'A',
@@ -191,6 +219,79 @@ jlm.directive('inputText', function () {
 		}
 	};
 });
+/*
+jlm.directive('inputText', function () {
+	return {
+        restrict: 'A',
+		scope: false,
+		// priority: 100,
+		template: 	'<div class="input-group">'+
+						'<input type="text" class="form-control" " ng-model="editValue">'+
+						'<div class="input-group-btn">'+
+							'<button type="button" class="btn btn-success" ng-click="editZoneSave(editValue,key)" ng-disabled="value == editValue">Save</button>'+
+							'<button type="button" class="btn btn-warning" ng-click="editValue = value" ng-disabled="value == editValue">Reset</button>'+
+							'<button type="button" class="btn btn-default" ng-show="!multy" ng-click="editZoneClose()">Cancel</button>'+
+						'</div>'+
+					'</div>',
+		controller: function ($scope,$element) {
+
+		},
+		link: function(scope, elem, attr) {
+			
+			scope.$watch(attr.inputText, function() {
+				scope.editValue = scope.value;
+			});
+		}
+	};
+});
+*/
+jlm.directive('inputSkill', function () {
+	return {
+        restrict: 'A',
+		scope: false,
+		template: 	
+					'<form class="itemInItem row">'+
+						'<div class="form-group col-md-6">'+
+							// '<label>enter skill</label>'+
+							'<input type="text" class="form-control" placeholder="Skill" ng-model="editValue.name">'+
+						'</div>'+
+						'<div class="form-group col-md-6">'+
+							// '<label>enter years</label>'+
+							'<input type="num" class="form-control" placeholder="Years" ng-model="editValue.years">'+
+						'</div>'+
+						'<div class="text-right col-md-12"><button type="submit" class="btn btn-danger" ng-click="remove()">Remove</button> <button type="submit" ng-disabled="value.name == editValue.name && value.years == editValue.years" ng-click="reset()" class="btn btn-warning">Reset</button> <button type="submit" ng-disabled="value.name == editValue.name && value.years == editValue.years" ng-click="save()" class="btn btn-success">Save</button></div>'+
+					'</form>',
+		controller: function ($scope,$element) {
+			
+			$scope.reset = function() {
+				if (typeof $scope.value.name !== 'undefined')
+					$scope.editValue.name = $scope.value.name;
+				else $scope.editValue.name = '';
+				
+				if (typeof $scope.value.years !== 'undefined')
+					$scope.editValue.years = $scope.value.years;
+				else $scope.editValue.years = '';
+			}
+			$scope.remove = function() {
+				console.log('need to remove by service id: ' + $scope.value.id + ', key: ' + $scope.key);
+				$scope.removeItem($scope.key);
+			}
+			$scope.save = function() {
+				if (typeof $scope.value.id !== 'undefined') {
+					console.log('update - '+ $scope.value.id);
+				} else {
+					console.log('add new');
+				}
+			}
+		},
+		link: function(scope, elem, attr) {
+			scope.$watch(attr.inputSkill, function() {
+				scope.editValue = {name:scope.value.name,years:scope.value.years};
+			});
+		}
+	};
+});
+
 /*
 jlm.directive('profileTemplate', function() {
 	return {

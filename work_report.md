@@ -29,6 +29,9 @@
 |3.5.16 |Iteration 2 - bulid activeion mode in profile | 2.5 Hours |
 |4.5.16 |Work on profile, profile picture upload, and design the page | 6.5 Hours |
 |5.5.16 |Work on profile, profile picture upload, and design the page | 7 Hours |
+|8.5.16 |Work on profile | 4 Hours |
+|9.5.16 |Work on profile | 3 Hours |
+|11.5.16 |Work on profile | 3 Hours |
 
 
 ## Moria Rabayoff

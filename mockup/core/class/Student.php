@@ -74,32 +74,22 @@ class Student extends User {
             return false;
         }
 	}
-     public function changeStatus($new_status, $reason = null, $desc = null) {
-         
-         $new = new DB_Action();
-//         echo $new;
-         echo $this->_data['status'];
-         if ($new_status === $this->_data['status']) {
-             $this->log->error(2);
-             // צריך לשלוח הודעת שגיאה בלוג לא?
-             return false;
-         } else { // אם עשיתה return למה יש פה else?
+     public function changeStatus($reason = null, $desc = null) {
              $data = array();
              $data['id'] = $this->ID;
-             $data['status'] = $new_status;
+             $data['status'] = null;
              
              //*****need to cheak old status against the new status******
-             //SELECT status FROM student WHERE ID=30 LIMIT 1
-             //    public function getRow($table, $arguments)
-             //             $temp = $this->table->getRow($this->table, $this->ID);
-             //             echo $temp;
-             //             
-             //              if ($temp->status == $new) {
-             //              }
-             //**********************************************************
-            // _table_ - זה אוטומטית מחליף לטבלה הראשית של הסטודנט
+             if ($this->status == 1) {
+                 $data['status'] = 0;
+             } else if ($this->status == 0) {
+                 $data['status'] = 1;
+             } else {
+                 $this->log->error(2);
+                 return false;
+             }
              $sql = "UPDATE _table_ SET status=:status  WHERE ID=:id";
-         }
+//         }
           if ($this->table->runQuery($sql, $data)) {
             $this->log->report('Information Updated(ChangeStatus)');
 			// יפה זה חשוב - זה בעצם דואג לעדכן את הסשיין! כל הכבוד שעליתם על זה לבד

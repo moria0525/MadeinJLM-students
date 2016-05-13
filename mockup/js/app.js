@@ -1,4 +1,4 @@
-var jlm = angular.module('jlm', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ngImgCrop', 'uiSwitch']);
+var jlm = angular.module('jlm', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ngImgCrop']);
 
 /* --- routeProvider --- */
 jlm.config(function ($routeProvider) {
@@ -132,13 +132,16 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
         });
     };
     $scope.changeStatus = function () {
-        student.changeStatus($scope.data.changeStatus).success(function (data) {
+        console.log($scope.studentData.status);
+        
+        student.changeStatus().success(function (data) {
             if (data.status === 'error') {
                 $scope.alerts.changeStatus = {type: 'danger', msg: data.errors.join('<br>')};
             } else {
                 $scope.alerts.changeStatus = {type: 'success', msg: 'Your password was change successfully'};
             }
         });
+        
     };
      
 });
@@ -171,9 +174,14 @@ jlm.controller('DropdownCtrl', function ($scope, $log) {
 });
 
 jlm.controller('MyController', function($scope,$rootScope,$log) {
+    console.log($rootScope.studentData);
+//     $scope.onOff = ['0'];
+//    console.log($scope);
   $scope.onOff = $rootScope.studentData.status;
     
 
+    
+    
   $scope.changeCallback = function() {
     console.log('This is the state of my model ' + $scope.enabled);
   };
@@ -192,6 +200,38 @@ jlm.controller('MyController', function($scope,$rootScope,$log) {
 //		templateUrl: 'view/include/header-profile.html'
 //	};
 //});
+
+
+jlm.directive('switch', function(){
+  return {
+    restrict: 'AE'
+  , replace: true
+  , transclude: true
+  , template: function(element, attrs) {
+      var html = '';
+      html += '<span';
+      html +=   ' class="switch' + (attrs.class ? ' ' + attrs.class : '') + '"';
+      html +=   attrs.ngModel ? ' ng-click="' + attrs.disabled + ' ? ' + attrs.ngModel + ' : ' + attrs.ngModel + '=!' + attrs.ngModel + (attrs.ngChange ? '; ' + attrs.ngChange + '()"' : '"') : '';
+      html +=   ' ng-class="{ checked:' + attrs.ngModel + ', disabled:' + attrs.disabled + ' }"';
+      html +=   '>';
+      html +=   '<small></small>';
+      html +=   '<input type="checkbox"';
+      html +=     attrs.id ? ' id="' + attrs.id + '"' : '';
+      html +=     attrs.name ? ' name="' + attrs.name + '"' : '';
+      html +=     attrs.ngModel ? ' ng-model="' + attrs.ngModel + '"' : '';
+      html +=     ' style="display:none" />';
+      html +=     '<span class="switch-text">'; /*adding new container for switch text*/
+      html +=     attrs.on ? '<span class="on">'+attrs.on+'</span>' : ''; /*switch text on value set by user in directive html markup*/
+      html +=     attrs.off ? '<span class="off">'+attrs.off + '</span>' : ' ';  /*switch text off value set by user in directive html markup*/
+      html += '</span>';
+      console.log(html);
+      return html;
+    }
+  }
+});
+
+
+
 
 /* --- profile --- */
 jlm.directive('profilePicture', function() {

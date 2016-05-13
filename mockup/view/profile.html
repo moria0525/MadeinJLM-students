@@ -7,9 +7,9 @@
 	<div class="container">
 		<div class="row">
 			<ul class="profileEditFormat">
-				<li profile-item title="'Basic education subject'" value="studentData.basic_education_subject" save-function="updateGeneral"></li>
-				<li profile-item title="'Basic education years'" value="studentData.basic_education_years" save-function="updateGeneral"></li>
-				<li profile-item title="'Skils'" value="studentData.skils" multy="true" save-function="updateSkill"></li>
+				<li profile-item="basic_education_subject" directive-name="input-text" title="'Basic education subject'" value="studentData.basic_education_subject" multy="false" save-function="update"></li>
+				<li profile-item="basic_education_years" directive-name="input-text" title="'Basic education years'" value="studentData.basic_education_years" multy="false" save-function="update"></li>
+				<li profile-item="skils" directive-name="input-skill" title="'Skils'" value="studentData.skils" multy="true" save-function="updateSkill" view-template="value.name"></li>
 				
 			</ul>
 			<!--<div profile-template student-data="studentData"></div>-->
@@ -40,6 +40,9 @@
 }
 .edit-zone .input-group {
     margin-bottom: 10px;
+}
+.itemInItem {
+	margin-bottom: 40px;
 }
 
 </style>

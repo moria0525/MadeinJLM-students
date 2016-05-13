@@ -14,8 +14,12 @@
 								<li><a href ng-click="logOut()">Log out</a></li>
 							  </ul>
 							</span>
-						</div>
-						<a ng-controller="changeColorOfButton" href id="change-status-btn" tooltip-placement="top-right" uib-tooltip="Click to change your status" ng-class="{'run': studentData.status == '1'}"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+						</div>         
+                         <form ng-controller="MyController">
+                            <switch  name="onOff" ng-change="changeStatus()" ng-model="studentData.status" on="on" off="off" tooltip-placement="top-right" uib-tooltip="Click to change your status" ></switch>
+                          </form>
+                        
+                        
 					</div>
 				</div>
 				<div id="header-connected-bottom">

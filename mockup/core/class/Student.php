@@ -10,9 +10,16 @@ class Student extends User {
 	}
     public function userData()
     {
+		// header('Content-Type: text/html; charset=utf-8');
         if ((bool) $this->session->signed) {
-			$this->_data['skils'] = array('hi1','hi2','hi3');
-            return $this->_data;
+			$db_action = new DB_Action();
+			// get student skills
+			$sql = 'SELECT student_skills.id,student_skills.skill_id,student_skills.years,skills.name
+					FROM student_skills INNER JOIN skills ON student_skills.skill_id=skills.id
+					WHERE student_id=' . $this->_data['ID'] . ' ORDER BY id ASC';
+			$this->_data['skils'] = $db_action->getQuery($sql);
+            // print_r($this->_data);
+			return $this->_data;
         }
         return false;
     }
@@ -45,7 +52,7 @@ class Student extends User {
         $data['profile'] = UPLOAD_DIR . $this->ID . '.jpg?' .time();
 		
         //Prepare User Update Query
-        $sql = "UPDATE student SET profile=:profile WHERE ID=:id";
+        $sql = "UPDATE _table_ SET profile=:profile WHERE ID=:id";
 
         //Check for Changes
         if ($this->table->runQuery($sql, $data)) {
@@ -67,34 +74,25 @@ class Student extends User {
             return false;
         }
 	}
-     public function changeStatus($new_status, $reason, $desc) {
-         
-         $new = new DB_Action();
-//         echo $new;
-         echo $this->_data['status'];
-         if ($new_status === $this->_data['status']) {
-             
-             return false;
-         } else {
-              $data = array();
+     public function changeStatus($reason = null, $desc = null) {
+             $data = array();
              $data['id'] = $this->ID;
-             $data['status'] = $new_status;
+             $data['status'] = null;
              
              //*****need to cheak old status against the new status******
-             //SELECT status FROM student WHERE ID=30 LIMIT 1
-             //    public function getRow($table, $arguments)
-             //             $temp = $this->table->getRow($this->table, $this->ID);
-             //             echo $temp;
-             //             
-             //              if ($temp->status == $new) {
-             //              }
-             //**********************************************************
-            
-             $sql = "UPDATE student SET status=:status  WHERE ID=:id";
-         }
+             if ($this->status == 1) {
+                 $data['status'] = 0;
+             } else if ($this->status == 0) {
+                 $data['status'] = 1;
+             } else {
+                 $this->log->error(2);
+                 return false;
+             }
+             $sql = "UPDATE _table_ SET status=:status  WHERE ID=:id";
+//         }
           if ($this->table->runQuery($sql, $data)) {
             $this->log->report('Information Updated(ChangeStatus)');
-
+			// יפה זה חשוב - זה בעצם דואג לעדכן את הסשיין! כל הכבוד שעליתם על זה לבד
             if ($this->clone === 0) {
                 $this->session->update = true;
             }
@@ -104,7 +102,8 @@ class Student extends User {
 
             // Clear the updates stack
             $this->_updates = new Collection();
-
+			// אני רואה שעדין לא הוספתם לטבלה ששומרת את הסיבה לעזיבה
+			// ובכלל לא השתמשתם ב DB_Action
             return true;
         } else {
             $this->log->error(18);

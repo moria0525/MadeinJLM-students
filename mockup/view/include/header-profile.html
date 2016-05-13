@@ -14,17 +14,9 @@
 								<li><a href ng-click="logOut()">Log out</a></li>
 							  </ul>
 							</span>
-						</div>
-<!--						<a ng-controller="changeColorOfButton" href id="change-status-btn" tooltip-placement="top-right" uib-tooltip="Click to change your status" ng-class="{'run': studentData.status == '1'}"><i class="fa fa-power-off" aria-hidden="true"></i></a>-->
-                        
-                        
-                         <form data-ng-controller="MyController">
-                            <switch  name="onOff" ng-model="onOff" on="on" off="off" tooltip-placement="top-right" uib-tooltip="Click to change your status"  ng-click="changeStatus(studentData.status)"></switch>
-<!--
-                            <p>
-                                Enabled: {{ onOff }}
-                            </p>
--->
+						</div>         
+                         <form ng-controller="MyController"  ng-click="changeStatus()">
+                            <switch  name="onOff" ng-model="onOff" on="on" off="off" tooltip-placement="top-right" uib-tooltip="Click to change your status" ></switch>
                           </form>
                         
                         

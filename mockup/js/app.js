@@ -189,13 +189,19 @@ jlm.controller('changeColorOfButton', function ($scope, $log) {
 	$scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
 });
 
-jlm.controller('MyController', function($scope) {
-  $scope.onOff = true;
-
+jlm.controller('MyController', function($scope,$rootScope,$log) {
+  $scope.onOff = $rootScope.studentData.status;
+    
 
   $scope.changeCallback = function() {
     console.log('This is the state of my model ' + $scope.enabled);
   };
+    if ($rootScope.studentData.status) {
+         $log.log('The status changed ' +  'true');
+    } else {
+        $log.log('The status changed ' +  'false');
+    }
+   
 });
 
 

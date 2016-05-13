@@ -42,7 +42,7 @@ class API_Student extends API {
     public function sendActivated($email) {
         $student = new Student();
         $user = $student->table->getRow(array('Email' => $email));
-        sendMail::send($user->Email, 'Activated your account', 'Hello ' . $user->first_name . ', Welcome to madeinJLM Jobs! <br>Please click on the link at the bottom to activated your account.<br>Click <a href="http://job.madeinjlm.org/MadeinJLM-students/mockup/API/Student/activated?c=' . $user->Confirmation . '">here</a>.<br>If you didnt signed for out website, please notify us at: madeinjlm.jce@gmail.com');
+        sendMail::send($user->Email, 'Activated your account', 'Hello ' . $user->first_name . ', Welcome to madeinJLM Jobs! <br>Please click on the link at the bottom to activated your account.<br>Click <a href="http://job.madeinjlm.org/MadeinJLM-students/mockup/API/Student/activated?c=' . $user->Confirmation . '">here</a>.<br>If you didnt signed out for this website, please notify us at: madeinjlm.jce@gmail.com');
     }
     public function register() {
         

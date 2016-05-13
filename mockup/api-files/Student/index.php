@@ -169,9 +169,16 @@ class API_Student extends API {
     public function changeStatus()
     {
 	   $student = new Student();
-		
+		$user = $student->table->getRow(array('Status' => $status));
+        $tempstatus = 0;
 		if($student->isSigned()){
-			if ($data = $student->changeStatus(0,$_GET['reason']=1,1)) {
+            if($user->Status == 1) {
+                $tempstatus = 0;
+            } else {
+                $tempstatus = 1;
+            }
+            
+			if ($data = $student->changeStatus($tempstatus,$_GET['reason']=1,1)) {
 				$return_arr = ['status' => "success"];
 			} else {
 				$errors = array();

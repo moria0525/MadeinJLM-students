@@ -15,7 +15,19 @@
 							  </ul>
 							</span>
 						</div>
-						<a ng-controller="changeColorOfButton" href id="change-status-btn" tooltip-placement="top-right" uib-tooltip="Click to change your status" ng-class="{'run': studentData.status == '1'}"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+<!--						<a ng-controller="changeColorOfButton" href id="change-status-btn" tooltip-placement="top-right" uib-tooltip="Click to change your status" ng-class="{'run': studentData.status == '1'}"><i class="fa fa-power-off" aria-hidden="true"></i></a>-->
+                        
+                        
+                         <form data-ng-controller="MyController">
+                            <switch  name="onOff" ng-model="onOff" on="on" off="off" tooltip-placement="top-right" uib-tooltip="Click to change your status" ng-class="{'run': studentData.status == '1'}" ng-click="changeStatus(studentData.status)"></switch>
+<!--
+                            <p>
+                                Enabled: {{ onOff }}
+                            </p>
+-->
+                          </form>
+                        
+                        
 					</div>
 				</div>
 				<div id="header-connected-bottom">

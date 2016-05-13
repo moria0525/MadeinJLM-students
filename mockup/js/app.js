@@ -1,4 +1,4 @@
-var jlm = angular.module('jlm', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ngImgCrop']);
+var jlm = angular.module('jlm', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ngImgCrop', 'uiSwitch']);
 
 /* --- routeProvider --- */
 jlm.config(function ($routeProvider) {
@@ -188,6 +188,16 @@ jlm.controller('changeColorOfButton', function ($scope, $log) {
 
 	$scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
 });
+
+jlm.controller('MyController', function($scope) {
+  $scope.onOff = true;
+
+
+  $scope.changeCallback = function() {
+    console.log('This is the state of my model ' + $scope.enabled);
+  };
+});
+
 
 
 /* --- profile --- */

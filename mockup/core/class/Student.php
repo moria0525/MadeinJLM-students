@@ -74,16 +74,17 @@ class Student extends User {
             return false;
         }
 	}
-     public function changeStatus($new_status, $reason, $desc) {
+     public function changeStatus($new_status, $reason = null, $desc = null) {
          
          $new = new DB_Action();
 //         echo $new;
          echo $this->_data['status'];
          if ($new_status === $this->_data['status']) {
+             $this->log->error(2);
              // צריך לשלוח הודעת שגיאה בלוג לא?
              return false;
          } else { // אם עשיתה return למה יש פה else?
-              $data = array();
+             $data = array();
              $data['id'] = $this->ID;
              $data['status'] = $new_status;
              

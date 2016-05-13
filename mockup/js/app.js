@@ -170,25 +170,6 @@ jlm.controller('DropdownCtrl', function ($scope, $log) {
 	$scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
 });
 
-jlm.controller('changeColorOfButton', function ($scope, $log) {
-    console.log("enter changeColorOfButton");
-	$scope.status = {
-		isopen: false
-	};
-
-	$scope.toggled = function(open) {
-		$log.log('Dropdown is now: ', open);
-	};
-
-	$scope.toggleDropdown = function($event) {
-		$event.preventDefault();
-		$event.stopPropagation();
-		$scope.status.isopen = !$scope.status.isopen;
-	};
-
-	$scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
-});
-
 jlm.controller('MyController', function($scope,$rootScope,$log) {
   $scope.onOff = $rootScope.studentData.status;
     
@@ -204,7 +185,13 @@ jlm.controller('MyController', function($scope,$rootScope,$log) {
    
 });
 
-
+//jlm.directive('MyController', function() {
+//	return {
+//		restrict: 'E',
+//		controller: 'MyControllerCtrl',
+//		templateUrl: 'view/include/header-profile.html'
+//	};
+//});
 
 /* --- profile --- */
 jlm.directive('profilePicture', function() {

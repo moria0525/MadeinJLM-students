@@ -41,6 +41,11 @@
 |13.4.16 |Iteration 1 | 4 Hours |
 |18.4.16|Iteration 1 - MVP-con|6 hours|
 |3.5.16 |Iteration 2 - bulid local server | 1.5 Hours |
+|4.5.16 |Iteration 2 - con | 1.5 Hours |
+|4.5.16 |Iteration 2 - con | 3 Hours |
+|9.5.16 |Iteration 2 - con | 1 Hours |
+|10.5.16 |Iteration 2 - edit DB | 3 Hours |
+
 
 ## Alon Shmilovich
 | date   | subject         | length  |

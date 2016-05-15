@@ -13,7 +13,7 @@
 |10.4.16|meeting with Ziv| 0.5 hour|
 |11.4.16|meeting with client && work on project| 1.5 hours|
 |17.4.16|Iteration 1 - MVP|6 hours|
-|5.1.16|meeting with client done iteration 1 - MVP and start iteration 2|4.5 hours|
+|1.5.16|meeting with client done iteration 1 - MVP and start iteration 2|4.5 hours|
 
 
 
@@ -42,7 +42,7 @@
 |18.4.16|Iteration 1 - MVP-con|6 hours|
 |3.5.16 |Iteration 2 - bulid local server | 1.5 Hours |
 |4.5.16 |Iteration 2 - con | 1.5 Hours |
-|4.5.16 |Iteration 2 - con | 3 Hours |
+|5.5.16 |Iteration 2 - con | 3 Hours |
 |9.5.16 |Iteration 2 - con | 1 Hours |
 |10.5.16 |Iteration 2 - edit DB | 3 Hours |
 

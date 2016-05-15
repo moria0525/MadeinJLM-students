@@ -61,6 +61,8 @@
 |13.4.16 |Iteration 1 | 4 Hours |
 |18.4.16|Iteration 1 - MVP-con|6 hours|
 |3.5.16 |Iteration 2 - bulid local server | 1.5 Hours |
+|13.5.16|Iteration 2 - Activation status | 5 Hours |
+|15.5.16|Iteration 2 - Activation status | 2.5 Hours |
 
 
 ## Yoad Shiran

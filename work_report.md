@@ -31,7 +31,10 @@
 |5.5.16 |Work on profile, profile picture upload, and design the page | 7 Hours |
 |8.5.16 |Work on profile | 4 Hours |
 |9.5.16 |Work on profile | 3 Hours |
-|11.5.16 |Work on profile | 3 Hours |
+|11.5.16 |Work on profile directive | 3 Hours |
+|12.5.16 |Work on profile directive | 2.5 Hours |
+|15.5.16 |Work on profile directive | 3 Hours |
+|16.5.16 |Work on change status | 4 Hours |
 
 
 ## Moria Rabayoff

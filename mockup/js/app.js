@@ -143,10 +143,18 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
     };
      
 });
-jlm.controller('generalController', function ($scope, $rootScope) {
+jlm.controller('generalController', function ($scope, $rootScope,student) {
     "use strict";
     $scope.data = {};
-    
+    student.init().success(function (data) {
+        $rootScope.studentData = data;
+//        console.log($rootScope.studentData.status);
+        if ($rootScope.studentData.status == 1) {
+            $scope.onOff = true;
+        } else {
+            $scope.onOff = false;
+        }
+    });
     $scope.alerts = {};
     $scope.closeAlert = function ($index) {
         $scope.alerts[$index] = {};
@@ -174,15 +182,15 @@ jlm.controller('DropdownCtrl', function ($scope, $log) {
 
 jlm.controller('MyController', function($scope,$rootScope,$log,student) {
 
-    student.init().success(function (data) {
-        $rootScope.studentData = data;
-//        console.log($rootScope.studentData.status);
-        if ($rootScope.studentData.status == 1) {
-            $scope.onOff = true;
-        } else {
-            $scope.onOff = false;
-        }
-    });
+//    student.init().success(function (data) {
+//        $rootScope.studentData = data;
+////        console.log($rootScope.studentData.status);
+//        if ($rootScope.studentData.status == 1) {
+//            $scope.onOff = true;
+//        } else {
+//            $scope.onOff = false;
+//        }
+//    });
    
    
 });

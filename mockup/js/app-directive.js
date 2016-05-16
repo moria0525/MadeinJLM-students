@@ -407,3 +407,79 @@ jlm.directive('profileMulty', function() {
 	};
 });
 */
+/*
+<span class="switch" ng-click="undefined ? onOff : onOff=!onOff; changeStatus()()" ng-class="{ checked:onOff, disabled:undefined }">
+	<small></small>
+	<input type="checkbox" name="onOff" ng-model="onOff" style="display:none" />
+	<span class="switch-text"><span class="on">on</span><span class="off">off</span></span>
+
+<span class="switch" ng-click="undefined ? onOff : onOff=!onOff; changeStatus()()" ng-class="{ checked:onOff, disabled:undefined }">
+	<small></small>
+	<input type="checkbox" name="onOff" ng-model="onOff" style="display:none" />
+	<span class="switch-text"></span>
+	
+<span class="switch" ng-click="undefined ? onOff : onOff=!onOff; changeStatus()()" ng-class="{ checked:onOff, disabled:undefined }">
+<small></small>
+<input type="checkbox" name="onOff" ng-model="onOff" style="display:none" />
+<span class="switch-text"> </span>
+*/
+jlm.directive('switchStatus', function(){
+  return {
+    restrict: 'AE'
+  , replace: true
+  , transclude: true
+  , template: function(element, attrs) {
+      var html = '';
+      html += '<span';
+      html +=   ' class="switch' + (attrs.class ? ' ' + attrs.class : '') + '"';
+      html +=   ' ng-click="switchStatusClick()"';
+      html +=   ' ng-class="{ checked:studentData.status }"';
+      html +=   '>';
+      html +=   '<small></small>';
+      html +=   '<input type="checkbox"';
+      html +=     ' name="studentData.status"';
+      html +=     ' ng-model="studentData.status"'
+      html +=     ' style="display:none" />';
+      html += '</span>';
+      return html;
+    }
+	, controller: function ($scope,$element,$uibModal,$rootScope,student) {
+		$scope.switchStatusClick = function() {
+			if ($rootScope.studentData.status == 1) {
+				var modalInstance = $uibModal.open({
+					animation: true,
+					templateUrl: 'view/directive/changeStatus.html',
+					controller: function($scope, $uibModalInstance, student){
+						
+						$scope.cancel = function () {
+							$uibModalInstance.dismiss('cancel');
+						};
+						$scope.change = function () {
+							$scope.data.changeStatus.status = 0;
+							student.changeStatus($scope.data.changeStatus).success(function (data) {
+								if (data.status === 'success') {
+									$rootScope.studentData.status = 0;
+									$uibModalInstance.dismiss('cancel');
+								} else {
+									console.log('errors',data.errors);
+								}
+							});
+						};
+					},
+					size: 'md'
+				});
+				
+			} else {
+				student.changeStatus({status:1}).success(function (data) {
+					if (data.status === 'success') {
+						$rootScope.studentData.status = 1;
+					} else {
+						console.log('errors',data.errors);
+					}
+				});
+			}
+			
+		}
+	}
+  }
+});

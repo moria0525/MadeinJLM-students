@@ -168,17 +168,9 @@ class API_Student extends API {
     }
     public function changeStatus()
     {
-	   $student = new Student();
-//		$user = $student->table->getRow(array('Status' => $status));
-//        $tempstatus = 0;
+		$student = new Student();
 		if($student->isSigned()){
-//            if($user->Status == 1) {
-//                $tempstatus = 0;
-//            } else {
-//                $tempstatus = 1;
-//            }
-//            
-			if ($data = $student->changeStatus($_GET['reason']=1,1)) {
+			if ($data = $student->changeStatus($_POST)) {
 				$return_arr = ['status' => "success"];
 			} else {
 				$errors = array();
@@ -188,13 +180,11 @@ class API_Student extends API {
 				$return_arr =  ['status' => "error",'errors' => $errors];
 			}
         }else{
-            //Display Errors
 			$errors = array('User not connected');
             $return_arr =  ['status' => "error",'errors' => $errors];
         }
         
         return $return_arr;
-		
     }
     public function update() {
         $student = new Student();

@@ -131,30 +131,11 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
             }
         });
     };
-    $scope.changeStatus = function (data) {
-        student.changeStatus().success(function (data) {
-            if (data.status === 'error') {
-                $scope.alerts.changeStatus = {type: 'danger', msg: data.errors.join('<br>')};
-            } else {
-                
-                $scope.alerts.changeStatus = {type: 'success', msg: 'Your status was change successfully'};
-            }
-        });
-    };
      
 });
 jlm.controller('generalController', function ($scope, $rootScope,student) {
     "use strict";
     $scope.data = {};
-    student.init().success(function (data) {
-        $rootScope.studentData = data;
-//        console.log($rootScope.studentData.status);
-        if ($rootScope.studentData.status == 1) {
-            $scope.onOff = true;
-        } else {
-            $scope.onOff = false;
-        }
-    });
     $scope.alerts = {};
     $scope.closeAlert = function ($index) {
         $scope.alerts[$index] = {};
@@ -180,60 +161,6 @@ jlm.controller('DropdownCtrl', function ($scope, $log) {
 	$scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
 });
 
-jlm.controller('MyController', function($scope,$rootScope,$log,student) {
-
-//    student.init().success(function (data) {
-//        $rootScope.studentData = data;
-////        console.log($rootScope.studentData.status);
-//        if ($rootScope.studentData.status == 1) {
-//            $scope.onOff = true;
-//        } else {
-//            $scope.onOff = false;
-//        }
-//    });
-   
-   
-});
-
-//jlm.directive('MyController', function() {
-//	return {
-//		restrict: 'E',
-//		controller: 'MyControllerCtrl',
-//		templateUrl: 'view/include/header-profile.html'
-//	};
-//});
-
-
-jlm.directive('switch', function(){
-  return {
-    restrict: 'AE'
-  , replace: true
-  , transclude: true
-  , template: function(element, attrs) {
-      var html = '';
-      html += '<span';
-      html +=   ' class="switch' + (attrs.class ? ' ' + attrs.class : '') + '"';
-      html +=   attrs.ngModel ? ' ng-click="' + attrs.disabled + ' ? ' + attrs.ngModel + ' : ' + attrs.ngModel + '=!' + attrs.ngModel + (attrs.ngChange ? '; ' + attrs.ngChange + '()"' : '"') : '';
-      html +=   ' ng-class="{ checked:' + attrs.ngModel + ', disabled:' + attrs.disabled + ' }"';
-      html +=   '>';
-      html +=   '<small></small>';
-      html +=   '<input type="checkbox"';
-      html +=     attrs.id ? ' id="' + attrs.id + '"' : '';
-      html +=     attrs.name ? ' name="' + attrs.name + '"' : '';
-      html +=     attrs.ngModel ? ' ng-model="' + attrs.ngModel + '"' : '';
-      html +=     ' style="display:none" />';
-      html +=     '<span class="switch-text">'; /*adding new container for switch text*/
-      html +=     attrs.on ? '<span class="on">'+attrs.on+'</span>' : ''; /*switch text on value set by user in directive html markup*/
-      html +=     attrs.off ? '<span class="off">'+attrs.off + '</span>' : ' ';  /*switch text off value set by user in directive html markup*/
-      html += '</span>';
-      return html;
-    }
-  }
-});
-
-
-
-
 /* --- profile --- */
 jlm.directive('profilePicture', function() {
 	return {
@@ -251,12 +178,13 @@ jlm.controller('profilePictureCtrl', function ($scope, $uibModal, $log) {
 			controller: 'ModalProfileCtrl',
 			size: 'md'
 		});
-
+		/*
 		modalInstance.result.then(function (selectedItem) {
 			$scope.selected = selectedItem;
 		}, function () {
 			$log.info('Modal dismissed at: ' + new Date());
 		});
+		*/
 	};
 		
 		
@@ -310,7 +238,10 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
                 url     : 'API/Student',
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (data) {
-                return data;
+				if (typeof data.status !== 'undefined' && data.status !== null) {
+					data.status = parseInt(data.status);
+				}
+				return data;
             }).error(function () {return false; });
         },
         login: function (data) {

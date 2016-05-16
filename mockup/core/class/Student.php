@@ -74,24 +74,30 @@ class Student extends User {
             return false;
         }
 	}
-     public function changeStatus($reason = null, $desc = null) {
-             $data = array();
-             $data['id'] = $this->ID;
-             $data['status'] = null;
-             
-             //*****need to cheak old status against the new status******
-             if ($this->status == 1) {
-                 $data['status'] = 0;
-             } else if ($this->status == 0) {
-                 $data['status'] = 1;
-             } else {
-                 $this->log->error(2);
-                 return false;
-             }
-             $sql = "UPDATE _table_ SET status=:status  WHERE ID=:id";
-//         }
-          if ($this->table->runQuery($sql, $data)) {
-            $this->log->report('Information Updated(ChangeStatus)');
+	//status,$reason = null, $description = null
+	public function changeStatus($info) {
+		// checking if get all info we need
+		if (!isset($info['status']) || 
+			($info['status'] == 0 && 
+				(!isset($info['reason']) || 
+				($info['reason'] == 9 && 
+					(!isset($info['description']) || 
+					trim($info['description']) == ''))))) {
+			$this->log->error(2);
+			return false;
+		}
+		// checking if status is change
+		if ($this->status == $info['status']) {
+			$this->log->error(2);
+			return false;
+		}
+		$data = array('id' => $this->ID, 'status' => $info['status']);
+
+		$sql = "UPDATE _table_ SET status=:status  WHERE ID=:id";
+		
+		if ($this->table->runQuery($sql, $data)) {
+            
+			$this->log->report('Information Updated(ChangeStatus)');
 			// יפה זה חשוב - זה בעצם דואג לעדכן את הסשיין! כל הכבוד שעליתם על זה לבד
             if ($this->clone === 0) {
                 $this->session->update = true;
@@ -102,14 +108,39 @@ class Student extends User {
 
             // Clear the updates stack
             $this->_updates = new Collection();
-			// אני רואה שעדין לא הוספתם לטבלה ששומרת את הסיבה לעזיבה
-			// ובכלל לא השתמשתם ב DB_Action
-            return true;
+			
+			if ($info['status'] == 0) {
+				$data = array(
+						'student_id' => $this->_data['ID'],
+						'reason' => $info['reason']
+					);
+				if (isset($info['description'])) {
+					$data['description'] = $info['description'];
+				}
+				$into = array();
+				foreach ($data as $index => $val) {
+					$into[] = $index;
+				}
+
+				$intoStr = implode(', ', $into);
+				$values = ':' . implode(', :', $into);
+
+				$sql = "INSERT INTO student_turn_off ({$intoStr}) VALUES({$values})";
+				
+				$db_action = new DB_Action();
+				
+				if ($db_action->runQuery($sql, $data)) {
+					$this->log->report('Information Updated(ChangeStatus)');
+				} else {
+					$this->log->error(2);
+					return false;
+				}
+			}
         } else {
-            $this->log->error(18);
+            $this->log->error(2);
             return false;
         }
-         
-     }
+		return true;
+	}
 }
 ?>

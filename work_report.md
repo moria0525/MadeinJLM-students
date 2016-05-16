@@ -70,4 +70,6 @@
 |--------|-----------------|---------|
 |13.4.16 |Iteration 1 | 2 Hours |
 |29.4.16 |Iteration 1 | 2 Hours |
-|3.5.16 |Iteration 2 - bulid local server | 1.5 Hours |
+|3.5.16  |Iteration 2 - bulid local server | 1.5 Hours |
+|6.5.16 |Iteration 2 - bulid local server | 5 Hours |
+|13.5.16 |Iteration 2 - bulid local server | 5 Hours |

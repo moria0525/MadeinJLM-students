@@ -331,7 +331,6 @@ img-crop canvas {
   display:block;
   position: absolute;
   right: 10%;
-  top: 25%;
   z-index: 0;
   color:#A9A9A9;
 }
@@ -341,7 +340,6 @@ img-crop canvas {
    z-index: 0;
   color:#fff;
   position: absolute;
-  top: 25%;
   left: 9%;
 }
 

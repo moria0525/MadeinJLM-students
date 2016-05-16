@@ -131,23 +131,22 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
             }
         });
     };
-    $scope.changeStatus = function () {
-        console.log($scope.studentData.status);
-        
+    $scope.changeStatus = function (data) {
         student.changeStatus().success(function (data) {
             if (data.status === 'error') {
                 $scope.alerts.changeStatus = {type: 'danger', msg: data.errors.join('<br>')};
             } else {
-                $scope.alerts.changeStatus = {type: 'success', msg: 'Your password was change successfully'};
+                
+                $scope.alerts.changeStatus = {type: 'success', msg: 'Your status was change successfully'};
             }
         });
-        
     };
      
 });
 jlm.controller('generalController', function ($scope, $rootScope) {
     "use strict";
     $scope.data = {};
+    
     $scope.alerts = {};
     $scope.closeAlert = function ($index) {
         $scope.alerts[$index] = {};
@@ -173,23 +172,18 @@ jlm.controller('DropdownCtrl', function ($scope, $log) {
 	$scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
 });
 
-jlm.controller('MyController', function($scope,$rootScope,$log) {
-    console.log($rootScope.studentData);
-//     $scope.onOff = ['0'];
-//    console.log($scope);
-  $scope.onOff = $rootScope.studentData.status;
-    
+jlm.controller('MyController', function($scope,$rootScope,$log,student) {
 
-    
-    
-  $scope.changeCallback = function() {
-    console.log('This is the state of my model ' + $scope.enabled);
-  };
-    if ($rootScope.studentData.status) {
-         $log.log('The status changed ' +  'true');
-    } else {
-        $log.log('The status changed ' +  'false');
-    }
+    student.init().success(function (data) {
+        $rootScope.studentData = data;
+//        console.log($rootScope.studentData.status);
+        if ($rootScope.studentData.status == 1) {
+            $scope.onOff = true;
+        } else {
+            $scope.onOff = false;
+        }
+    });
+   
    
 });
 
@@ -224,7 +218,6 @@ jlm.directive('switch', function(){
       html +=     attrs.on ? '<span class="on">'+attrs.on+'</span>' : ''; /*switch text on value set by user in directive html markup*/
       html +=     attrs.off ? '<span class="off">'+attrs.off + '</span>' : ' ';  /*switch text off value set by user in directive html markup*/
       html += '</span>';
-      console.log(html);
       return html;
     }
   }

@@ -73,4 +73,4 @@
 |3.5.16  |Iteration 2 - bulid local server | 1.5 Hours |
 |6.5.16 |Iteration 2 - bulid local server | 5 Hours |
 |13.5.16 |Iteration 2 - Activation status | 5 Hours |
-|16.5.16 |Iteration 2 - close the bug of activiation status | 5 Hours |
+|16.5.16 |Iteration 2 - close the bug of activiation status | 1.5 Hours |

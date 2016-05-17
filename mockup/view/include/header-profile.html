@@ -3,7 +3,7 @@
 				<div id="header-connected-top">
 					<span class="student-hi">Hi {{studentData.first_name}},</span>
 					<div class="student-action">
-						<div ng-controller="DropdownCtrl" tooltip-placement="top-right" uib-tooltip="Click for user actions">
+						<div ng-controller="DropdownCtrl" tooltip-placement="top-right" uib-tooltip="Click here for user actions">
 							<span uib-dropdown on-toggle="toggled(open)">
 							  <a href id="user-setting" uib-dropdown-toggle >
 								<i class="fa fa-cog" aria-hidden="true"></i>
@@ -15,11 +15,11 @@
 							  </ul>
 							</span>
 						</div>         
-						<switch-status  name="onOff" tooltip-placement="top-right" uib-tooltip="Click to change your status" >
+						<switch-status  name="onOff" tooltip-placement="top-right" uib-tooltip="Click here to change your status" >
 						</switch-status>
 					</div>
 				</div>
 				<div id="header-connected-bottom">
-					How many watched my profile: {{studentData.counter_view}}
+					<div name="watch" tooltip-placement="top-right" uib-tooltip="How many companies watched me?">{{studentData.counter_view}} companies watched you</div>
 				</div>
 			</div>

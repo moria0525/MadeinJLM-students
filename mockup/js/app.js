@@ -51,8 +51,13 @@ jlm.run(function ($rootScope) {
 	$rootScope.options = {
 			'basic_education_years': {1: 'less then 12 years', 2: '12 years', 3: '13 years', 4: '14 years'},
 			'skils_years': {1: 'less then 1 year',2: '1 year',3: '2 years',4: '3 years',5: 'more then 3 years'},
+			'semesters_left': {1: '1 semester',2: '2 semesters',3: '3 semesters',4: '4 semesters',5: '5 semesters',6: '6 semesters',7: '7 semesters',8: 'more than 7 semesters'},
+			'job_percent': {1: 'helf',2: 'full job',3: 'hours',4: 'freelancer'},
+			'possible': {1: 'possible',2: 'not possible'},
 			'skils': {},
-			'degree': {},
+			'degrees': {},
+			'languages': {},
+			'colleges': {},
 		};
 });
 
@@ -120,6 +125,12 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
         if ($rootScope.studentData === false) {
             $location.path("/login");
         }
+    });
+    general.getOptions().success(function (data) {
+		angular.forEach(data, function(value, key) {
+			if ($rootScope.options[key])
+				$rootScope.options[key] = value;
+		});
     });
     $scope.logOut = function () {
         student.logOut().success(function (data) {
@@ -233,6 +244,14 @@ jlm.controller('ModalProfileCtrl', ['$scope', '$uibModalInstance', '$log', 'stud
 
 }]);
 
+jlm.filter('nl2br', function($sce){
+    return function(msg,is_xhtml) { 
+        var is_xhtml = is_xhtml || true;
+        var breakTag = (is_xhtml) ? '<br />' : '<br>';
+        var msg = (msg + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1'+ breakTag +'$2');
+        return $sce.trustAsHtml(msg);
+    }
+});
 
 /* --- services --- */
 jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, $httpParamSerializerJQLike) {
@@ -344,7 +363,16 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
 jlm.factory('general', ['$http', '$httpParamSerializerJQLike', function ($http, $httpParamSerializerJQLike) {
     "use strict";
 	return {
-        /*
+		getOptions: function () {
+            return $http({
+                method  : 'POST',
+                url     : 'API/General/getOptions',
+                headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }).success(function (data) {
+                return data;
+            }).error(function () {return {}; });
+        },
+		/*
 		profileEditFormat: function () {
             return $http({
                 method  : 'POST',

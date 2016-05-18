@@ -23,6 +23,37 @@ class API_General extends API {
 		$sql = 'SELECT * FROM skills ORDER BY id ASC';
 		return $db->getQuery($sql);
     }
+    public function getOptions() {
+		$return_array = array();
+		$db = new DB_Action();
+		
+		$sql = 'SELECT * FROM skills ORDER BY id ASC';
+		$temp = $db->getQuery($sql);
+		if ($temp && is_array($temp) && !empty($temp))
+			foreach ($temp as $v)
+				$return_array['skils'][$v['id']] = array('name' =>$v['name'],'status' =>$v['status']);
+		
+		$sql = 'SELECT * FROM degree ORDER BY id ASC';
+		$temp = $db->getQuery($sql);
+		if ($temp && is_array($temp) && !empty($temp)) {
+			foreach ($temp as $v)
+				$return_array['degrees'][$v['id']] = $v['name'];
+		}
+		
+		$sql = 'SELECT * FROM languages ORDER BY id ASC';
+		$temp = $db->getQuery($sql);
+		if ($temp && is_array($temp) && !empty($temp))
+			foreach ($temp as $v)
+				$return_array['languages'][$v['id']] = $v['name'];
+		
+		$sql = 'SELECT * FROM college ORDER BY id ASC';
+		$temp = $db->getQuery($sql);
+		if ($temp && is_array($temp) && !empty($temp))
+			foreach ($temp as $v)
+				$return_array['colleges'][$v['id']] = $v['name'];
+		
+		return $return_array;
+    }
     
     
     public function profileEditFormat() {

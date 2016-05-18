@@ -90,6 +90,8 @@ jlm.directive('profileItem', function() {
             options: "=",
             defaultValue: "=",
             multy: "=",
+            maxlength: "=",
+            breaks: "=",
             saveFunction: "@",
             viewTemplate: "@",
         },
@@ -100,10 +102,13 @@ jlm.directive('profileItem', function() {
 			html += 	'<div class="no-edit-zone" ng-click="showEditZone()" ng-show="!editZoneShow" tooltip-placement="top-left" uib-tooltip="Edit">';
 				var viewT = 'value';
 				if (typeof attrs.viewTemplate !== 'undefined' && attrs.viewTemplate != '')
-						viewT = attrs.viewTemplate;
+					viewT = attrs.viewTemplate;
+				if (typeof attrs.breaks !== 'undefined' && attrs.breaks == 'true')
+					viewT = '<ng-bind-html ng-bind-html="'+viewT+' | nl2br"></ng-bind-html>';
+				else viewT = '{{'+viewT+'}}';
 				if (attrs.multy == 'true')
-					html += '<div ng-repeat="value in value">{{' + viewT + '}}{{$last ? \'\' : \', \'}}</div>';
-				else html +='<div>{{' + viewT + '}}</div>';
+					html += '<div ng-repeat="value in value">' + viewT + '{{$last ? \'\' : \', \'}}</div>';
+				else html +='<div>' + viewT + '</div>';
 			html += 	'</div>';
 			html += 	'<div class="edit-zone" ng-show="editZoneShow">';
 				if (attrs.multy == 'true')
@@ -136,6 +141,7 @@ jlm.directive('profileItem', function() {
 			};
 			$scope.editZoneSave = function (value,key) {
 				var sendData = {};
+				
 				sendData[$scope.field] = value;
 				
 				if ($scope.multy) {
@@ -170,18 +176,41 @@ jlm.directive('inputText', function () {
 	return {
         restrict: 'A',
 		scope: false,
-		template: 	'<div class="input-group">'+
-						'<input type="text" class="form-control" " ng-model="editValue">'+
-						'<div class="input-group-btn">'+
-							'<button type="button" class="btn btn-success" ng-click="editZoneSave(editValue,key)" ng-disabled="value == editValue">Save</button>'+
-							'<button type="button" class="btn btn-warning" ng-click="editValue = value" ng-disabled="value == editValue">Reset</button>'+
-							'<button type="button" class="btn btn-default" ng-show="!multy" ng-click="editZoneClose()">Cancel</button>'+
+		template: 	'<form ng-submit="editZoneSave(editValue,key)">'+
+						'<div class="input-group">'+
+							'<input type="text" class="form-control" " ng-model="editValue" maxlength="{{maxlength}}">'+
+							'<div class="input-group-btn">'+
+								'<button type="button" class="btn btn-success" ng-click="editZoneSave(editValue,key)" ng-disabled="value == editValue">Save</button>'+
+								'<button type="button" class="btn btn-warning" ng-click="editValue = value" ng-disabled="value == editValue">Reset</button>'+
+								'<button type="button" class="btn btn-default" ng-show="!multy" ng-click="editZoneClose()">Cancel</button>'+
+							'</div>'+
 						'</div>'+
-					'</div>',
+					'</form>',
 		controller: function ($scope,$element) {
 		},
 		link: function(scope, elem, attr) {
 			scope.$watch(attr.inputText, function() {
+				scope.editValue = scope.value;
+			});
+		}
+	};
+});
+jlm.directive('inputTextarea', function () {
+	return {
+        restrict: 'A',
+		scope: false,
+		template: 	'<form ng-submit="editZoneSave(editValue,key)">'+
+						'<div class="form-group"><textarea class="form-control" rows="7" ng-model="editValue" maxlength="{{maxlength}}"></textarea></div> '+
+						'<div class="text-right form-group">'+
+							'<button type="button" class="btn btn-success" ng-click="editZoneSave(editValue,key)" ng-disabled="value == editValue">Save</button> '+
+							'<button type="button" class="btn btn-warning" ng-click="editValue = value" ng-disabled="value == editValue">Reset</button> '+
+							'<button type="button" class="btn btn-default" ng-show="!multy" ng-click="editZoneClose()">Cancel</button>'+
+						'</div>'+
+					'</form>',
+		controller: function ($scope,$element) {
+		},
+		link: function(scope, elem, attr) {
+			scope.$watch(attr.inputTextarea, function() {
 				scope.editValue = scope.value;
 			});
 		}

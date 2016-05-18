@@ -232,6 +232,9 @@ header .header-connected #change-status-btn.run {
     height: auto;
     font-size: 17px;
 }
+select.form-control {
+    padding: 11px 10px;
+}
 /* end header style */
 
 /* main style */

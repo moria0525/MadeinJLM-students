@@ -87,15 +87,47 @@ jlm.directive('profileItem', function() {
             directiveName: "@",
             value: "=",
             title: "=",
+            options: "=",
+            defaultValue: "=",
             multy: "=",
             saveFunction: "@",
             viewTemplate: "@",
         },
-		// priority: 98,
-		templateUrl: 'view/directive/profile-item.html',
+		template: function(element, attrs) {
+			var html = '';
+			html += '<label class="col-sm-4 profileItemLable" ng-click="showEditZone()" tooltip-placement="top-right" uib-tooltip="Edit">{{ title }}:</label>';
+			html += '<div class="col-sm-8">';
+			html += 	'<div class="no-edit-zone" ng-click="showEditZone()" ng-show="!editZoneShow" tooltip-placement="top-left" uib-tooltip="Edit">';
+				var viewT = 'value';
+				if (typeof attrs.viewTemplate !== 'undefined' && attrs.viewTemplate != '')
+						viewT = attrs.viewTemplate;
+				if (attrs.multy == 'true')
+					html += '<div ng-repeat="value in value">{{' + viewT + '}}{{$last ? \'\' : \', \'}}</div>';
+				else html +='<div>{{' + viewT + '}}</div>';
+			html += 	'</div>';
+			html += 	'<div class="edit-zone" ng-show="editZoneShow">';
+				if (attrs.multy == 'true')
+					html += '<div><div ng-repeat="(key,value) in value"><div '+attrs.directiveName+'="value"></div></div><button type="button" class="btn btn-primary" ng-click="add();">Add</button> <button type="button" class="btn btn-default" ng-click="editZoneClose();">Cancel</button></div>';
+				else html += '<div '+attrs.directiveName+'="value"></div>';
+			html += 	'</div>';
+			html += '</div>';
+			return html;
+		},
 		controller: function ($scope,$element,student) {
-			// console.log($scope.value);
 			$scope.editValue = $scope.value;
+			
+			$scope.removeItem = function (key) {
+				$scope.value.splice(key, 1);
+			};
+			$scope.add = function() {
+				console.log('add new');
+				if (typeof $scope.defaultValue !== 'undefined' && $scope.defaultValue != '')
+					$scope.value.push($scope.defaultValue);
+				else $scope.value.push({});
+				console.log($scope.value);
+				return false;
+			}
+			
 			$scope.showEditZone = function () {
 				$scope.editZoneShow = true;
 			};
@@ -106,16 +138,6 @@ jlm.directive('profileItem', function() {
 				var sendData = {};
 				sendData[$scope.field] = value;
 				
-				
-				/*
-				console.log('value: '+ $scope.field);
-				console.log('value: '+ value);
-				console.log('saveFunction: '+ $scope.saveFunction);
-				if ($scope.multy)
-					console.log('id: '+ key);
-				*/
-				
-				
 				if ($scope.multy) {
 					sendData['key'] = key;
 					console.log(sendData);
@@ -125,7 +147,7 @@ jlm.directive('profileItem', function() {
 						if (data.status == 'success') {
 							$scope.value = value;
 							$scope.editZoneClose();
-							alert('success');
+							console.log('success');
 						} else alert('error');
 					});
 					*/
@@ -135,101 +157,42 @@ jlm.directive('profileItem', function() {
 						if (data.status == 'success') {
 							$scope.value = value;
 							$scope.editZoneClose();
-							alert('success');
+							console.log('success');
 						} else alert('error');
 					});
 				}
 				
-				
 			};
-		},
-		link: function(scope, elem, attr) {
 		}
-	};
-});
-jlm.directive('multyData', function ($compile) {
-	return {
-        restrict: 'EA',
-        scope: false,
-		controller: function ($scope,$element) {
-
-		},
-		// priority: 99,
-        link: function (scope, element, attrs) {
-			var innerHtml = element[0].innerHTML;
-			if (scope.multy == '1')
-				var html ='<div ng-repeat="(key,value) in value">' + innerHtml + '</div>';
-			else {
-				var html ='<div>'+innerHtml+'</div>';
-			}
-            var e =$compile(html)(scope);
-            element.replaceWith(e);
-			
-        }
-	};
-});
-jlm.directive('multyDataView', function ($compile) {
-	return {
-        restrict: 'A',
-        scope: false,
-		controller: function ($scope,$element) {
-		},
-        link: function (scope, element, attrs) {
-			// if (scope.viewTemplate == '1')
-			var viewT = 'value';	
-			if (typeof scope.viewTemplate !== 'undefined')
-					viewT = scope.viewTemplate;
-			var html ='<div>{{' + viewT + '}}</div>';
-			if (scope.multy == true) {
-				html = '<div><span ng-repeat="value in value">{{' + viewT + '}}{{$last ? \'\' : \', \'}}</span></div>';
-			}
-            var e =$compile(html)(scope);
-            element.replaceWith(e);
-			
-        }
-	};
-});
-jlm.directive('multyDataEdit', function ($compile) {
-	return {
-        restrict: 'EA',
-        scope: false,
-		controller: function ($scope,$element) {
-			$scope.removeItem = function (key) {
-				$scope.value.splice(key, 1);
-			};
-			$scope.add = function() {
-				console.log('add new');
-				$scope.value.push({});
-				return false;
-			}
-		},
-        link: function (scope, element, attrs) {
-			if (scope.multy == '1')
-				var html ='<div><div ng-repeat="(key,value) in value"><div ' + scope.directiveName + '="value"></div></div><button type="button" class="btn btn-link" ng-click="add();">add</button></div>';
-			else {
-				var html ='<div input-text="value"></div>';
-			}
-            var e =$compile(html)(scope);
-            element.replaceWith(e);
-			
-        }
 	};
 });
 jlm.directive('inputText', function () {
 	return {
         restrict: 'A',
-        /*
-		scope: {
-            value: "=inputText",
-            // editValue: "=inputText",
-            editZoneClose: "&",
-            hideCancel: "=",
-        },
-		*/
 		scope: false,
-		// priority: 100,
 		template: 	'<div class="input-group">'+
 						'<input type="text" class="form-control" " ng-model="editValue">'+
+						'<div class="input-group-btn">'+
+							'<button type="button" class="btn btn-success" ng-click="editZoneSave(editValue,key)" ng-disabled="value == editValue">Save</button>'+
+							'<button type="button" class="btn btn-warning" ng-click="editValue = value" ng-disabled="value == editValue">Reset</button>'+
+							'<button type="button" class="btn btn-default" ng-show="!multy" ng-click="editZoneClose()">Cancel</button>'+
+						'</div>'+
+					'</div>',
+		controller: function ($scope,$element) {
+		},
+		link: function(scope, elem, attr) {
+			scope.$watch(attr.inputText, function() {
+				scope.editValue = scope.value;
+			});
+		}
+	};
+});
+jlm.directive('inputSelect', function () {
+	return {
+        restrict: 'A',
+		scope: false,
+		template: 	'<div class="input-group">'+
+						'<select class="form-control" ng-model="editValue"><option value="0" disabled>select from the list</option><option ng-repeat="(key,name) in options" value="{{key}}">{{name}}</option></select>'+
 						'<div class="input-group-btn">'+
 							'<button type="button" class="btn btn-success" ng-click="editZoneSave(editValue,key)" ng-disabled="value == editValue">Save</button>'+
 							'<button type="button" class="btn btn-warning" ng-click="editValue = value" ng-disabled="value == editValue">Reset</button>'+
@@ -240,8 +203,7 @@ jlm.directive('inputText', function () {
 
 		},
 		link: function(scope, elem, attr) {
-			
-			scope.$watch(attr.inputText, function() {
+			scope.$watch(attr.inputSelect, function() {
 				scope.editValue = scope.value;
 			});
 		}
@@ -259,7 +221,7 @@ jlm.directive('inputSkill', function () {
 						'</div>'+
 						'<div class="form-group col-md-6">'+
 							// '<label>enter years</label>'+
-							'<input type="num" class="form-control" placeholder="Years" ng-model="editValue.years">'+
+							'<select class="form-control" ng-model="editValue.years"><option value="0" disabled>select years</option><option ng-repeat="(key,name) in options.skils_years" value="{{key}}">{{name}}</option></select>'+
 						'</div>'+
 						'<div class="text-right col-md-12"><button type="submit" class="btn btn-danger" ng-click="remove()">Remove</button> <button type="submit" ng-disabled="value.name == editValue.name && value.years == editValue.years" ng-click="reset()" class="btn btn-warning">Reset</button> <button type="submit" ng-disabled="value.name == editValue.name && value.years == editValue.years" ng-click="save()" class="btn btn-success">Save</button></div>'+
 					'</form>',
@@ -294,135 +256,8 @@ jlm.directive('inputSkill', function () {
 		}
 	};
 });
-/*
-jlm.directive('multyData', function ($compile) {
-	return {
-        restrict: 'A',
-        scope: {
-            multyData: "=",
-            value: "=multyData",
-			multy: "=",
-        },
-		controller: function ($scope,$element) {
-			$scope.editValue = '1';
-			$scope.value = $scope.multyData;
-		},
-		priority: 99,
-        link: function (scope, element, attrs) {
-			var innerHtml = element[0].innerHTML;
-			if (scope.multy == '1')
-				var html ='<div ng-repeat="value in multyData">' + innerHtml + '</div>';
-			else {
-				var html ='<div>'+innerHtml+'</div>';
-			}
-            var e =$compile(html)(scope);
-            element.replaceWith(e);
-			
-        }
-	};
-});
-*/
-/*
-jlm.directive('inputText', function () {
-	return {
-        restrict: 'A',
-		scope: false,
-		// priority: 100,
-		template: 	'<div class="input-group">'+
-						'<input type="text" class="form-control" " ng-model="editValue">'+
-						'<div class="input-group-btn">'+
-							'<button type="button" class="btn btn-success" ng-click="editZoneSave(editValue,key)" ng-disabled="value == editValue">Save</button>'+
-							'<button type="button" class="btn btn-warning" ng-click="editValue = value" ng-disabled="value == editValue">Reset</button>'+
-							'<button type="button" class="btn btn-default" ng-show="!multy" ng-click="editZoneClose()">Cancel</button>'+
-						'</div>'+
-					'</div>',
-		controller: function ($scope,$element) {
 
-		},
-		link: function(scope, elem, attr) {
-			
-			scope.$watch(attr.inputText, function() {
-				scope.editValue = scope.value;
-			});
-		}
-	};
-});
-*/
-
-
-
-
-
-
-/*
-jlm.directive('profileTemplate', function() {
-	return {
-		restrict: 'A',
-		templateUrl: 'API/General/profileEditFormat',
-        scope: {
-            profileTemplate: "="
-        },
-		template: 	'<div class="input-group">'+
-						'<input type="text" class="form-control" " ng-model="editValue">'+
-						'<div class="input-group-btn">'+
-							'<button type="button" class="btn btn-success" ng-click="editZoneSave()" ng-disabled="value == editValue">Save</button>'+
-							'<button type="button" class="btn btn-warning" ng-click="editZoneReset()" ng-disabled="value == editValue">Reset</button>'+
-							'<button type="button" class="btn btn-default" ng-click="editZoneClose()">Cancel</button>'+
-						'</div>'+
-					'</div>',
-		controller: function ($scope,$element) {
-			$scope.editValue = '2';
-			// console.log($scope.studentData);
-		},
-		link: function(scope, elem, attr) {
-			
-		}
-	};
-});
-*/
-/*
-jlm.directive('profileMulty', function() {
-	return {
-		restrict: 'A',
-        scope: {
-            profileMulty: "=",
-            value: "=",
-        },
-		//http://stackoverflow.com/questions/14615534/custom-directive-like-ng-repeat
-		transclude: true,
-		template: '<ng-transclude></ng-transclude>',
-		controller: function ($scope,$element) {
-			$scope.click = function () {
-				alert();
-			};
-		},
-		link: function(scope, elem, attr) {
-			console.log(1);
-			angular.element(elem[0]).on('click', function(e) {
-				console.log(2);
-				alert();
-			});
-			
-		}
-	};
-});
-*/
-/*
-<span class="switch" ng-click="undefined ? onOff : onOff=!onOff; changeStatus()()" ng-class="{ checked:onOff, disabled:undefined }">
-	<small></small>
-	<input type="checkbox" name="onOff" ng-model="onOff" style="display:none" />
-	<span class="switch-text"><span class="on">on</span><span class="off">off</span></span>
-
-<span class="switch" ng-click="undefined ? onOff : onOff=!onOff; changeStatus()()" ng-class="{ checked:onOff, disabled:undefined }">
-	<small></small>
-	<input type="checkbox" name="onOff" ng-model="onOff" style="display:none" />
-	<span class="switch-text"></span>
-	
-<span class="switch" ng-click="undefined ? onOff : onOff=!onOff; changeStatus()()" ng-class="{ checked:onOff, disabled:undefined }">
-<small></small>
-<input type="checkbox" name="onOff" ng-model="onOff" style="display:none" />
-<span class="switch-text"> </span>
-*/
+/* --- switch status --- */
 jlm.directive('switchStatus', function(){
   return {
     restrict: 'AE'

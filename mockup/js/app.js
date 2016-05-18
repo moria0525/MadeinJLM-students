@@ -48,6 +48,11 @@ jlm.config(function ($routeProvider) {
 /* --- rootScope --- */
 jlm.run(function ($rootScope) {
 	$rootScope.studentData = false;
+	$rootScope.options = {
+			'basic_education_years': {1: 'less then 12 years', 2: '12 years', 3: '13 years', 4: '14 years'},
+			'skils_years': {1: 'less then 1 year',2: '1 year',3: '2 years',4: '3 years',5: 'more then 3 years'},
+			'skils': {},
+		};
 });
 
 /* --- controlers --- */

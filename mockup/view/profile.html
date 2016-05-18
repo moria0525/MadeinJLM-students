@@ -5,17 +5,13 @@
 
 <section class="main-context">
 	<div class="container">
-		<div class="row">
-			<ul class="profileEditFormat">
-				<li profile-item="basic_education_subject" directive-name="input-text" title="'Basic education subject'" value="studentData.basic_education_subject" multy="false" save-function="update"></li>
-				<li profile-item="basic_education_years" directive-name="input-text" title="'Basic education years'" value="studentData.basic_education_years" multy="false" save-function="update"></li>
-				<li profile-item="skils" directive-name="input-skill" title="'Skils'" value="studentData.skils" multy="true" save-function="updateSkill" view-template="value.name"></li>
-				
-			</ul>
-			<!--<div profile-template student-data="studentData"></div>-->
+		
 <style>
+.mt-60 {
+	margin-top: 60px;
+}
 .profileEditFormat {
-    padding: 60px 0 0 0;
+    padding: 0;
     list-style: none;
 }
 .profileItemLable {line-height: 46px;text-align: right;cursor: pointer;}
@@ -42,61 +38,23 @@
     margin-bottom: 10px;
 }
 .itemInItem {
-	margin-bottom: 40px;
+	margin-bottom: 15px;
 }
 
 </style>
-			<!--
-			<div class="form-horizontal">
-				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-3 control-label">Email</label>
-					<div class="col-sm-9">
-						<input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-3 control-label">Email</label>
-					<div class="col-sm-9">
-						Barak dasdasdsa
-					</div>
+		<div class="row mt-60">
+			<div class="col-md-9">
+				<div class="row">
+					<ul class="profileEditFormat">
+						<li profile-item="basic_education_subject" directive-name="input-text" title="'Basic education subject'" value="studentData.basic_education_subject" multy="false" save-function="update"></li>
+						<li profile-item="basic_education_years" directive-name="input-select" title="'Basic education years'" value="studentData.basic_education_years" options="options.basic_education_years" multy="false" save-function="update" view-template="options[value]"></li>
+						<li profile-item="skils" directive-name="input-skill" title="'Skils'" value="studentData.skils" default-value="{years:'0'}" options="options" multy="true" save-function="updateSkill" view-template="value.name"></li>
+					</ul>
 				</div>
 			</div>
-			<ul>
-				<li data-ng-repeat="item in general.profileEditFormat">
-					<h3>{{ item.title }}</h3>
-				</li>
-			</ul>
-			
-			<div class="col-md-12 text-center">
-				<h2 class="mb-40">profile</h2>
-				
-				
+			<div class="col-md-3">
+				Here will be profile complate precent and note from admin...
 			</div>
-			<div id="fileupload" >
-				<div class="myfileupload-buttonbar ">
-					<label class="myui-button">
-						<span >Add File for my Profile picture</span>
-						<input id="file" type="file" name="files[]" />
-					</label>
-				</div>
-				
-			</div>    
-			<div class="col-md-8 text-center" id ="fieldArea">
-			Personal Information
-			</div>
-			<div div class="col-md-8 text-center" id ="fieldArea">
-			Education
-			</div>             
-			<div div class="col-md-8 text-center" id ="fieldArea">
-			Experience
-			</div>
-			<div div class="col-md-8 text-center" id ="fieldArea">
-			Skills
-			</div>
-			<div div class="col-md-8 text-center" id ="fieldArea">
-			Links & Files
-			</div>
-			-->
 		</div>
 	</div>
 </section>

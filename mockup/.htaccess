@@ -1,4 +1,4 @@
-﻿IndexIgnore .htaccess */.??* *~ *# */HEADER* */README* */_vti*
+IndexIgnore .htaccess */.??* *~ *# */HEADER* */README* */_vti*
 
 Options -Indexes
 

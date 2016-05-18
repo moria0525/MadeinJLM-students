@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /**
  * Class DB_Table

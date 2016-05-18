@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 class API_Admin extends API {
     public function index() {

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /**
  * A Collection which references a existing array

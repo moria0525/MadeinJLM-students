@@ -1,4 +1,4 @@
-﻿/* --- uploadFile --- */
+/* --- uploadFile --- */
 jlm.directive('uploadFile', function() {
 	return {
 		restrict: 'A',

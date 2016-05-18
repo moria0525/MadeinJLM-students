@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 class API_Student extends API {
     public function index() {
         $student = new Student();

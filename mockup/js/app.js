@@ -1,4 +1,4 @@
-﻿var jlm = angular.module('jlm', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ngImgCrop']);
+var jlm = angular.module('jlm', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ngImgCrop']);
 
 /* --- routeProvider --- */
 jlm.config(function ($routeProvider) {

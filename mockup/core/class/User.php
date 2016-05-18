@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /**
  * All in one user object use to authenticating, registering new users and other user actions

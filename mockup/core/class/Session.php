@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /**
  * Class to handle the PHP session

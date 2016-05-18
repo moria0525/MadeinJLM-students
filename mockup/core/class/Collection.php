@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /**
  * An object oriented representation an associative array

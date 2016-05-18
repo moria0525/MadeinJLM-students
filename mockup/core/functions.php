@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /**
  * Prints a string in an HTML header tag

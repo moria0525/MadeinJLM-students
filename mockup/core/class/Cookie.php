@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /**
  * Class handles a single cookie

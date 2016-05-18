@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 class API_General extends API {
 	public function index() {}
     

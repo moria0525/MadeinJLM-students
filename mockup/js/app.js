@@ -1,4 +1,4 @@
-var jlm = angular.module('jlm', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ngImgCrop']);
+﻿var jlm = angular.module('jlm', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ngImgCrop']);
 
 /* --- routeProvider --- */
 jlm.config(function ($routeProvider) {
@@ -52,6 +52,7 @@ jlm.run(function ($rootScope) {
 			'basic_education_years': {1: 'less then 12 years', 2: '12 years', 3: '13 years', 4: '14 years'},
 			'skils_years': {1: 'less then 1 year',2: '1 year',3: '2 years',4: '3 years',5: 'more then 3 years'},
 			'skils': {},
+			'degree': {},
 		};
 });
 

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 class sendMail {
     public static function send($to, $subject, $message) {
         

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 /**
  * Console to log reports and errors

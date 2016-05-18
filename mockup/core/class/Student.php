@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 class Student extends User {
 	public function __construct()

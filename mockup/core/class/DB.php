@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 
 /**
@@ -109,7 +109,7 @@ class DB
         }
         $this->log->report('Connecting to database...');
         try{
-            $this->connection = new \PDO($this->generateDSN(), $this->user, $this->password);
+            $this->connection = new \PDO($this->generateDSN(), $this->user, $this->password,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
             $this->log->report('Connected to database.');
         } catch ( \PDOException $e ){
             $this->log->error('Failed to connect to database, [SQLSTATE] ' . $e->getCode());

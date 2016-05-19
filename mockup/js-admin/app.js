@@ -260,7 +260,7 @@ jlm.factory('admin', ['$http', '$httpParamSerializerJQLike', function ($http, $h
         init: function () {
             return $http({
                 method  : 'POST',
-                url     : 'API/Student',
+                url     : 'API/Admin',
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (data) {
 				if (typeof data.status !== 'undefined' && data.status !== null) {
@@ -272,7 +272,7 @@ jlm.factory('admin', ['$http', '$httpParamSerializerJQLike', function ($http, $h
         login: function (data) {
             return $http({
                 method  : 'POST',
-                url     : 'API/Student/Login',
+                url     : 'API/Admin/Login',
                 data    : $httpParamSerializerJQLike(data),
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (data) {
@@ -292,7 +292,7 @@ jlm.factory('admin', ['$http', '$httpParamSerializerJQLike', function ($http, $h
         logOut: function () {
             return $http({
                 method  : 'POST',
-                url     : 'API/Student/logOut',
+                url     : 'API/Admin/logOut',
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (data) {
                 return data;
@@ -301,7 +301,7 @@ jlm.factory('admin', ['$http', '$httpParamSerializerJQLike', function ($http, $h
         resetPassword: function (email) {
             return $http({
                 method  : 'POST',
-                url     : 'API/Student/resetPassword',
+                url     : 'API/Admin/resetPassword',
                 data    : $httpParamSerializerJQLike({'Email':email}),  // pass in data as strings
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (data) {
@@ -311,7 +311,7 @@ jlm.factory('admin', ['$http', '$httpParamSerializerJQLike', function ($http, $h
         newPassword: function (hash,newPass) {
 			return $http({
                 method  : 'POST',
-                url     : 'API/Student/newPassword',
+                url     : 'API/Admin/newPassword',
                 data    : $httpParamSerializerJQLike({'hash':hash,'newPass':newPass}),  // pass in data as strings
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (data) {
@@ -321,7 +321,7 @@ jlm.factory('admin', ['$http', '$httpParamSerializerJQLike', function ($http, $h
         changePassword: function (data) {
             return $http({
                 method  : 'POST',
-                url     : 'API/Student/changePassword',
+                url     : 'API/Admin/changePassword',
                 data    : $httpParamSerializerJQLike(data),
                 headers : { 'Content-Type':  'application/x-www-form-urlencoded' }
             }).success(function (data){
@@ -331,7 +331,7 @@ jlm.factory('admin', ['$http', '$httpParamSerializerJQLike', function ($http, $h
         update: function (data) {
             return $http({
                 method  : 'POST',
-                url     : 'API/Student/update',
+                url     : 'API/Admin/update',
                 data    : $httpParamSerializerJQLike(data),
                 headers : { 'Content-Type':  'application/x-www-form-urlencoded' }
             }).success(function (data){

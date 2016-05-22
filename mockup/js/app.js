@@ -1,7 +1,7 @@
 var jlm = angular.module('jlm', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ngImgCrop']);
 
 /* --- routeProvider --- */
-jlm.config(function ($routeProvider) {
+jlm.config(function ($routeProvider, $locationProvider) {
     "use strict";
     $routeProvider.
         when('/', {
@@ -43,6 +43,8 @@ jlm.config(function ($routeProvider) {
         otherwise({
             redirectTo: '/'
         });
+	$locationProvider.html5Mode(true);
+	$locationProvider.hashPrefix('!');
 });
 
 /* --- rootScope --- */

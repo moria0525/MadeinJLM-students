@@ -13,3 +13,11 @@ RewriteRule API\/([^/]+)\/([^/]+)\/([\d]+)$ api.php?api=$1&fname=$2&id=$3&%{QUER
 RewriteRule API\/([^/]+)\/([^/]+)$ api.php?api=$1&fname=$2&%{QUERY_STRING}
 RewriteRule API\/([^/]+)/$ api.php?api=$1&%{QUERY_STRING}
 RewriteRule API\/([^/]+)$ api.php?api=$1&%{QUERY_STRING}
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Rewrite everything else to index.html to allow html5 state links
+RewriteRule ^ index.html [L]
+

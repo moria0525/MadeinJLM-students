@@ -1,50 +1,48 @@
 var jlm = angular.module('jlm', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ngImgCrop']);
 
 /* --- routeProvider --- */
-jlm.config(function ($routeProvider, $locationProvider) {
+jlm.config(function ($routeProvider) {
     "use strict";
     $routeProvider.
         when('/', {
-            templateUrl: 'view/home.html',
+            templateUrl: 'view-admin/home.html',
             // controller: 'UserNotConnected',
         }).
         when('/not-us', {
-            templateUrl: 'view/not-us.html',
+            templateUrl: 'view-admin/not-us.html',
             // controller: 'UserNotConnected',
         }).
 
         when('/login', {
-            templateUrl: 'view/login.html',
+            templateUrl: 'view-admin/login.html',
             controller: 'UserNotConnected',
         }).
         when('/activated', {
-            templateUrl: 'view/activated.html',
+            templateUrl: 'view-admin/activated.html',
             controller: 'UserNotConnected',
         }).
         when('/reset-password', {
-            templateUrl: 'view/reset-password.html',
+            templateUrl: 'view-admin/reset-password.html',
             controller: 'UserNotConnected'
         }).
         when('/new-password/:hash', {
-            templateUrl: 'view/new-password.html',
+            templateUrl: 'view-admin/new-password.html',
             controller: 'UserNotConnected'
         }).
         when('/termOfUse', {
-        templateUrl: 'view/termOfUse.html'
+        templateUrl: 'view-admin/termOfUse.html'
         }).
         when('/profile', {
-            templateUrl: 'view/profile.html',
+            templateUrl: 'view-admin/profile.html',
             controller: 'UserConnected',
         }).
         when('/change-password', {
-            templateUrl: 'view/change-password.html',
+            templateUrl: 'view-admin/change-password.html',
             controller: 'UserConnected',
         }).
         otherwise({
             redirectTo: '/'
         });
-	$locationProvider.html5Mode(true);
-	$locationProvider.hashPrefix('!');
 });
 
 /* --- rootScope --- */
@@ -59,7 +57,7 @@ jlm.run(function ($rootScope) {
 			'skils': {},
 			'degrees': {},
 			'languages': {},
-			'colleges': {1: 'Azrieli - Jerusalem College of Engineering',2: 'Ariel University',3:'ORT Jerusalem',4:'Schechter Institute',5:'Jerusalem College of Technology',6:'Hebrew University of Jerusalem',7:'Betzalel',8:'College Ephrath',9:'Shalem College',10:'Al-Quds University',11:'College of Management'},
+			'colleges': {},
 		};
 });
 
@@ -185,7 +183,7 @@ jlm.directive('profilePicture', function() {
 	return {
 		restrict: 'E',
 		controller: 'profilePictureCtrl',
-		templateUrl: 'view/directive/profile-picture.html'
+		templateUrl: 'view-admin/directive/profile-picture.html'
 	};
 });
 jlm.controller('profilePictureCtrl', function ($scope, $uibModal, $log) {
@@ -193,7 +191,7 @@ jlm.controller('profilePictureCtrl', function ($scope, $uibModal, $log) {
 	$scope.openChangeProfileImage = function () {
 		var modalInstance = $uibModal.open({
 			animation: true,
-			templateUrl: 'view/directive/changeProfileImage.html',
+			templateUrl: 'view-admin/directive/changeProfileImage.html',
 			controller: 'ModalProfileCtrl',
 			size: 'md'
 		});
@@ -256,13 +254,13 @@ jlm.filter('nl2br', function($sce){
 });
 
 /* --- services --- */
-jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, $httpParamSerializerJQLike) {
+jlm.factory('admin', ['$http', '$httpParamSerializerJQLike', function ($http, $httpParamSerializerJQLike) {
     "use strict";
     return {
         init: function () {
             return $http({
                 method  : 'POST',
-                url     : 'API/Student',
+                url     : 'API/Admin',
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (data) {
 				if (typeof data.status !== 'undefined' && data.status !== null) {
@@ -274,7 +272,7 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
         login: function (data) {
             return $http({
                 method  : 'POST',
-                url     : 'API/Student/Login',
+                url     : 'API/Admin/Login',
                 data    : $httpParamSerializerJQLike(data),
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (data) {
@@ -294,7 +292,7 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
         logOut: function () {
             return $http({
                 method  : 'POST',
-                url     : 'API/Student/logOut',
+                url     : 'API/Admin/logOut',
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (data) {
                 return data;
@@ -303,7 +301,7 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
         resetPassword: function (email) {
             return $http({
                 method  : 'POST',
-                url     : 'API/Student/resetPassword',
+                url     : 'API/Admin/resetPassword',
                 data    : $httpParamSerializerJQLike({'Email':email}),  // pass in data as strings
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (data) {
@@ -313,7 +311,7 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
         newPassword: function (hash,newPass) {
 			return $http({
                 method  : 'POST',
-                url     : 'API/Student/newPassword',
+                url     : 'API/Admin/newPassword',
                 data    : $httpParamSerializerJQLike({'hash':hash,'newPass':newPass}),  // pass in data as strings
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (data) {
@@ -323,7 +321,7 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
         changePassword: function (data) {
             return $http({
                 method  : 'POST',
-                url     : 'API/Student/changePassword',
+                url     : 'API/Admin/changePassword',
                 data    : $httpParamSerializerJQLike(data),
                 headers : { 'Content-Type':  'application/x-www-form-urlencoded' }
             }).success(function (data){
@@ -333,7 +331,7 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
         update: function (data) {
             return $http({
                 method  : 'POST',
-                url     : 'API/Student/update',
+                url     : 'API/Admin/update',
                 data    : $httpParamSerializerJQLike(data),
                 headers : { 'Content-Type':  'application/x-www-form-urlencoded' }
             }).success(function (data){

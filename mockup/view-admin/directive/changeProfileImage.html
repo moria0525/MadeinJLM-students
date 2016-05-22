@@ -1,0 +1,38 @@
+        <div class="modal-header">
+            <h3 class="modal-title">Change profile picture</h3>
+        </div>
+        <div class="modal-body">
+			<form ng-show="imageDataURI == ''">
+				<div class="upload-file-zone" upload-file="imageDataURI" upload-file-accept="" upload-file-text="Choose picture:" upload-file-name="picture"></div>
+			</form>
+			<div ng-show="imageDataURI != ''">
+				<div ng-if="true" class="cropArea">
+					<img-crop image="imageDataURI"
+							  result-image="$parent.resImageDataURI"
+							  change-on-fly="true"
+							  area-type="square"
+							  area-min-size="150"
+							  result-image-format="image/jpeg"
+							  result-image-quality="1"
+							  result-image-size="500"
+							  on-change="onChange($dataURI)"
+							  on-load-begin="onLoadBegin()"
+							  on-load-done="onLoadDone()"
+							  on-load-error="onLoadError()"
+							  ></img-crop>
+				</div>
+
+				<div style="text-align:center">
+					<h3>How my profile will look:</h3>
+					<div>
+						<img ng-src="{{resImageDataURI}}" id="profile-picture-result" />
+					</div>
+				</div>
+			</div>
+			
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="save()" ng-show="imageDataURI != ''">Save</button>
+            <button class="btn btn-danger" type="button" ng-click="imageDataURI = '';" ng-show="imageDataURI != ''">Reset</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>

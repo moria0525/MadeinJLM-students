@@ -1,10 +1,11 @@
 // not used - can to delete..
-$(function() {
-    $(".inputWrapper").mousedown(function() {
+$(function () {
+    'use strict';
+	$(".inputWrapper").mousedown(function () {
         var button = $(this);
         button.addClass('clicked');
-        setTimeout(function(){
+        setTimeout(function () {
             button.removeClass('clicked');
-        },50);
+        }, 50);
     });
 });

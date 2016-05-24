@@ -3,36 +3,36 @@
  * (c) 2010-2016 Google, Inc. http://angularjs.org
  * License: MIT
  */
-(function(window, angular, undefined) {'use strict';
+(function (window, angular, undefined) {'use strict';
 
 /* jshint ignore:start */
-var noop        = angular.noop;
-var copy        = angular.copy;
-var extend      = angular.extend;
-var jqLite      = angular.element;
-var forEach     = angular.forEach;
-var isArray     = angular.isArray;
-var isString    = angular.isString;
-var isObject    = angular.isObject;
-var isUndefined = angular.isUndefined;
-var isDefined   = angular.isDefined;
-var isFunction  = angular.isFunction;
-var isElement   = angular.isElement;
+    var noop		= angular.noop;
+	var copy        = angular.copy;
+	var extend      = angular.extend;
+    var jqLite      = angular.element;
+    var forEach     = angular.forEach;
+    var isArray     = angular.isArray;
+    var isString    = angular.isString;
+    var isObject    = angular.isObject;
+    var isUndefined = angular.isUndefined;
+    var isDefined   = angular.isDefined;
+    var isFunction  = angular.isFunction;
+    var isElement   = angular.isElement;
 
-var ELEMENT_NODE = 1;
-var COMMENT_NODE = 8;
+    var ELEMENT_NODE = 1;
+    var COMMENT_NODE = 8;
 
-var ADD_CLASS_SUFFIX = '-add';
-var REMOVE_CLASS_SUFFIX = '-remove';
-var EVENT_CLASS_PREFIX = 'ng-';
-var ACTIVE_CLASS_SUFFIX = '-active';
-var PREPARE_CLASS_SUFFIX = '-prepare';
+    var ADD_CLASS_SUFFIX = '-add';
+    var REMOVE_CLASS_SUFFIX = '-remove';
+    var EVENT_CLASS_PREFIX = 'ng-';
+    var ACTIVE_CLASS_SUFFIX = '-active';
+    var PREPARE_CLASS_SUFFIX = '-prepare';
 
-var NG_ANIMATE_CLASSNAME = 'ng-animate';
-var NG_ANIMATE_CHILDREN_DATA = '$$ngAnimateChildren';
+    var NG_ANIMATE_CLASSNAME = 'ng-animate';
+    var NG_ANIMATE_CHILDREN_DATA = '$$ngAnimateChildren';
 
 // Detect proper transitionend/animationend event names.
-var CSS_PREFIX = '', TRANSITION_PROP, TRANSITIONEND_EVENT, ANIMATION_PROP, ANIMATIONEND_EVENT;
+     var CSS_PREFIX = '', TRANSITION_PROP, TRANSITIONEND_EVENT, ANIMATION_PROP, ANIMATIONEND_EVENT;
 
 // If unprefixed events are not supported but webkit-prefixed are, use the latter.
 // Otherwise, just use W3C names, browsers not supporting them at all will just ignore them.
@@ -43,121 +43,124 @@ var CSS_PREFIX = '', TRANSITION_PROP, TRANSITIONEND_EVENT, ANIMATION_PROP, ANIMA
 // Also, the only modern browser that uses vendor prefixes for transitions/keyframes is webkit
 // therefore there is no reason to test anymore for other vendor prefixes:
 // http://caniuse.com/#search=transition
-if (isUndefined(window.ontransitionend) && isDefined(window.onwebkittransitionend)) {
-  CSS_PREFIX = '-webkit-';
-  TRANSITION_PROP = 'WebkitTransition';
-  TRANSITIONEND_EVENT = 'webkitTransitionEnd transitionend';
-} else {
-  TRANSITION_PROP = 'transition';
-  TRANSITIONEND_EVENT = 'transitionend';
-}
-
-if (isUndefined(window.onanimationend) && isDefined(window.onwebkitanimationend)) {
-  CSS_PREFIX = '-webkit-';
-  ANIMATION_PROP = 'WebkitAnimation';
-  ANIMATIONEND_EVENT = 'webkitAnimationEnd animationend';
-} else {
-  ANIMATION_PROP = 'animation';
-  ANIMATIONEND_EVENT = 'animationend';
-}
-
-var DURATION_KEY = 'Duration';
-var PROPERTY_KEY = 'Property';
-var DELAY_KEY = 'Delay';
-var TIMING_KEY = 'TimingFunction';
-var ANIMATION_ITERATION_COUNT_KEY = 'IterationCount';
-var ANIMATION_PLAYSTATE_KEY = 'PlayState';
-var SAFE_FAST_FORWARD_DURATION_VALUE = 9999;
-
-var ANIMATION_DELAY_PROP = ANIMATION_PROP + DELAY_KEY;
-var ANIMATION_DURATION_PROP = ANIMATION_PROP + DURATION_KEY;
-var TRANSITION_DELAY_PROP = TRANSITION_PROP + DELAY_KEY;
-var TRANSITION_DURATION_PROP = TRANSITION_PROP + DURATION_KEY;
-
-var isPromiseLike = function(p) {
-  return p && p.then ? true : false;
-};
-
-var ngMinErr = angular.$$minErr('ng');
-function assertArg(arg, name, reason) {
-  if (!arg) {
-    throw ngMinErr('areq', "Argument '{0}' is {1}", (name || '?'), (reason || "required"));
-  }
-  return arg;
-}
-
-function mergeClasses(a,b) {
-  if (!a && !b) return '';
-  if (!a) return b;
-  if (!b) return a;
-  if (isArray(a)) a = a.join(' ');
-  if (isArray(b)) b = b.join(' ');
-  return a + ' ' + b;
-}
-
-function packageStyles(options) {
-  var styles = {};
-  if (options && (options.to || options.from)) {
-    styles.to = options.to;
-    styles.from = options.from;
-  }
-  return styles;
-}
-
-function pendClasses(classes, fix, isPrefix) {
-  var className = '';
-  classes = isArray(classes)
-      ? classes
-      : classes && isString(classes) && classes.length
-          ? classes.split(/\s+/)
-          : [];
-  forEach(classes, function(klass, i) {
-    if (klass && klass.length > 0) {
-      className += (i > 0) ? ' ' : '';
-      className += isPrefix ? fix + klass
-                            : klass + fix;
+       if (isUndefined(window.ontransitionend) && isDefined(window.onwebkittransitionend)) {
+        CSS_PREFIX = '-webkit-';
+        TRANSITION_PROP = 'WebkitTransition';
+        TRANSITIONEND_EVENT = 'webkitTransitionEnd transitionend';
+    } else {
+        TRANSITION_PROP = 'transition';
+        TRANSITIONEND_EVENT = 'transitionend';
     }
-  });
-  return className;
-}
 
-function removeFromArray(arr, val) {
-  var index = arr.indexOf(val);
-  if (val >= 0) {
-    arr.splice(index, 1);
-  }
-}
+     if (isUndefined(window.onanimationend) && isDefined(window.onwebkitanimationend)) {
+        CSS_PREFIX = '-webkit-';
+        ANIMATION_PROP = 'WebkitAnimation';
+        ANIMATIONEND_EVENT = 'webkitAnimationEnd animationend';
+    } else {
+        ANIMATION_PROP = 'animation';
+        ANIMATIONEND_EVENT = 'animationend';
+    }
 
-function stripCommentsFromElement(element) {
-  if (element instanceof jqLite) {
-    switch (element.length) {
-      case 0:
-        return [];
-        break;
+     var DURATION_KEY = 'Duration';
+     var PROPERTY_KEY = 'Property';
+     var DELAY_KEY = 'Delay';
+     var TIMING_KEY = 'TimingFunction';
+     var ANIMATION_ITERATION_COUNT_KEY = 'IterationCount';
+     var ANIMATION_PLAYSTATE_KEY = 'PlayState';
+     var SAFE_FAST_FORWARD_DURATION_VALUE = 9999;
 
-      case 1:
+     var ANIMATION_DELAY_PROP = ANIMATION_PROP + DELAY_KEY;
+     var ANIMATION_DURATION_PROP = ANIMATION_PROP + DURATION_KEY;
+     var TRANSITION_DELAY_PROP = TRANSITION_PROP + DELAY_KEY;
+     var TRANSITION_DURATION_PROP = TRANSITION_PROP + DURATION_KEY;
+
+     var isPromiseLike = function (p) {
+            return p && p.then ? true : false;
+        };
+
+     var ngMinErr = angular.$$minErr('ng');
+     function assertArg(arg, name, reason) {
+        if (!arg) {
+            throw ngMinErr('areq', "Argument '{0}' is {1}", (name || '?'), (reason || "required"));
+        }
+        return arg;
+    }
+
+     function mergeClasses(a, b) {
+        if (!a && !b) return '';
+        if (!a) return b;
+        if (!b) return a;
+        if (isArray(a))
+	    a = a.join(' ');
+        if (isArray(b))
+	    b = b.join(' ');
+        return a + ' ' + b;
+    }
+
+    function packageStyles(options) {
+        var styles = {};
+        if (options && (options.to || options.from)) {
+            styles.to = options.to;
+            styles.from = options.from;
+        }
+        return styles;
+    }
+
+    function pendClasses(classes, fix, isPrefix) {
+        var className = '';
+        classes = isArray(classes)
+            ? classes
+            : classes && isString(classes) && classes.length
+            ? classes.split(/\s+/)
+            : [];
+        forEach(classes, function (klass, i) {
+            if (klass && klass.length > 0) {
+                className += (i > 0) ? ' ' : '';
+                className += isPrefix ? fix + klass
+                            : klass + fix;
+            }
+        });
+        return className;
+    }
+
+    function removeFromArray(arr, val) {
+        var index = arr.indexOf(val);
+        if (val >= 0) {
+            arr.splice(index, 1);
+        }
+    }
+
+    function stripCommentsFromElement(element) {
+        if (element instanceof jqLite) {
+            switch (element.length) {
+            case 0:
+                return [];
+                break;
+
+            case 1:
         // there is no point of stripping anything if the element
         // is the only element within the jqLite wrapper.
         // (it's important that we retain the element instance.)
-        if (element[0].nodeType === ELEMENT_NODE) {
-          return element;
+                if (element[0].nodeType === ELEMENT_NODE) {
+                    return element;
+                }
+                break;
+
+            default:
+                return jqLite(extractElementNode(element));
+                break;
+            }
         }
-        break;
 
-      default:
-        return jqLite(extractElementNode(element));
-        break;
+        if (element.nodeType === ELEMENT_NODE) {
+            return jqLite(element);
+        }
     }
-  }
 
-  if (element.nodeType === ELEMENT_NODE) {
-    return jqLite(element);
-  }
-}
-
-function extractElementNode(element) {
-  if (!element[0]) return element;
-  for (var i = 0; i < element.length; i++) {
+    function extractElementNode(element) {
+        if (!element[0])
+			    return element;
+        for (var i = 0; i < element.length; i++) {
     var elm = element[i];
     if (elm.nodeType == ELEMENT_NODE) {
       return elm;

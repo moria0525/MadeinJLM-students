@@ -60,7 +60,7 @@ jlm.run(function ($rootScope) {
 		'skils': {},
 		'degrees': {},
 		'languages': {},
-		'colleges': {1: 'Azrieli - Jerusalem College of Engineering', 2: 'Ariel University', 3: 'ORT Jerusalem', 4: 'Schechter Institute', 5: 'Jerusalem College of Technology', 6: 'Hebrew University of Jerusalem', 7: 'Betzalel', 8: 'College Ephrath', 9: 'Shalem College', 10: 'Al-Quds University', 11: 'College of Management'}
+		'colleges': {}
 	};
 });
 

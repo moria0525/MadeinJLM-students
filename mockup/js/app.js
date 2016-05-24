@@ -5,21 +5,21 @@ jlm.config(function ($routeProvider, $locationProvider) {
     "use strict";
     $routeProvider.
         when('/', {
-            templateUrl: 'view/home.html',
+            templateUrl: 'view/home.html'
             // controller: 'UserNotConnected',
         }).
         when('/not-us', {
-            templateUrl: 'view/not-us.html',
+            templateUrl: 'view/not-us.html'
             // controller: 'UserNotConnected',
         }).
 
         when('/login', {
             templateUrl: 'view/login.html',
-            controller: 'UserNotConnected',
+            controller: 'UserNotConnected'
         }).
         when('/activated', {
             templateUrl: 'view/activated.html',
-            controller: 'UserNotConnected',
+            controller: 'UserNotConnected'
         }).
         when('/reset-password', {
             templateUrl: 'view/reset-password.html',
@@ -30,15 +30,15 @@ jlm.config(function ($routeProvider, $locationProvider) {
             controller: 'UserNotConnected'
         }).
         when('/termOfUse', {
-        templateUrl: 'view/termOfUse.html'
+            templateUrl: 'view/termOfUse.html'
         }).
         when('/profile', {
             templateUrl: 'view/profile.html',
-            controller: 'UserConnected',
+            controller: 'UserConnected'
         }).
         when('/change-password', {
             templateUrl: 'view/change-password.html',
-            controller: 'UserConnected',
+            controller: 'UserConnected'
         }).
         otherwise({
             redirectTo: '/'
@@ -49,18 +49,19 @@ jlm.config(function ($routeProvider, $locationProvider) {
 
 /* --- rootScope --- */
 jlm.run(function ($rootScope) {
+	'use strict';
 	$rootScope.studentData = false;
 	$rootScope.options = {
-			'basic_education_years': {1: 'less then 12 years', 2: '12 years', 3: '13 years', 4: '14 years'},
-			'skils_years': {1: 'less then 1 year',2: '1 year',3: '2 years',4: '3 years',5: 'more then 3 years'},
-			'semesters_left': {1: '1 semester',2: '2 semesters',3: '3 semesters',4: '4 semesters',5: '5 semesters',6: '6 semesters',7: '7 semesters',8: 'more than 7 semesters'},
-			'job_percent': {1: 'helf',2: 'full job',3: 'hours',4: 'freelancer'},
-			'possible': {1: 'possible',2: 'not possible'},
-			'skils': {},
-			'degrees': {},
-			'languages': {},
-			'colleges': {1: 'Azrieli - Jerusalem College of Engineering',2: 'Ariel University',3:'ORT Jerusalem',4:'Schechter Institute',5:'Jerusalem College of Technology',6:'Hebrew University of Jerusalem',7:'Betzalel',8:'College Ephrath',9:'Shalem College',10:'Al-Quds University',11:'College of Management'},
-		};
+	    'basic_education_years': {1: 'less then 12 years', 2: '12 years', 3: '13 years', 4: '14 years'},
+		'skils_years': {1: 'less then 1 year', 2: '1 year', 3: '2 years', 4: '3 years', 5: 'more then 3 years'},
+		'semesters_left': {1: '1 semester', 2: '2 semesters', 3: '3 semesters', 4: '4 semesters', 5: '5 semesters', 6: '6 semesters', 7: '7 semesters', 8: 'more than 7 semesters'},
+		'job_percent': {1: 'helf', 2: 'full job', 3: 'hours', 4: 'freelancer'},
+		'possible': {1: 'possible', 2: 'not possible'},
+		'skils': {},
+		'degrees': {},
+		'languages': {},
+		'colleges': {1: 'Azrieli - Jerusalem College of Engineering', 2: 'Ariel University', 3: 'ORT Jerusalem', 4: 'Schechter Institute', 5: 'Jerusalem College of Technology', 6: 'Hebrew University of Jerusalem', 7: 'Betzalel', 8: 'College Ephrath', 9: 'Shalem College', 10: 'Al-Quds University', 11: 'College of Management'}
+	};
 });
 
 /* --- controlers --- */
@@ -104,10 +105,10 @@ jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $locat
         });
     };
     $scope.newPassword = function () {
-		if($scope.data.newPassword.password !== $scope.data.newPassword.password2){
+		if ($scope.data.newPassword.password !== $scope.data.newPassword.password2) {
 			$scope.alerts.newPassword = {type: 'danger', msg: 'Passwords does not match'};
 		} else {
-			student.newPassword($routeParams.hash,{Password: $scope.data.newPassword.password}).success(function (data) {
+			student.newPassword($routeParams.hash, {Password: $scope.data.newPassword.password}).success(function (data) {
 				if (data.status === 'error') {
 					$scope.alerts.newPassword = {type: 'danger', msg: data.errors.join('<br>')};
 				} else {
@@ -129,9 +130,9 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
         }
     });
     general.getOptions().success(function (data) {
-		angular.forEach(data, function(value, key) {
+		angular.forEach(data, function (value, key) {
 			if ($rootScope.options[key])
-				$rootScope.options[key] = value;
+		    $rootScope.options[key] = value;
 		});
     });
     $scope.logOut = function () {
@@ -141,7 +142,7 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
             }
         });
     };
-   $scope.changePassword = function () {
+    $scope.changePassword = function () {
         student.changePassword($scope.data.changePassword).success(function (data) {
             if (data.status === 'error') {
                 $scope.alerts.changePassword = {type: 'danger', msg: data.errors.join('<br>')};
@@ -152,7 +153,7 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
     };
      
 });
-jlm.controller('generalController', function ($scope, $rootScope,student) {
+jlm.controller('generalController', function ($scope, $rootScope, student) {
     "use strict";
     $scope.data = {};
     $scope.alerts = {};
@@ -162,16 +163,16 @@ jlm.controller('generalController', function ($scope, $rootScope,student) {
 });
 
 jlm.controller('DropdownCtrl', function ($scope, $log) {
-
+    'use strict';
 	$scope.status = {
 		isopen: false
 	};
 
-	$scope.toggled = function(open) {
+	$scope.toggled = function (open) {
 		$log.log('Dropdown is now: ', open);
 	};
 
-	$scope.toggleDropdown = function($event) {
+	$scope.toggleDropdown = function ($event) {
 		$event.preventDefault();
 		$event.stopPropagation();
 		$scope.status.isopen = !$scope.status.isopen;
@@ -181,7 +182,8 @@ jlm.controller('DropdownCtrl', function ($scope, $log) {
 });
 
 /* --- profile --- */
-jlm.directive('profilePicture', function() {
+jlm.directive('profilePicture', function () {
+	'use strict';
 	return {
 		restrict: 'E',
 		controller: 'profilePictureCtrl',
@@ -189,7 +191,7 @@ jlm.directive('profilePicture', function() {
 	};
 });
 jlm.controller('profilePictureCtrl', function ($scope, $uibModal, $log) {
-	
+	'use strict';
 	$scope.openChangeProfileImage = function () {
 		var modalInstance = $uibModal.open({
 			animation: true,
@@ -208,29 +210,29 @@ jlm.controller('profilePictureCtrl', function ($scope, $uibModal, $log) {
 		
 		
 });
-jlm.controller('ModalProfileCtrl', ['$scope', '$uibModalInstance', '$log', 'student', '$rootScope', function($scope, $uibModalInstance, $log, student, $rootScope){
-
+jlm.controller('ModalProfileCtrl', ['$scope', '$uibModalInstance', '$log', 'student', '$rootScope', function ($scope, $uibModalInstance, $log, student, $rootScope) {
+	'use strict';
 	$scope.cancel = function () {
 		$uibModalInstance.dismiss('cancel');
 	};
-	$scope.imageDataURI='';
-	$scope.resImageDataURI='';
-	$scope.onChange=function($dataURI) {
+	$scope.imageDataURI = '';
+	$scope.resImageDataURI = '';
+	$scope.onChange = function ($dataURI) {
 		// console.log('onChange fired');
 	};
-	$scope.onLoadBegin=function() {
+	$scope.onLoadBegin = function () {
 		// console.log('onLoadBegin fired');
 	};
-	$scope.onLoadDone=function() {
+	$scope.onLoadDone = function () {
 		// console.log('onLoadDone fired');
 	};
-	$scope.onLoadError=function() {
+	$scope.onLoadError = function () {
 		// console.log('onLoadError fired');
 	};
-	$scope.$watch('resImageDataURI',function(){
+	$scope.$watch('resImageDataURI', function () {
 		// console.log('Res image', $scope.resImageDataURI);
 	});
-	$scope.save = function(){
+	$scope.save = function () {
 		
         student.uploadProfile($scope.resImageDataURI).success(function (data) {
 			if (data.status === 'error') {
@@ -246,13 +248,14 @@ jlm.controller('ModalProfileCtrl', ['$scope', '$uibModalInstance', '$log', 'stud
 
 }]);
 
-jlm.filter('nl2br', function($sce){
-    return function(msg,is_xhtml) { 
+jlm.filter('nl2br', function ($sce) {
+    'use strict';
+	return function (msg, is_xhtml) {
         var is_xhtml = is_xhtml || true;
         var breakTag = (is_xhtml) ? '<br />' : '<br>';
-        var msg = (msg + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1'+ breakTag +'$2');
+        var msg = (msg + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
         return $sce.trustAsHtml(msg);
-    }
+    };
 });
 
 /* --- services --- */
@@ -304,17 +307,17 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
             return $http({
                 method  : 'POST',
                 url     : 'API/Student/resetPassword',
-                data    : $httpParamSerializerJQLike({'Email':email}),  // pass in data as strings
+                data    : $httpParamSerializerJQLike({'Email': email}),  // pass in data as strings
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (data) {
                 return data;
             }).error(function () {return {'status': 'error', 'errors': 'Please try again later..'}; });
         },
-        newPassword: function (hash,newPass) {
+        newPassword: function (hash, newPass) {
 			return $http({
                 method  : 'POST',
                 url     : 'API/Student/newPassword',
-                data    : $httpParamSerializerJQLike({'hash':hash,'newPass':newPass}),  // pass in data as strings
+                data    : $httpParamSerializerJQLike({'hash': hash, 'newPass': newPass}),  // pass in data as strings
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (data) {
                 return data;
@@ -326,9 +329,9 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
                 url     : 'API/Student/changePassword',
                 data    : $httpParamSerializerJQLike(data),
                 headers : { 'Content-Type':  'application/x-www-form-urlencoded' }
-            }).success(function (data){
+            }).success(function (data) {
                 return data;
-            }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}; });      
+            }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}; });
         },
         update: function (data) {
             return $http({
@@ -336,9 +339,9 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
                 url     : 'API/Student/update',
                 data    : $httpParamSerializerJQLike(data),
                 headers : { 'Content-Type':  'application/x-www-form-urlencoded' }
-            }).success(function (data){
+            }).success(function (data) {
                 return data;
-            }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}; });      
+            }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}; });
         },
         changeStatus: function (data) {
             return $http({
@@ -346,19 +349,19 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
                 url     : 'API/Student/changeStatus',
                 data    : $httpParamSerializerJQLike(data),
                 headers : { 'Content-Type':  'application/x-www-form-urlencoded' }
-            }).success(function (data){
+            }).success(function (data) {
                 return data;
-            }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}; });      
+            }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}; });
         },
         uploadProfile: function (picture) {
 			var fd = new FormData();
 			fd.append('picture', picture);
 			return $http.post('API/Student/uploadProfile', fd, {
 				transformRequest: angular.identity,
-				headers: {'Content-Type': undefined,'Process-Data': false}
-			}).success(function(data){
+				headers: {'Content-Type': undefined, 'Process-Data': false}
+			}).success(function (data) {
 				return data;
-			}).error(function(){return {'status': 'error', 'errors': 'Please try again later.'}; });
+			}).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}; });
         }
     };
 }]);

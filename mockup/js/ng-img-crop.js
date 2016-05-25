@@ -1,4 +1,4 @@
-﻿/*!
+/*!
  * ngImgCrop v0.3.2
  * https://github.com/alexk111/ngImgCrop
  *
@@ -7,75 +7,75 @@
  *
  * Generated at Wednesday, December 3rd, 2014, 3:54:12 PM
  */
-(function() {
-'use strict';
+(function () {
+    'use strict';
 
-var crop = angular.module('ngImgCrop', []);
+    var crop = angular.module('ngImgCrop', []);
 
-crop.factory('cropAreaCircle', ['cropArea', function(CropArea) {
-  var CropAreaCircle = function() {
-    CropArea.apply(this, arguments);
+    crop.factory('cropAreaCircle', ['cropArea', function (CropArea) {
+        var CropAreaCircle = function () {
+                CropArea.apply(this, arguments);
 
-    this._boxResizeBaseSize = 20;
-    this._boxResizeNormalRatio = 0.9;
-    this._boxResizeHoverRatio = 1.2;
-    this._iconMoveNormalRatio = 0.9;
-    this._iconMoveHoverRatio = 1.2;
+                this._boxResizeBaseSize = 20;
+                this._boxResizeNormalRatio = 0.9;
+                this._boxResizeHoverRatio = 1.2;
+                this._iconMoveNormalRatio = 0.9;
+                this._iconMoveHoverRatio = 1.2;
 
-    this._boxResizeNormalSize = this._boxResizeBaseSize*this._boxResizeNormalRatio;
-    this._boxResizeHoverSize = this._boxResizeBaseSize*this._boxResizeHoverRatio;
+                this._boxResizeNormalSize = this._boxResizeBaseSize * this._boxResizeNormalRatio;
+                this._boxResizeHoverSize = this._boxResizeBaseSize * this._boxResizeHoverRatio;
 
-    this._posDragStartX=0;
-    this._posDragStartY=0;
-    this._posResizeStartX=0;
-    this._posResizeStartY=0;
-    this._posResizeStartSize=0;
+                this._posDragStartX = 0;
+                this._posDragStartY = 0;
+                this._posResizeStartX = 0;
+                this._posResizeStartY = 0;
+                this._posResizeStartSize = 0;
 
-    this._boxResizeIsHover = false;
-    this._areaIsHover = false;
-    this._boxResizeIsDragging = false;
-    this._areaIsDragging = false;
-  };
+                this._boxResizeIsHover = false;
+                this._areaIsHover = false;
+                this._boxResizeIsDragging = false;
+                this._areaIsDragging = false;
+            };
 
-  CropAreaCircle.prototype = new CropArea();
+        CropAreaCircle.prototype = new CropArea();
 
-  CropAreaCircle.prototype._calcCirclePerimeterCoords=function(angleDegrees) {
-    var hSize=this._size/2;
-    var angleRadians=angleDegrees * (Math.PI / 180),
-        circlePerimeterX=this._x + hSize * Math.cos(angleRadians),
-        circlePerimeterY=this._y + hSize * Math.sin(angleRadians);
-    return [circlePerimeterX, circlePerimeterY];
-  };
+        CropAreaCircle.prototype._calcCirclePerimeterCoords = function (angleDegrees) {
+            var hSize = this._size / 2;
+            var angleRadians = angleDegrees * (Math.PI / 180),
+                circlePerimeterX = this._x + hSize * Math.cos(angleRadians),
+                circlePerimeterY = this._y + hSize * Math.sin(angleRadians);
+            return [circlePerimeterX, circlePerimeterY];
+        };
 
-  CropAreaCircle.prototype._calcResizeIconCenterCoords=function() {
-    return this._calcCirclePerimeterCoords(-45);
-  };
+        CropAreaCircle.prototype._calcResizeIconCenterCoords = function () {
+            return this._calcCirclePerimeterCoords(-45);
+        };
 
-  CropAreaCircle.prototype._isCoordWithinArea=function(coord) {
-    return Math.sqrt((coord[0]-this._x)*(coord[0]-this._x) + (coord[1]-this._y)*(coord[1]-this._y)) < this._size/2;
-  };
-  CropAreaCircle.prototype._isCoordWithinBoxResize=function(coord) {
-    var resizeIconCenterCoords=this._calcResizeIconCenterCoords();
-    var hSize=this._boxResizeHoverSize/2;
-    return(coord[0] > resizeIconCenterCoords[0] - hSize && coord[0] < resizeIconCenterCoords[0] + hSize &&
-           coord[1] > resizeIconCenterCoords[1] - hSize && coord[1] < resizeIconCenterCoords[1] + hSize);
-  };
+        CropAreaCircle.prototype._isCoordWithinArea = function (coord) {
+            return Math.sqrt((coord[0] - this._x) * (coord[0] - this._x) + (coord[1] - this._y) *  (coord[1] - this._y)) < this._size / 2;
+        };
+        CropAreaCircle.prototype._isCoordWithinBoxResize = function (coord) {
+            var resizeIconCenterCoords = this._calcResizeIconCenterCoords();
+            var hSize = this._boxResizeHoverSize / 2;
+            return (coord[0] > resizeIconCenterCoords[0] - hSize && coord[0] < resizeIconCenterCoords[0] + hSize &&
+                     coord[1] > resizeIconCenterCoords[1] - hSize && coord[1] < resizeIconCenterCoords[1] + hSize);
+        };
 
-  CropAreaCircle.prototype._drawArea=function(ctx,centerCoords,size){
-    ctx.arc(centerCoords[0],centerCoords[1],size/2,0,2*Math.PI);
-  };
+        CropAreaCircle.prototype._drawArea = function (ctx, centerCoords, size) {
+            ctx.arc(centerCoords[0], centerCoords[1], size / 2, 0, 2 * Math.PI);
+        };
 
-  CropAreaCircle.prototype.draw=function() {
-    CropArea.prototype.draw.apply(this, arguments);
+        CropAreaCircle.prototype.draw = function () {
+            CropArea.prototype.draw.apply(this, arguments);
 
     // draw move icon
-    this._cropCanvas.drawIconMove([this._x,this._y], this._areaIsHover?this._iconMoveHoverRatio:this._iconMoveNormalRatio);
+            this._cropCanvas.drawIconMove([this._x, this._y], this._areaIsHover ?this._iconMoveHoverRatio : this._iconMoveNormalRatio);
 
     // draw resize cubes
-    this._cropCanvas.drawIconResizeBoxNESW(this._calcResizeIconCenterCoords(), this._boxResizeBaseSize, this._boxResizeIsHover?this._boxResizeHoverRatio:this._boxResizeNormalRatio);
+            this._cropCanvas.drawIconResizeBoxNESW(this._calcResizeIconCenterCoords(), this._boxResizeBaseSize, this._boxResizeIsHover?this._boxResizeHoverRatio:this._boxResizeNormalRatio);
   };
 
-  CropAreaCircle.prototype.processMouseMove=function(mouseCurX, mouseCurY) {
+  CropAreaCircle.prototype.processMouseMove = function (mouseCurX, mouseCurY) {
     var cursor='default';
     var res=false;
 

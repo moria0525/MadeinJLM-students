@@ -11,22 +11,22 @@
 				<div class="row">
 					<ul class="profileEditFormat">
 						<li profile-item="basic_education_years" directive-name="input-select" title="'Basic education years'" value="studentData.basic_education_years" options="options.basic_education_years" multy="false" save-function="update" view-template="options[value]"></li>
-						<li profile-item="basic_education_subject" directive-name="input-text" title="'Basic education subject'" value="studentData.basic_education_subject" multy="false" save-function="update" maxlength="250"></li>
+						<li profile-item="basic_education_subject" directive-name="input-text" title="'Education'" value="studentData.basic_education_subject" multy="false" save-function="update" maxlength="250"></li>
 						
 						<li profile-item="college_id" directive-name="input-select" title="'College'" value="studentData.college_id" options="options.colleges" multy="false" save-function="update" view-template="options[value]"></li>
 						<li profile-item="degree_id" directive-name="input-select" title="'Degree'" value="studentData.degree_id" options="options.degrees" multy="false" save-function="update" view-template="options[value]"></li>
 						<li profile-item="semesters_left" directive-name="input-select" title="'Semesters left'" value="studentData.semesters_left" options="options.semesters_left" multy="false" save-function="update" view-template="options[value]"></li>
 						
 						<li profile-item="job_percent" directive-name="input-select" title="'Position wanted'" value="studentData.job_percent" options="options.job_percent" multy="false" save-function="update" view-template="options[value]"></li>
-						<li profile-item="job_morning" directive-name="input-select" title="'job in morning'" value="studentData.job_morning" options="options.possible" multy="false" save-function="update" view-template="options[value]"></li>
-						<li profile-item="job_night" directive-name="input-select" title="'job in night'" value="studentData.job_night" options="options.possible" multy="false" save-function="update" view-template="options[value]"></li>
-						<li profile-item="job_weekend" directive-name="input-select" title="'job in weekend'" value="studentData.job_weekend" options="options.possible" multy="false" save-function="update" view-template="options[value]"></li>
+						<li profile-item="job_morning" directive-name="input-select" title="'Mornings'" value="studentData.job_morning" options="options.possible" multy="false" save-function="update" view-template="options[value]"></li>
+						<li profile-item="job_night" directive-name="input-select" title="'Nights'" value="studentData.job_night" options="options.possible" multy="false" save-function="update" view-template="options[value]"></li>
+						<li profile-item="job_weekend" directive-name="input-select" title="'Weekends'" value="studentData.job_weekend" options="options.possible" multy="false" save-function="update" view-template="options[value]"></li>
 						<li profile-item="current_work" directive-name="input-text" title="'Current work'" value="studentData.current_work" multy="false" save-function="update" maxlength="250"></li>
 						
 						<li profile-item="summary" directive-name="input-textarea" title="'Summary'" value="studentData.summary" multy="false" save-function="update" maxlength="1500" breaks="true"></li>
 						<li profile-item="experience" directive-name="input-textarea" title="'Experience'" value="studentData.experience" multy="false" save-function="update" maxlength="1500" breaks="true"></li>
-						<li profile-item="linkedin" directive-name="input-text" title="'linkedin link'" value="studentData.linkedin" multy="false" save-function="update" maxlength="250"></li>
-						<li profile-item="github" directive-name="input-text" title="'github link'" value="studentData.github" multy="false" save-function="update" maxlength="250"></li>
+						<li profile-item="linkedin" directive-name="input-text" title="'Linkedin link'" value="studentData.linkedin" multy="false" save-function="update" maxlength="250"></li>
+						<li profile-item="github" directive-name="input-text" title="'Github link'" value="studentData.github" multy="false" save-function="update" maxlength="250"></li>
 						
 						
 						<li profile-item="skils" directive-name="input-skill" title="'Skils'" value="studentData.skils" default-value="{years:'0'}" options="options" multy="true" save-function="updateSkill" view-template="value.name + (options.skils_years[value.years]? ': ' +options.skils_years[value.years] : '')"></li>

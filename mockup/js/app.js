@@ -52,11 +52,11 @@ jlm.run(function ($rootScope) {
 	'use strict';
 	$rootScope.studentData = false;
 	$rootScope.options = {
-	    'basic_education_years': {1: 'less then 12 years', 2: '12 years', 3: '13 years', 4: '14 years'},
+	    'basic_education_years': {1: 'Less then 12 years', 2: '12 years', 3: '13 years', 4: '14 years'},
 		'skils_years': {1: 'less then 1 year', 2: '1 year', 3: '2 years', 4: '3 years', 5: 'more then 3 years'},
 		'semesters_left': {1: '1 semester', 2: '2 semesters', 3: '3 semesters', 4: '4 semesters', 5: '5 semesters', 6: '6 semesters', 7: '7 semesters', 8: 'more than 7 semesters'},
-		'job_percent': {1: 'helf', 2: 'full job', 3: 'hours', 4: 'freelancer'},
-		'possible': {1: 'possible', 2: 'not possible'},
+		'job_percent': {1: 'Half', 2: 'Full job', 3: 'Hours', 4: 'Freelancer'},
+		'possible': {1: 'Possible', 2: 'Not possible'},
 		'skils': {},
 		'degrees': {},
 		'languages': {},

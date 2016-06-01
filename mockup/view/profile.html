@@ -10,6 +10,10 @@
 			<div class="col-md-9">
 				<div class="row">
 					<ul class="profileEditFormat">
+                        <!-- need to fix the place of skill without the div !!! Barak dont be Angry! we will fix this!   -->
+                        <div class="col-md-10">
+                        <li profile-item="skils" directive-name="input-skill" title="'Skils'" value="studentData.skils" default-value="{years:'0'}" options="options" multy="true" save-function="updateSkill" view-template="value.name + (options.skils_years[value.years]? ': ' +options.skils_years[value.years] : '')"></li>
+                        </div>
 						<!--
                         <li profile-item="basic_education_years" directive-name="input-select" title="'Basic education years'" value="studentData.basic_education_years" options="options.basic_education_years" multy="false" save-function="update" view-template="options[value]"></li> -->
 						<li profile-item="basic_education_subject" directive-name="input-text" title="'Education'" value="studentData.basic_education_subject" multy="false" save-function="update" maxlength="250"></li>
@@ -30,7 +34,7 @@
 						<li profile-item="github" directive-name="input-text" title="'Github link'" value="studentData.github" multy="false" save-function="update" maxlength="150"></li>
 						
 						
-						<li profile-item="skils" directive-name="input-skill" title="'Skils'" value="studentData.skils" default-value="{years:'0'}" options="options" multy="true" save-function="updateSkill" view-template="value.name + (options.skils_years[value.years]? ': ' +options.skils_years[value.years] : '')"></li>
+						
 					</ul>
 				</div>
 			</div>

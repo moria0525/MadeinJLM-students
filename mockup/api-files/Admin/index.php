@@ -29,7 +29,6 @@ class API_Admin extends API {
         
         //not required, just an example usage of the built-in error reporting system
         if($admin->isSigned()){
-            return true;
             $return_arr = ['status' => "success"];
         }else{
             //Display Errors
@@ -37,7 +36,6 @@ class API_Admin extends API {
             foreach($admin->log->getErrors() as $err){
                 $errors[] = $err;
             }
-            return false;
             $return_arr =  ['status' => "error",'errors' => $errors];
         }
         

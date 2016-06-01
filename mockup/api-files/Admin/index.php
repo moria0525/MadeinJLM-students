@@ -5,7 +5,7 @@ class API_Admin extends API {
         $admin = new Admin();
         return $admin;
     }
-    public function adminlogin() {
+    public function login() {
         
         if (isset($_POST['Email']))
             $username = $_POST['Email'];       
@@ -14,6 +14,7 @@ class API_Admin extends API {
         if (isset($_POST['Password']))
             $password = $_POST['Password'];
         else $password = '';
+       
         
          if (isset($_POST['auto']))
             $auto = $_POST['auto'];  //To remember user with a cookie for autologin

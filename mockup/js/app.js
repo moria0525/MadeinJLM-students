@@ -146,10 +146,14 @@ jlm.controller('AdminNotConnected', function ($scope, $http, $routeParams, $loca
 	'use strict';
 	
 	admin.init().success(function (data) {
+        
         $rootScope.adminData = data;
         if ($rootScope.adminData !== false) {
             $location.path("/admin-login");
         }
+        console.log($rootScope);
+        console.log("*******************");
+        console.log(data);
     });
 		
 	$scope.adminlogin = function () {
@@ -509,7 +513,7 @@ jlm.factory('admin', ['$http', '$httpParamSerializerJQLike', function ($http, $h
         adminlogin: function (data) {
             return $http({
                 method  : 'POST',
-                url     : 'API/Admin/Login',
+                url     : 'API/Admin/login',
                 data    : $httpParamSerializerJQLike(data),
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (data) {

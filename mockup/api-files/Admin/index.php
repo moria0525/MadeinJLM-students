@@ -7,7 +7,13 @@ class API_Admin extends API {
         return $admin;
     }
     public function Login() {
-
+        if (isset($_POST['Email']))
+            $username = $_POST['Email'];
+        else $username = '';
+        
+        if (isset($_POST['Password']))
+            $password = $_POST['Password'];
+        else $password = '';
         
         $username = $_POST['Username'];
         $password = $_POST['Password'];

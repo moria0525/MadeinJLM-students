@@ -68,6 +68,8 @@ h2, h3, h4 {
 	background: #1c1c1c;
 	color: #FFF;
 }
+.btn-danger {background: #cf4440;}
+.btn-primary {background: #567ec6;}
 .btn-success {background: #54AE54;}
 .btn-warning {background: #ED9C2A;}
 .btn-default {background: #ECECEC;}

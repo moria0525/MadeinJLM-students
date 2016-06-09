@@ -12,6 +12,10 @@ jlm.config(function ($routeProvider, $locationProvider) {
             templateUrl: 'view/not-us.html'
             // controller: 'UserNotConnected',
         }).
+        when('/companies', {
+            templateUrl: 'view/companies.html'
+            // controller: 'UserNotConnected',
+        }).
 
         when('/login', {
             templateUrl: 'view/login.html',

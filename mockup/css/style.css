@@ -68,7 +68,11 @@ h2, h3, h4 {
 	background: #1c1c1c;
 	color: #FFF;
 }
- end general style 
+.btn-success {background: #54AE54;}
+.btn-warning {background: #ED9C2A;}
+.btn-default {background: #ECECEC;}
+
+/* end general style */
 
 .btn.btn-jlm-change {
     
@@ -374,6 +378,14 @@ img-crop canvas {
     padding: 0;
     list-style: none;
 }
+.profileEditFormat > li:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
 .profileItemLable {line-height: 46px;text-align: right;cursor: pointer;}
 .no-edit-zone {
 	padding-left: 11px;
@@ -402,3 +414,68 @@ img-crop canvas {
 }
 
 /* end profile style */
+
+/* skills */
+.view-skills span {
+    background: #567EC6;
+    color: #FFF;
+    padding: 5px 15px;
+    margin: 5px 5px 5px 0;
+    display: inline-block;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+}
+.view-skills span:hover {
+    background: #345B9F;
+}
+/* end skills */
+
+/* suggest */
+.ac-container {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  z-index: 999;
+}
+.ac-container .ac-menu {
+  border: 1px solid #ccc;
+  list-style: none;
+  padding: 0;
+  background-color: white;
+  box-shadow: 0 3px 7px 0px rgba(0, 0, 0, 0.15);
+  margin: 0;
+}
+.ac-container .ac-menu .ac-menu-item {
+  border-bottom: 1px dotted #ccc;
+  line-height: 35px;
+  margin: 0;
+}
+.ac-container .ac-menu .ac-menu-item:last-child {
+  border-bottom: 0;
+}
+.ac-container .ac-menu .ac-menu-item:hover {
+  background-color: #e0eaff;
+}
+.ac-container .ac-menu a {
+  padding-left: 5px;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+.ac-container .ac-menu .ac-state-focus {
+  outline: none;
+  background-color: #e0eaff;
+}
+.highlight {
+    font-weight: 900;
+    color: #ED9C2A;
+}
+/* end suggest */

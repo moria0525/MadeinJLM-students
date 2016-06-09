@@ -1,0 +1,21 @@
+        <div class="modal-header">
+            <h3 class="modal-title">{{editSkillData.key == -1? 'Add Skill' : 'Edit Skill'}}</h3>
+        </div>
+        <div class="modal-body">
+			<uib-alert ng-show="skillAlerts.msg != null" type="{{skillAlerts.type}}" close="skillAlerts = {}"><span ng-bind-html="skillAlerts.msg"></span></uib-alert>
+			<div class="form-group" mass-autocomplete>
+				<input type="text" ng-model="editSkillData.name" mass-autocomplete-item="autocomplete_options" class="form-control" placeholder="Skill">
+			</div>
+			<div class="form-group">
+				<select class="form-control" ng-model="editSkillData.years">
+					<option value="0" disabled>select from the list</option>
+					<option ng-repeat="(key,name) in options.skils_years" value="{{key}}">{{name}}</option>
+				</select>
+			</div>
+			<p ng-show="showChangeForce && editSkillData.years != 0 && editSkillData.name != ''" class="bg-warning" style="padding: 15px;">This skill not in our list. Do you want to add this skill <button ng-click="change(true)" class="btn btn-link" style="font-weight: bold;font-size: 1.2em;">Yes</button></p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="change()" ng-disabled="editSkillData.years == 0 || editSkillData.name == ''">{{editSkillData.key == -1? 'Add' : 'Change'}}</button>
+            <button class="btn btn-danger" type="button" ng-click="deleteSkill()" ng-if="editSkillData.key != -1">Delete</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>

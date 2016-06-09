@@ -206,6 +206,51 @@ class API_Student extends API {
     public function deleteTableInfo() {
 
     }
+    public function addSkill() {
+		$student = new Student();
+		if($student->isSigned()){
+			
+			if ($data = $student->addSkill($_POST)) {
+				$return_arr = ['status' => "success",'data' => $data];
+			} else {
+				$errors = array();
+				foreach($student->log->getErrors() as $err){
+					$errors[] = $err;
+				}
+				$return_arr =  ['status' => "error",'errors' => $errors];
+			}
+			
+        }else{
+			$errors = array('User not connected');
+            $return_arr =  ['status' => "error",'errors' => $errors];
+        }
+        return $return_arr;
+    }
+    public function deleteSkill() {
+		$student = new Student();
+		if (!isset($_POST['id'])) {
+			$errors = array('Error');
+            $return_arr =  ['status' => "error",'errors' => $errors];
+			return $return_arr;
+		}
+		if($student->isSigned()){
+			
+			if ($data = $student->deleteSkill($_POST['id'])) {
+				$return_arr = ['status' => "success"];
+			} else {
+				$errors = array();
+				foreach($student->log->getErrors() as $err){
+					$errors[] = $err;
+				}
+				$return_arr =  ['status' => "error",'errors' => $errors];
+			}
+			
+        }else{
+			$errors = array('User not connected');
+            $return_arr =  ['status' => "error",'errors' => $errors];
+        }
+        return $return_arr;
+    }
     public function uploadProfile() {
 		$student = new Student();
 		

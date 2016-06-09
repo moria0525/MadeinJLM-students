@@ -87,6 +87,7 @@ jlm.directive('profileItem', function () {
         scope: {
             field: "@profileItem",
             directiveName: "@",
+            directiveView: "@",
             value: "=",
             title: "=",
             options: "=",
@@ -101,28 +102,33 @@ jlm.directive('profileItem', function () {
 			var html = '';
 			html += '<label class="col-sm-4 profileItemLable" ng-click="showEditZone()" tooltip-placement="top-right" uib-tooltip="Edit">{{ title }}:</label>';
 			html += '<div class="col-sm-8">';
-			html += '<div class="no-edit-zone" ng-click="showEditZone()" ng-show="!editZoneShow" tooltip-placement="top-left" uib-tooltip="Edit">';
-            var viewT = 'value';
-            if (typeof attrs.viewTemplate !== 'undefined' && attrs.viewTemplate !== '') {
-                viewT = attrs.viewTemplate;
-            }
-            if (typeof attrs.breaks !== 'undefined' && attrs.breaks === 'true') {
-                viewT = '<ng-bind-html ng-bind-html="' + viewT + ' | nl2br"></ng-bind-html>';
-            } else { viewT = '{{' + viewT + '}}';
-                   }
-            if (attrs.multy === 'true') {
-                html += '<div ng-repeat="value in value">' + viewT + '{{$last ? \'\' : \', \'}}</div>';
-            } else {
-                html += '<div>' + viewT + '</div>';
-            }
-			html += '</div>';
-			html += '<div class="edit-zone" ng-show="editZoneShow">';
-            if (attrs.multy === 'true') {
-                html += '<div><div ng-repeat="(key,value) in value"><div ' + attrs.directiveName + '="value"></div></div><button type="button" class="btn btn-primary" ng-click="add();">Add</button> <button type="button" class="btn btn-default" ng-click="editZoneClose();">Cancel</button></div>';
-            } else {
-                html += '<div ' + attrs.directiveName + '="value"></div>';
-            }
-			html += '</div>';
+				if (typeof attrs.directiveView !== 'undefined' && attrs.directiveView == 'true') {
+					html += '<div ' + attrs.directiveName + '="value"></div>';
+				} else {
+					html += '<div class="no-edit-zone" ng-click="showEditZone()" ng-show="!editZoneShow" tooltip-placement="top-left" uib-tooltip="Edit">';
+						var viewT = 'value';
+						if (typeof attrs.viewTemplate !== 'undefined' && attrs.viewTemplate !== '') {
+							viewT = attrs.viewTemplate;
+						}
+						if (typeof attrs.breaks !== 'undefined' && attrs.breaks === 'true') {
+							viewT = '<ng-bind-html ng-bind-html="' + viewT + ' | nl2br"></ng-bind-html>';
+						} else {
+							viewT = '{{' + viewT + '}}';
+						}
+						if (attrs.multy === 'true') {
+							html += '<div ng-repeat="value in value">' + viewT + '{{$last ? \'\' : \', \'}}</div>';
+						} else {
+							html += '<div>' + viewT + '</div>';
+						}
+					html += '</div>';
+					html += '<div class="edit-zone" ng-show="editZoneShow">';
+						if (attrs.multy === 'true') {
+							html += '<div><div ng-repeat="(key,value) in value"><div ' + attrs.directiveName + '="value"></div></div><div style="margin-top: 5px;"><button type="button" class="btn btn-primary" ng-click="add();">Add</button> <button type="button" class="btn btn-default" ng-click="editZoneClose();">Cancel</button></div></div>';
+						} else {
+							html += '<div ' + attrs.directiveName + '="value"></div>';
+						}
+					html += '</div>';
+				}
 			html += '</div>';
 			return html;
 		},
@@ -133,16 +139,14 @@ jlm.directive('profileItem', function () {
 				$scope.value.splice(key, 1);
 			};
 			$scope.add = function () {
-				console.log('add new');
 				if (typeof $scope.defaultValue !== 'undefined' && $scope.defaultValue !== '') {
 					$scope.value.push($scope.defaultValue);
                 } else {
                     $scope.value.push({});
                 }
-				console.log($scope.value);
 				return false;
 			};
-			
+			$scope.editZoneShow = false;
 			$scope.showEditZone = function () {
 				$scope.editZoneShow = true;
 			};
@@ -156,7 +160,6 @@ jlm.directive('profileItem', function () {
 				
 				if ($scope.multy) {
 					sendData['key'] = key;
-					console.log(sendData);
 					/*
 					student[$scope.saveFunction](sendData).success(function (data){
 						console.log(data);
@@ -169,7 +172,6 @@ jlm.directive('profileItem', function () {
 					*/
 				} else {
 					student[$scope.saveFunction](sendData).success(function (data) {
-						console.log(data);
 						if (data.status === 'success') {
 							$scope.value = value;
 							$scope.editZoneClose();
@@ -258,49 +260,129 @@ jlm.directive('inputSkill', function () {
 	return {
         restrict: 'A',
 		scope: false,
-		template: '<form class="itemInItem row">' +
-						'<div class="form-group col-md-6">' +
-							// '<label>enter skill</label>' +
-							'<input type="text" class="form-control" placeholder="Skill" ng-model="editValue.name">' +
-						'</div>' +
-						'<div class="form-group col-md-6">' +
-							// '<label>enter years</label>' +
-							'<select class="form-control" ng-model="editValue.years"><option value="0" disabled>select years</option><option ng-repeat="(key,name) in options.skils_years" value="{{key}}">{{name}}</option></select>' +
-						'</div>' +
-						'<div class="text-right col-md-12"><button type="submit" class="btn btn-danger" ng-click="remove()">Remove</button> <button type="submit" ng-disabled="value.name == editValue.name && value.years == editValue.years" ng-click="reset()" class="btn btn-warning">Reset</button> <button type="submit" ng-disabled="value.name == editValue.name && value.years == editValue.years" ng-click="save()" class="btn btn-success">Save</button></div>' +
-					'</form>',
-		controller: function ($scope, $element) {
-			
-			$scope.reset = function () {
-				if (typeof $scope.value.name !== 'undefined') {
-					$scope.editValue.name = $scope.value.name;
-                } else {
-                    $scope.editValue.name = '';
-                }
-				if (typeof $scope.value.years !== 'undefined') {
-					$scope.editValue.years = $scope.value.years;
-                } else {
-                    $scope.editValue.years = '';
-                }
-			};
-			$scope.remove = function () {
-				console.log('need to remove by service id: ' + $scope.value.id + ', key: ' + $scope.key);
-				$scope.removeItem($scope.key);
-			};
-			$scope.save = function () {
-				if (typeof $scope.value.id !== 'undefined') {
-					console.log('update - ' + $scope.value.id);
-					$scope.editZoneSave($scope.editValue, $scope.value.id);
+		template: 	'<div class="view-skills"><span ng-repeat="(key, skill) in value" ng-click="editSkill(key)">{{skill.name}} {{options.skils_years[skill.years] ? \' : \' + options.skils_years[skill.years] : \'\'}}</span></div>'+
+					'<button class="btn btn-success" style="margin-top:5px;margin-bottom:20px;" ng-click="editSkill(-1)">Add more Skill</button>'
+		,
+		controller: function ($scope, $element,$uibModal) {
+		    $scope.editSkill = function (key) {
+				if (key == -1) {
+					$scope.editSkillData = {
+							key : -1,
+							id : 0,
+							name : '',
+							years : '0',
+						};
 				} else {
-					console.log('add new');
+					$scope.editSkillData = {
+							key : key,
+							id : $scope.value[key].id,
+							name : $scope.value[key].name,
+							years : $scope.value[key].years,
+						};
 				}
-			};
-		},
+				var modalInstance = $uibModal.open({
+						animation: true,
+						templateUrl: 'view/directive/editSkill.html',
+						scope: $scope,
+						controller: function ($scope, $uibModalInstance, $sce, $q, $rootScope, student) {
+							var states = $scope.options.skils;
+							var fuzzySearch = new Fuse(states, {
+								shouldSort: true,
+								caseSensitive: false,
+								threshold: 0.4,
+							});
+							function highlight(val, term) {
+								term = term.toLowerCase();
+								var tempVal = val.toLowerCase();
+								var index = tempVal.indexOf(term);
+								if ( index >= 0 ) { 
+									val = val.substring(0,index) + "<span class='highlight'>" + val.substring(index,index+term.length) + "</span>" + val.substring(index + term.length);
+									return val;
+								} else return val;
+							}
+							function fuzzy_suggest(term) {
+								$scope.showChangeForce = false;
+								if (!term)
+									return [];
+								return fuzzySearch
+									.search(term)
+									.slice(0, 10)
+									.map(function (i) {
+										var val = states[i];
+										return {
+											value: val,
+											label: $sce.trustAsHtml(highlight(val, term))
+									};
+								});
+							}
+							$scope.autocomplete_options = {
+								suggest: fuzzy_suggest
+							};
+							
+							function isInArray(value, array) {
+								value = value.toLowerCase();
+								var tempArr = [];
+								for (var i = 0; i < array.length; i++) {
+									tempArr.push(array[i].toLowerCase());
+								}
+								if (tempArr.indexOf(value) > -1)
+									return array[tempArr.indexOf(value)];
+								else return false;
+							}
+							
+							$scope.showChangeForce = false;
+							
+							$scope.cancel = function () {
+								$uibModalInstance.dismiss('cancel');
+							};
+							$scope.deleteSkill = function () {
+								student.deleteSkill($scope.editSkillData.id).success(function (data) {
+									if (data.status === 'success') {
+										$scope.value.splice($scope.editSkillData.key, 1);
+										$uibModalInstance.dismiss('cancel');
+									} else {
+										$scope.skillAlerts = {type: 'danger', msg: data.errors.join('<br>')};
+									}
+								});
+							};
+							$scope.change = function (force) {
+								var isInArrayTemp = isInArray($scope.editSkillData.name, $scope.options.skils);
+								if ((typeof force !== 'undefined' && force == true) || isInArrayTemp) {
+									if (isInArrayTemp)
+										$scope.editSkillData.name = isInArrayTemp;
+									student.addSkill($scope.editSkillData).success(function (data) {
+										if (data.status === 'success') {
+											// add skill to student array
+											if ($scope.editSkillData.key == -1) {
+												$rootScope.studentData.skils.push({id:data.data.id,name:$scope.editSkillData.name,years:String($scope.editSkillData.years)});
+												if (!isInArray($scope.editSkillData.name, $scope.options.skils))
+													$rootScope.options.skils.push($scope.editSkillData.name);
+											} else {
+												$rootScope.studentData.skils[$scope.editSkillData.key] = {id:data.data.id,name:$scope.editSkillData.name,years:String($scope.editSkillData.years)};
+												if (!isInArray($scope.editSkillData.name, $scope.options.skils))
+													$rootScope.options.skils.push($scope.editSkillData.name);
+											}
+											$uibModalInstance.dismiss('cancel');
+										} else {
+											$scope.skillAlerts = {type: 'danger', msg: data.errors.join('<br>')};
+										}
+									});
+								} else {
+									$scope.showChangeForce = true;
+								}
+							};
+						},
+						size: 'sm'
+					});
+		    };
+		}
+		/*,
 		link: function (scope, elem, attr) {
 			scope.$watch(attr.inputSkill, function () {
 				scope.editValue = {name: scope.value.name, years: scope.value.years};
 			});
 		}
+		*/
 	};
 });
 

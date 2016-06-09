@@ -27,11 +27,11 @@ class API_General extends API {
 		$return_array = array();
 		$db = new DB_Action();
 		
-		$sql = 'SELECT * FROM skills ORDER BY id ASC';
+		$sql = 'SELECT * FROM skills WHERE status=1 ORDER BY id ASC';
 		$temp = $db->getQuery($sql);
 		if ($temp && is_array($temp) && !empty($temp))
 			foreach ($temp as $v)
-				$return_array['skils'][$v['id']] = array('name' =>$v['name'],'status' =>$v['status']);
+				$return_array['skils'][] = $v['name'];
 		
 		$sql = 'SELECT * FROM degree ORDER BY id ASC';
 		$temp = $db->getQuery($sql);

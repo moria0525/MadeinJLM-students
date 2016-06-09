@@ -74,7 +74,6 @@ class Student extends User {
             return false;
         }
 	}
-	//status,$reason = null, $description = null
 	public function changeStatus($info) {
 		// checking if get all info we need
 		if (!isset($info['status']) || 
@@ -141,6 +140,137 @@ class Student extends User {
             return false;
         }
 		return true;
+	}
+	private function checkSkillExist($skill_name) {
+		$skill_name = strtolower($skill_name);
+		$db_action = new DB_Action();
+        $sql = 'SELECT id FROM skills WHERE LOWER(name)=:name LIMIT 1';
+        if (!$stmt = $db_action->getStatement($sql, array('name' => $skill_name))) {
+            return false;
+        } else {
+			$temp = $stmt->fetch();
+			if (isset($temp['id']))
+				return $temp['id'];
+			else return false;
+        }
+	}
+	public function addSkill($info) {
+		if (!isset($info['name']) || !isset($info['years'])) {
+			$this->log->error(2);
+			return false;
+		}
+		$db_action = new DB_Action();
+		if (isset($info['id']) && $info['id'] != 0) {
+			// update Skill
+			$skillBefore = $db_action->getRow('student_skills', array('id' => $info['id']));
+			if (!$skillBefore) {
+				$this->log->error(2);
+				return false;
+			}
+			$dataTemp = array();
+			$dataTemp['skill_id'] = $this->checkSkillExist($info['name']);
+			$dataTemp['years'] = intval($info['years']);
+			if (!$dataTemp['skill_id']) {
+				// add new skill
+				$sql = "INSERT INTO skills (name) VALUES(:name)";
+				
+				if ($db_action->runQuery($sql, array('name' => $info['name']))) {
+					$this->log->report('Information Updated(addSkill)');
+					$dataTemp['skill_id'] = $db_action->getLastInsertedID();
+				} else {
+					$this->log->error(2);
+					return false;
+				}
+			}
+			$data = array();
+			$into = array();
+			foreach ($dataTemp as $k => $v) {
+				if ($v != $skillBefore[$k]) {
+					$data[$k] = $v;
+					$into[] = $k . '=:' . $k;
+				}
+			}
+			if (isset($data['skill_id']) && $db_action->getRow('student_skills', array('skill_id' => $data['skill_id'],'student_id'=>$this->_data['ID']))) {
+				$this->log->error('You already got this skill');
+				return false;
+			}
+			if (!empty($data)) {
+				$data['id'] = intval($info['id']);
+				$sql = "UPDATE student_skills SET ".implode(', ', $into)." WHERE id=:id";
+				if ($db_action->runQuery($sql, $data)) {
+					
+					$this->log->report('Information Updated(addSkill)');
+					if ($this->clone === 0) {
+						$this->session->update = true;
+					}
+				} else {
+					$this->log->error(2);
+					return false;
+				}
+			}
+		} else {
+			// add Skill
+			$data = array();
+			$data['skill_id'] = $this->checkSkillExist($info['name']);
+			$data['years'] = intval($info['years']);
+			if ($data['skill_id'] && $db_action->getRow('student_skills', array('skill_id' => $data['skill_id'],'student_id'=>$this->_data['ID']))) {
+				$this->log->error('You already got this skill');
+				return false;
+			}
+			if (!$data['skill_id']) {
+				// add new skill
+				$sql = "INSERT INTO skills (name) VALUES(:name)";
+				
+				if ($db_action->runQuery($sql, array('name' => $info['name']))) {
+					$this->log->report('Information Updated(addSkill)');
+					$data['skill_id'] = $db_action->getLastInsertedID();
+				} else {
+					$this->log->error(2);
+					return false;
+				}
+			}
+			$data['student_id'] = $this->_data['ID'];
+			$into = array();
+			foreach ($data as $k => $v) {
+				$into[] = $k;
+			}
+			
+			$intoStr = implode(', ', $into);
+			$values = ':' . implode(', :', $into);
+			
+			$sql = "INSERT INTO student_skills ({$intoStr}) VALUES({$values})";
+			
+			if ($db_action->runQuery($sql, $data)) {
+				$this->log->report('Information Updated(addSkill)');
+				if ($this->clone === 0) {
+					$this->session->update = true;
+				}
+			} else {
+				$this->log->error(2);
+				return false;
+			}
+		}
+		if (isset($data)) {
+			$data['id'] = $db_action->getLastInsertedID();
+			if ($data['id'] == 0 && isset($info['id']) && $info['id'] != 0) 
+				$data['id'] = $info['id'];
+			return $data;
+		}
+		return true;
+	}
+	public function deleteSkill($id) {
+		$sql = 'DELETE FROM student_skills WHERE id='.$id.' AND student_id='.$this->_data['ID'];
+		$db_action = new DB_Action();
+		
+		if ($db_action->query($sql)){
+			if ($this->clone === 0) {
+				$this->session->update = true;
+			}
+			return true;
+		} else {
+			$this->log->error(2);
+			return false;
+		}
 	}
 }
 ?>

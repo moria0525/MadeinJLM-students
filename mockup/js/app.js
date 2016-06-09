@@ -1,4 +1,4 @@
-var jlm = angular.module('jlm', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ngImgCrop']);
+var jlm = angular.module('jlm', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ngImgCrop', 'MassAutoComplete']);
 
 /* --- routeProvider --- */
 jlm.config(function ($routeProvider, $locationProvider) {
@@ -202,7 +202,7 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
     general.getOptions().success(function (data) {
 		angular.forEach(data, function (value, key) {
 			if ($rootScope.options[key])
-		    $rootScope.options[key] = value;
+				$rootScope.options[key] = value;
 		});
     });
     $scope.logOut = function () {
@@ -438,6 +438,26 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
                 method  : 'POST',
                 url     : 'API/Student/update',
                 data    : $httpParamSerializerJQLike(data),
+                headers : { 'Content-Type':  'application/x-www-form-urlencoded' }
+            }).success(function (data) {
+                return data;
+            }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}; });
+        },
+        addSkill: function (data) {
+            return $http({
+                method  : 'POST',
+                url     : 'API/Student/addSkill',
+                data    : $httpParamSerializerJQLike(data),
+                headers : { 'Content-Type':  'application/x-www-form-urlencoded' }
+            }).success(function (data) {
+                return data;
+            }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}; });
+        },
+        deleteSkill: function (id) {
+            return $http({
+                method  : 'POST',
+                url     : 'API/Student/deleteSkill',
+                data    : $httpParamSerializerJQLike({id:id}),
                 headers : { 'Content-Type':  'application/x-www-form-urlencoded' }
             }).success(function (data) {
                 return data;

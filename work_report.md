@@ -35,6 +35,9 @@
 |12.5.16 |Work on profile directive | 2.5 Hours |
 |15.5.16 |Work on profile directive | 3 Hours |
 |16.5.16 |Work on change status | 4 Hours |
+|05.06.16 |Work on skills | 4 Hours |
+|08.06.16 |Work on skills | 6 Hours |
+|09.06.16 |Work on skills | 5 Hours |
 
 
 ## Moria Rabayoff

@@ -16,3 +16,11 @@
     border-style: solid;
 }
 /* upload-file end */
+
+/* Affix */
+.affix {
+    position:fixed !important;
+    top: 15px;
+    z-index: 990;
+}
+/* end Affix */

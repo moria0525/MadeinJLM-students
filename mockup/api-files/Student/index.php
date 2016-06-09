@@ -297,6 +297,41 @@ class API_Student extends API {
         
         return $return_arr;
     }
+    public function getCV() {
+		if (!isset($_GET['id']) || empty($_GET['id'])) {
+			die();
+		}
+		$db = new DB_Action();
+		
+		if ($data = $db->getRow('student', array('ID' => intval($_GET['id'])))) {
+			if ($data['cv'] != '') {
+				header("Content-Type: application/octet-stream");
+				
+				$file = 'uploads/cv/' . $data['cv'];
+
+				header("Content-Disposition: attachment; filename=CV.".pathinfo($file, PATHINFO_EXTENSION));   
+				header("Content-Type: application/octet-stream");
+				header("Content-Type: application/download");
+				header("Content-Description: File Transfer");            
+				header("Content-Length: " . filesize($file));
+				flush();
+				$fp = fopen($file, "r");
+				while (!feof($fp))
+				{
+					echo fread($fp, 65536);
+					flush();
+				} 
+				fclose($fp); 
+			} else {
+				header('Content-Type: text/html; charset=utf-8');
+				echo '<h1 style="text-align: center;">Student don\'t got CV</h1>';
+			}
+		} else {
+			header('Content-Type: text/html; charset=utf-8');
+			echo '<h1 style="text-align: center;">Student not exist</h1>';
+		}
+		die();
+    }
     public function myCV() {
 		$student = new Student();
 		

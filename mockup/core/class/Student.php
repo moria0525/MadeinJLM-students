@@ -74,6 +74,97 @@ class Student extends User {
             return false;
         }
 	}
+    public function deleteCV() {
+		
+		if ($this->_data['cv'] == '')
+			return true;
+		
+		define('UPLOAD_DIR', 'uploads/cv/');
+		
+		if (file_exists ( UPLOAD_DIR . $this->_data['cv'] ))
+			unlink( UPLOAD_DIR . $this->_data['cv'] );
+		
+		$data = array();
+		$data['id'] = $this->ID;
+		$data['cv'] = '';
+		
+		$sql = "UPDATE _table_ SET cv=:cv WHERE ID=:id";
+
+		if ($this->table->runQuery($sql, $data)) {
+			$this->log->report('Information Updated');
+
+			if ($this->clone === 0) {
+				$this->session->update = true;
+			}
+			
+			$this->_data = array_merge($this->_data, $data);
+			
+			$this->_updates = new Collection();
+			
+		} else {
+			$this->log->error(2);
+			return false;
+		}
+	}
+    public function uploadCV($cv)
+	{
+        $this->log->channel('update CV picture');
+		
+		if (empty($cv))
+            $this->log->error(2);
+		
+		$file_name = $cv['name'];
+		$file_size =$cv['size'];
+		$file_tmp =$cv['tmp_name'];
+		$file_type=$cv['type'];   
+		$file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+		
+		$extensions = array("jpeg","jpg","png","pdf","doc","dot","docx");        
+		if(in_array($file_ext,$extensions )=== false)
+			 $this->log->error("file extension not allowed, please choose a JPEG or PNG or PDF or DOC file.");
+		
+		if($file_size > 5*1024*1024)
+			 $this->log->error("File size cannot exceed 5 MB");
+		
+        if ($this->log->hasError()) {
+            return false;
+        }
+		
+		define('UPLOAD_DIR', 'uploads/cv/');
+		
+		if ($this->_data['cv'] != '' && file_exists ( UPLOAD_DIR . $this->_data['cv'] ))
+			unlink( UPLOAD_DIR . $this->_data['cv'] );
+		
+		$cv_location = UPLOAD_DIR . $this->ID . '.' . $file_ext;
+		move_uploaded_file($file_tmp,$cv_location);
+		
+		$this->log->report('upload CV complete');
+		
+		if ($this->_data['cv'] != $this->ID . '.' . $file_ext) {
+			$data = array();
+			$data['id'] = $this->ID;
+			$data['cv'] = $this->ID . '.' . $file_ext;
+			
+			$sql = "UPDATE _table_ SET cv=:cv WHERE ID=:id";
+
+			if ($this->table->runQuery($sql, $data)) {
+				$this->log->report('Information Updated');
+
+				if ($this->clone === 0) {
+					$this->session->update = true;
+				}
+				
+				$this->_data = array_merge($this->_data, $data);
+				
+				$this->_updates = new Collection();
+
+			} else {
+				$this->log->error(2);
+				return false;
+			}
+		}
+		return $this->_data['cv'];
+	}
 	public function changeStatus($info) {
 		// checking if get all info we need
 		if (!isset($info['status']) || 

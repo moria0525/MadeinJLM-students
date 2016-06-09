@@ -1,4 +1,4 @@
-var jlm = angular.module('jlm', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ngImgCrop', 'MassAutoComplete']);
+var jlm = angular.module('jlm', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ngImgCrop', 'MassAutoComplete', 'ngFileUpload']);
 
 /* --- routeProvider --- */
 jlm.config(function ($routeProvider, $locationProvider) {
@@ -486,6 +486,15 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
 			}).success(function (data) {
 				return data;
 			}).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}; });
+        },
+        deleteCV: function () {
+            return $http({
+                method  : 'POST',
+                url     : 'API/Student/deleteCV',
+                headers : { 'Content-Type':  'application/x-www-form-urlencoded' }
+            }).success(function (data) {
+                return data;
+            }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}; });
         }
     };
 }]);

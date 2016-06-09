@@ -5,6 +5,7 @@ jlm.directive('uploadFile', function () {
 		restrict: 'A',
         scope: {
             uploadFile: "=",// where to put...
+            fileExtension: "=",// where to put...
             uploadFileAccept: "@",
             uploadFileText: "@",
             uploadFileName: "@"
@@ -12,10 +13,13 @@ jlm.directive('uploadFile', function () {
 		templateUrl: 'view/directive/upload-file.html',
 		link: function (scope, elem, attr) {
 			angular.element(elem[0].querySelectorAll("input")).bind('change', function (e) {
-                var reader = new FileReader();
-                reader.onload = function (loadEvent) {
-                    scope.$apply(function () {
+				var fileName= angular.element(this)[0].value;
+				var fileExtension= fileName.substr(fileName.lastIndexOf('.')+1).toLowerCase();
+				var reader = new FileReader();
+				reader.onload = function (loadEvent) {
+					scope.$apply(function () {
                         scope.uploadFile = loadEvent.target.result;
+                        scope.fileExtension = fileExtension;
                     });
                 };
                 reader.readAsDataURL(e.target.files[0]);
@@ -252,6 +256,56 @@ jlm.directive('inputSelect', function () {
 			scope.$watch(attr.inputSelect, function () {
 				scope.editValue = scope.value;
 			});
+		}
+	};
+});
+jlm.directive('inputFile', function () {
+    'use strict';
+	return {
+        restrict: 'A',
+		scope: false,
+		template: 	'<div style="margin-top:5px;margin-bottom:20px;">'+
+						'<button class="btn btn-primary" ng-show="value != \'\'" ng-click="download(\'API/Student/myCV\')">Download</button> '+
+						'<button class="btn btn-danger" ng-show="value != \'\'" ng-click="deleteCV()">Delete</button> '+
+						'<button class="btn btn-success" ngf-select="upload($file)">{{value == \'\'? \'Upload\' : \'Change\' }}</button>'+
+					'</div>',
+		controller: function ($scope, $element,$window,$http, Upload,student) {
+			$scope.deleteCV = function () {
+				student.deleteCV().success(function (data) {
+					$scope.value = '';
+				});
+			};
+			$scope.upload = function (file) {
+				Upload.upload({
+					url: 'API/Student/uploadCV',
+					data: {file: file, 'username': $scope.username}
+				}).then(function (resp) {
+					if (typeof resp.data !== 'undefined' && typeof resp.data.status !== 'undefined') {
+						if (resp.data.status == 'success') {
+							if (typeof resp.data !== 'undefined' && typeof resp.data.new_cv !== 'undefined') {
+								console.log(resp.data);
+								$scope.value= resp.data.new_cv;
+							}else alert('Error..');
+						} else {
+							if (typeof resp.data !== 'undefined' && typeof resp.data.errors !== 'undefined')
+								alert(resp.data.errors.join('\n'));
+						}
+						
+					} else {
+						alert('Error..');
+					}
+				}, function (resp) {
+					console.log(resp);
+					console.log('Error status: ' + resp.status);
+				}, function (evt) {
+					console.log(evt);
+					var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+					console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+				});
+			};
+			$scope.download = function(url) {
+				$window.open(url);
+			};
 		}
 	};
 });

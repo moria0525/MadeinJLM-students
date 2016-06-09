@@ -274,4 +274,80 @@ class API_Student extends API {
         return $return_arr;
 		
     }
+    public function uploadCV() {
+		$student = new Student();
+		
+		if($student->isSigned()){
+			if(!isset($_FILES['file'])){
+				$return_arr =  ['status' => "nofile"];
+			} else if ($data = $student->uploadCV($_FILES['file'])) {
+				$return_arr = ['status' => "success",'new_cv' => $data];
+			} else {
+				$errors = array();
+				foreach($student->log->getErrors() as $err){
+					$errors[] = $err;
+				}
+				$return_arr =  ['status' => "error",'errors' => $errors];
+			}
+        }else{
+            //Display Errors
+			$errors = array('User not connected');
+            $return_arr =  ['status' => "error",'errors' => $errors];
+        }
+        
+        return $return_arr;
+    }
+    public function myCV() {
+		$student = new Student();
+		
+		if($student->isSigned()){
+			header("Content-Type: application/octet-stream");
+
+			$file = 'uploads/cv/' . $student->cv;
+
+			header("Content-Disposition: attachment; filename=CV.".pathinfo($file, PATHINFO_EXTENSION));   
+			header("Content-Type: application/octet-stream");
+			header("Content-Type: application/download");
+			header("Content-Description: File Transfer");            
+			header("Content-Length: " . filesize($file));
+			flush(); // this doesn't really matter.
+			$fp = fopen($file, "r");
+			while (!feof($fp))
+			{
+				echo fread($fp, 65536);
+				flush(); // this is essential for large downloads
+			} 
+			fclose($fp); 
+			die();
+        }else{
+            //Display Errors
+			$errors = array('User not connected');
+            $return_arr =  ['status' => "error",'errors' => $errors];
+        }
+        
+        return $return_arr;
+		
+    }
+    public function deleteCV() {
+		$student = new Student();
+		
+		if($student->isSigned()){
+			
+			if ($data = $student->deleteCV()) {
+				$return_arr = ['status' => "success"];
+			} else {
+				$errors = array();
+				foreach($student->log->getErrors() as $err){
+					$errors[] = $err;
+				}
+				$return_arr =  ['status' => "error",'errors' => $errors];
+			}
+        }else{
+			$errors = array('User not connected');
+            $return_arr =  ['status' => "error",'errors' => $errors];
+        }
+        
+        return $return_arr;
+		
+    }
 }

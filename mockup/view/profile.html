@@ -7,9 +7,6 @@
 	<div class="container">
 		<div class="row mt-60">
 			<div class="col-md-9">
-                            <div class="alert alert-danger" ng-show = "studentData.status">
-            <strong>Attention!</strong> Your Status is off!   Turn On your Status so the companies will know you are looking for a job!
-            </div>
 				<div class="row">
 					<ul class="profileEditFormat">
                         <li profile-item="skils" directive-name="input-skill" directive-view="true" title="'Skills'" value="studentData.skils" options="options"></li>
@@ -40,18 +37,25 @@
 			</div>
             
            
-			<div class="col-md-3 parentElement" affix-me id="affix" tooltip-placement="top-right" uib-tooltip="Progress bar that show how much your Profile complate">
-				<div class="childElement" ng-controller = "ProfileStrength">
-					Profile Strength:
-					<div class="progress" >
-						<div class="progress-bar progress-bar-striped active" role="progressbar"
-							aria-valuenow="{{strength}}" aria-valuemin="0" aria-valuemax="100" style="width:{{strength}}%">
-							<p>{{strength}}% </p>
+			<div class="col-md-3">
+				<div class="parentElement" affix-me id="affix">
+					<div class="childElement">
+						<div ng-controller = "ProfileStrength" tooltip-placement="top-right" uib-tooltip="Progress bar that show how much your Profile complate">
+							Profile Strength:
+							<div class="progress" >
+								<div class="progress-bar progress-bar-striped active" role="progressbar"
+									aria-valuenow="{{strength}}" aria-valuemin="0" aria-valuemax="100" style="width:{{strength}}%">
+									<p>{{strength}}% </p>
+								</div>
+							</div>
+							<div class="alert alert-info" tooltip-placement="bottom-right" uib-tooltip="The Companies filter profiles also according to Profile Strength. So look on the Tips and make your profile Better & Fuller">
+								 <strong>Tip!</strong> {{strengthTips}}
+							</div>
+						</div>
+						<div class="alert alert-danger" ng-show="!studentData.status">
+							<strong>Attention!</strong> Your Status is off!   Turn On your Status so the companies will know you are looking for a job! <a href="#" ng-click="switchStatusClick(1); $event.preventDefault()">Turn on</a>
 						</div>
 					</div>
-                    <div class="alert alert-info" tooltip-placement="bottom-right" uib-tooltip="The Companies filter profiles also according to Profile Strength. So look on the Tips and make your profile Better & Fuller">
-                         <strong>Tip!</strong> {{strengthTips}}
-                    </div>
 				</div>
 			</div>
 		</div>

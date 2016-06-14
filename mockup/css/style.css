@@ -104,6 +104,14 @@ header {
     background: #333 url('../img/0919_jerusalem10[1].jpg');
     background-size: 100%;
 }
+header #top-header {
+    background: -moz-linear-gradient(top, rgba(0,0,0,0.6) 25%, rgba(0, 0, 0, 0) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(25%, rgba(0,0,0,0.6)), color-stop(100%, rgba(0, 0, 0, 0)));
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0.6) 25%, rgba(0, 0, 0, 0) 100%);
+    background: -o-linear-gradient(top, rgba(0,0,0,0.6) 25%, rgba(0, 0, 0, 0) 100%);
+    background: -ms-linear-gradient(top, rgba(0,0,0,0.6) 25%, rgba(0, 0, 0, 0) 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6) 25%, rgba(0, 0, 0, 0) 100%);
+}
 header #logo {
 	display: block;
 	width:24%;
@@ -231,6 +239,11 @@ header .header-connected #change-status-btn {
 }
 header .header-connected #change-status-btn.run {
     color: #A9FF8E;
+}
+.alert a {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #337ab7;
 }
 .mb-40 {margin-bottom: 40px;}
 .form-control {

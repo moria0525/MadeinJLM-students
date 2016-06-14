@@ -82,6 +82,7 @@ jlm.directive("fileread", [function () {
         }
     };
 }]);
+
 /* --- Affix --- */
 jlm.directive('affixMe', ['$timeout','$window', function($timeout, $window) {
     return {
@@ -192,6 +193,7 @@ jlm.directive('profileItem', function () {
 				sendData[$scope.field] = value;
 				
 				if ($scope.multy) {
+					// on this app we dont have multy that use this function
 					sendData['key'] = key;
 					/*
 					student[$scope.saveFunction](sendData).success(function (data){
@@ -459,13 +461,6 @@ jlm.directive('inputSkill', function () {
 					});
 		    };
 		}
-		/*,
-		link: function (scope, elem, attr) {
-			scope.$watch(attr.inputSkill, function () {
-				scope.editValue = {name: scope.value.name, years: scope.value.years};
-			});
-		}
-		*/
 	};
 });
 
@@ -490,42 +485,6 @@ jlm.directive('switchStatus', function () {
             html +=     ' style="display:none" />';
             html += '</span>';
             return html;
-        },
-        controller: function ($scope, $element, $uibModal, $rootScope, student) {
-		    $scope.switchStatusClick = function () {
-			    if ($rootScope.studentData.status === 1) {
-				    var modalInstance = $uibModal.open({
-					        animation: true,
-                            templateUrl: 'view/directive/changeStatus.html',
-                            controller: function ($scope, $uibModalInstance, student) {
-
-						        $scope.cancel = function () {
-							        $uibModalInstance.dismiss('cancel');
-						        };
-						        $scope.change = function () {
-                                    $scope.data.changeStatus.status = 0;
-                                    student.changeStatus($scope.data.changeStatus).success(function (data) {
-                                        if (data.status === 'success') {
-                                            $rootScope.studentData.status = 0;
-                                            $uibModalInstance.dismiss('cancel');
-                                        } else {
-                                            console.log('errors', data.errors);
-                                        }
-							        });
-						        };
-					        },
-					        size: 'md'
-				        });
-                } else {
-				    student.changeStatus({status: 1}).success(function (data) {
-                        if (data.status === 'success') {
-                            $rootScope.studentData.status = 1;
-                        } else {
-                            console.log('errors', data.errors);
-                        }
-				    });
-                }
-		    };
-	    }
+        }
     };
 });

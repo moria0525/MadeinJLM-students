@@ -7,6 +7,9 @@
 	<div class="container">
 		<div class="row mt-60">
 			<div class="col-md-9">
+                            <div class="alert alert-danger" ng-show = "{{!studentData.status}}">
+            <strong>Attention!</strong> Your Status is off!   Turn On your Status so the companies will know you are looking for a job!
+            </div>
 				<div class="row">
 					<ul class="profileEditFormat">
                         <li profile-item="skils" directive-name="input-skill" directive-view="true" title="'Skills'" value="studentData.skils" options="options"></li>

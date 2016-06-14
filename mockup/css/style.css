@@ -125,8 +125,6 @@ header #logo img {
 header .header-nav ul {
 	width:41%;
 	float: left;
-}
-header .header-nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -138,8 +136,9 @@ header .header-nav ul li {
     margin-right: 20px;
 }
 header .header-nav ul.right li {
-    text-align: right;
-    margin-left: 20px;
+    float: right;
+    margin-left: 50px;
+    margin-right: 0;
 }
 header .header-nav ul a:visited ,
 header .header-nav ul a {
@@ -174,7 +173,7 @@ header .header-connected {
 }
 header .header-connected .student-action {
     float: right;
-    margin-right: 35px;
+    margin-right: 3px;
 }
 header .header-connected .student-action > * {
     float: right;
@@ -230,6 +229,7 @@ header .header-connected #header-connected-top {
 header .header-connected #header-connected-top .student-hi {
     font-size: 40px;
     color: #FFF;
+    text-shadow: 2px 2px 1px #1a2944;
 }
 header .header-connected #header-connected-bottom {
     position: absolute;

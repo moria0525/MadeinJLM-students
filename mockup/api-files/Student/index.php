@@ -82,17 +82,25 @@ class API_Student extends API {
 		$student = new Student();
         $return_arr = array();
 		
-        if ($student->activate($_POST['c'])) 
+		$confirmation = false;
+		
+		if (isset($_POST['c']) && $_POST['c'] != '')
+			$confirmation = $_POST['c'];
+		
+		if (isset($_GET['c']) && $_GET['c'] != '')
+			$confirmation = $_GET['c'];
+		
+		if (!$confirmation) {
+            $return_arr =  ['status' => "error",'errors' => ['Please enter your confirmation code']];
+		} else if ($student->activate($confirmation)) 
             $return_arr = ['status' => "success"];
         else {
-            
             //Display Errors
             $errors = array();
             foreach($student->log->getErrors() as $err){
                 $errors[] = $err;
             }
             $return_arr =  ['status' => "error",'errors' => $errors];
-            
         } 
         
         return $return_arr;

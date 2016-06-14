@@ -103,6 +103,7 @@ body.ng-pageslide-body-closed::before {
 		float: none;
 	}
 	.mobile-menu-btn {display: block;}
+	.affix {position: inherit !important}
 }
 @media (max-width:767px) {
 	header .header-connected #profileImage {
@@ -146,4 +147,14 @@ body.ng-pageslide-body-closed::before {
 		top: 125px;
 		left: 15px;
 	}
+}
+@media (max-width:480px) {
+	.edit-zone .input-group-btn > .btn {
+		padding: 9px 6px;
+		font-size: 14px;
+	}
+	.edit-zone .form-group > .btn {
+		font-size: 14px;
+	}
+
 }

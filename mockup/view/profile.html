@@ -35,7 +35,9 @@
 					</ul>
 				</div>
 			</div>
-			<div class="col-md-3 parentElement" affix-me id="affix">
+            
+           
+			<div class="col-md-3 parentElement" affix-me id="affix" tooltip-placement="top-right" uib-tooltip="Progress bar that show how much your Profile complate">
 				<div class="childElement" ng-controller = "ProfileStrength">
 					Profile Strength:
 					<div class="progress" >
@@ -44,7 +46,7 @@
 							<p>{{strength}}% </p>
 						</div>
 					</div>
-                    <div class="alert alert-info">
+                    <div class="alert alert-info" tooltip-placement="bottom-right" uib-tooltip="The Companies filter profiles also according to Profile Strength. So look on the Tips and make your profile Better & Fuller">
                          <strong>Tip!</strong> {{strengthTips}}
                     </div>
 				</div>

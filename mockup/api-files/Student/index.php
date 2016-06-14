@@ -75,12 +75,11 @@ class API_Student extends API {
         return $return_arr;
     }
     public function activated() {
-        
-        $student = new Student();
-        
+		
+		$student = new Student();
         $return_arr = array();
-        
-        if ($student->activate($_GET['c'])) 
+		
+        if ($student->activate($_POST['c'])) 
             $return_arr = ['status' => "success"];
         else {
             

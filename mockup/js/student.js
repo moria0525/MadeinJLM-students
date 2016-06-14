@@ -60,11 +60,12 @@ jlm.controller('StudentActivated', function ($scope, $http, $routeParams, $locat
         if ($rootScope.studentData !== false) {
             $location.path("/profile");
         } else {
-			student.activated().success(function ($routeParams.hash) {
+			student.activated($routeParams.hash).success(function (data) {
+				console.log(data);
 				if (data.status === 'error')
 					$scope.alerts.activated = {type: 'danger', msg: data.errors.join('<br>')};
 				else $scope.alerts.activated = {type: 'success', msg: 'Activated successfully.'};
-			}
+			});
 		}
     });
 });
@@ -327,9 +328,9 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
         },
         activated: function (hash) {
             return $http({
-                method  : 'GET',
+                method  : 'POST',
                 url     : 'API/Student/activated',
-                data    : $httpParamSerializerJQLike({c:hash}),  // pass in data as strings
+                data    : $httpParamSerializerJQLike({'c': hash}),  // pass in data as strings
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (data) {
                 return data;

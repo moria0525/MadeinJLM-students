@@ -113,15 +113,17 @@ header #top-header {
     background: linear-gradient(to bottom, rgba(0,0,0,0.6) 25%, rgba(0, 0, 0, 0) 100%);
 }
 header #logo {
-	display: block;
-	width:24%;
-	float: left;
+    display: block;
+    width: 16.7%;
+    float: left;
+    line-height: 240px;
+	margin:0 0.65%;
 }
 header #logo img {
 	width: 100%;
 }
 header .header-nav ul {
-	width:38%;
+	width:41%;
 	float: left;
 }
 header .header-nav ul {
@@ -142,6 +144,7 @@ header .header-nav ul.right li {
 header .header-nav ul a:visited ,
 header .header-nav ul a {
     color: #E2E2E2;
+    text-shadow: 2px 2px 1px #1a2944;
 	-webkit-transition: 0.3s all;
 	-moz-transition: 0.3s all;
 	-o-transition: 0.3s all;

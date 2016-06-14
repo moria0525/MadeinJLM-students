@@ -269,20 +269,20 @@ jlm.controller('ProfileStrength', function ($scope, $http, $routeParams, $locati
                 strength += 5;               
             if($rootScope.studentData.summary!=="")
                 strength += 10;
-            if($rootScope.studentData.college_id!==null)
+            if($rootScope.studentData.college_id!=="0")
                 strength += 5;
-            if($rootScope.studentData.degree_id!==null)
+            if($rootScope.studentData.degree_id!=="0")
                 strength += 5;
-            if($rootScope.studentData.semesters_left!==null)
+            if($rootScope.studentData.semesters_left!=="0")
                 strength += 5;
-            if($rootScope.studentData.job_percent!==null)
+            if($rootScope.studentData.job_percent!=="0")
                 strength += 5;
             if($rootScope.studentData.experience!=="")
                 strength += 5;
-            if($rootScope.studentData.grade_average!==null)
+            if($rootScope.studentData.grade_average!=="" && $rootScope.studentData.grade_average!=="0" )
                 strength += 10;
-            if($rootScope.studentData.cv!==null)
-                strength += 5;
+            if($rootScope.studentData.cv!=="")
+                strength += 10;
             if($rootScope.studentData.skils!==null)
             {
                 if($rootScope.studentData.skils.length<=6)

@@ -25,6 +25,7 @@ body {
 	font-size: 17px;
     color: #333;
     height: auto;
+    overflow-x: hidden;
 }
 input, button, select, textarea {
 	font-family: 'Raleway', sans-serif;

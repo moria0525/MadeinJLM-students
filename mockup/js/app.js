@@ -256,6 +256,45 @@ jlm.controller('AdminConnected', function ($scope, $http, $routeParams, $locatio
 	
 });
 
+jlm.controller('ProfileStrength', function ($scope, $http, $routeParams, $location, student, general, $rootScope) {
+    "use strict";
+        student.init().success(function (data) {
+        $rootScope.studentData = data;
+            var strength = 0;
+            if($rootScope.studentData.basic_education_subject!=="")
+                strength += 5;
+            if($rootScope.studentData.phone_number!=="")
+                strength += 5;
+            if($rootScope.studentData.linkedin!=="")
+                strength += 5;               
+            if($rootScope.studentData.summary!=="")
+                strength += 10;
+            if($rootScope.studentData.college_id!==null)
+                strength += 5;
+            if($rootScope.studentData.degree_id!==null)
+                strength += 5;
+            if($rootScope.studentData.semesters_left!==null)
+                strength += 5;
+            if($rootScope.studentData.job_percent!==null)
+                strength += 5;
+            if($rootScope.studentData.experience!=="")
+                strength += 5;
+            if($rootScope.studentData.grade_average!==null)
+                strength += 10;
+            if($rootScope.studentData.cv!==null)
+                strength += 5;
+            if($rootScope.studentData.skils!==null)
+            {
+                if($rootScope.studentData.skils.length<=6)
+                    strength += 5*$rootScope.studentData.skils.length;
+                else
+                    strength +=30;
+            }
+              $scope.strength = strength;   
+        });
+});
+
+
 jlm.controller('generalController', function ($scope, $rootScope, student) {
     "use strict";
     $scope.data = {};

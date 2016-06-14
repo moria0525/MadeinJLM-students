@@ -36,12 +36,12 @@
 				</div>
 			</div>
 			<div class="col-md-3 parentElement" affix-me id="affix">
-				<div class="childElement">
+				<div class="childElement" ng-controller = "ProfileStrength">
 					Profile Strength:
-					<div class="progress">
+					<div class="progress" >
 						<div class="progress-bar progress-bar-striped active" role="progressbar"
-							aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%">
-							40%
+							aria-valuenow="{{strength}}" aria-valuemin="0" aria-valuemax="100" style="width:{{strength}}%">
+							<p>{{strength}}% </p>
 						</div>
 					</div>
 				</div>

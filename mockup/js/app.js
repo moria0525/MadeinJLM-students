@@ -258,39 +258,70 @@ jlm.controller('AdminConnected', function ($scope, $http, $routeParams, $locatio
 
 jlm.controller('ProfileStrength', function ($scope, $http, $routeParams, $location, student, general, $rootScope) {
     "use strict";
+    var arrayTips = ["Good! just dont forget to update your Data! ","Tip: To raise your profile strength you need to fill Department of Study field ","Tip: If you will add a Phone Number your Profile strength will jump with 5 precents! ","Tip: Everyone have Linkedin acount, so add yours! ","Tip: Your college name filed is blank. ","If you will fill the Degree field your profile strength will grow with 5% ","Tip: fill the Semester Left field for raise your Profile Strength! ","Tip: The Position wanted field will help you find job that suitable for you! ","Hi there, fill your experience so the companies will appreciate you much better","your Grade average is importent  so if you will fill it more job options will open for you","This profile not covering all! upload cv file so the companies will know you better!","The Summary field is your place to tell about your self and very importent for the companies witch looking for students","The most powerfull strength is your Skills! it's obvious that you have at least 6 skills!"];
         student.init().success(function (data) {
         $rootScope.studentData = data;
+            var tipSelect = 0;
             var strength = 0;
             if($rootScope.studentData.basic_education_subject!=="")
                 strength += 5;
+            else
+                tipSelect = 1;
             if($rootScope.studentData.phone_number!=="")
                 strength += 5;
+            else
+                tipSelect = 2;
             if($rootScope.studentData.linkedin!=="")
-                strength += 5;               
-            if($rootScope.studentData.summary!=="")
-                strength += 10;
+                strength += 5;
+            else
+                tipSelect = 3;
             if($rootScope.studentData.college_id!=="0")
                 strength += 5;
+            else
+                tipSelect = 4;
             if($rootScope.studentData.degree_id!=="0")
                 strength += 5;
+            else
+                tipSelect = 5;
             if($rootScope.studentData.semesters_left!=="0")
                 strength += 5;
+            else
+                tipSelect = 6;
             if($rootScope.studentData.job_percent!=="0")
                 strength += 5;
+            else
+                tipSelect = 7;
             if($rootScope.studentData.experience!=="")
                 strength += 5;
+            else
+                tipSelect = 8;
             if($rootScope.studentData.grade_average!=="" && $rootScope.studentData.grade_average!=="0" )
                 strength += 10;
+            else
+                tipSelect = 9;
             if($rootScope.studentData.cv!=="")
                 strength += 10;
+            else
+                tipSelect = 10;
+            if($rootScope.studentData.summary!=="")
+                strength += 10;
+            else
+                tipSelect = 11;
             if($rootScope.studentData.skils!==null)
             {
                 if($rootScope.studentData.skils.length<=6)
+                {
                     strength += 5*$rootScope.studentData.skils.length;
+                    tipSelect = 12;
+                }
                 else
-                    strength +=30;
+                    strength +=30;  
+                
             }
-              $scope.strength = strength;   
+            else
+                tipSelect = 12;
+            $scope.strength = strength;
+            $scope.strengthTips = arrayTips[tipSelect];    
         });
 });
 

@@ -1,17 +1,36 @@
 			<div id="top-header">
 				<nav class="container header-nav">
 					<ul>
-						<li><a href="#">About</a></li>
-						<li><a href="#">Why Jerusalem</a></li>
-						<li><a href="#">Companies</a></li>
-						<li><a href="#">Locations</a></li>
+						<li><a href="http://madeinjlm.org/about/">About</a></li>
+						<li><a href="http://madeinjlm.org/why-jerusalem/">Why Jerusalem</a></li>
+						<li><a href="http://madeinjlm.org/companies/">Companies</a></li>
+						<li><a href="http://madeinjlm.org/locations/">Locations</a></li>
 					</ul>
 					<a href="./" title="Made in JLM" id="logo"><img src="img/logo.png" alt="Made in JLM logo"></a>
 					<ul class="right">
-						<li><a href="#">Get Involved</a></li>
-						<li><a href="#">Jobs</a></li>
-						<li><a href="#">Events</a></li>
-						<li><a href="#">News</a></li>
+						<li><a href="http://madeinjlm.org/helpjlm/">Get Involved</a></li>
+						<li><a href="http://madeinjlm.org/jobs/">Jobs</a></li>
+						<li><a href="http://madeinjlm.org/events-1/">Events</a></li>
+						<li><a href="https://flipboard.com/@madeinjlm/jerusalem-startups-ki68k6ory">News</a></li>
 					</ul>
 				</nav>
 			</div>
+            <div ng-controller="pageslideCtrl">
+                <a class="mobile-menu-btn" href="#" ng-click="toggle()"><i class="fa fa-bars" aria-hidden="true"></i></a>
+                <div pageslide ps-open="checked" ps-side="left" ps-push="true" ps-body-class="true" >
+                    <div style="padding:20px" id="demo-right">
+                        <ul>
+							<li><a href="http://madeinjlm.org/">Home</a></li>
+							<li><a href="http://madeinjlm.org/about/">About</a></li>
+							<li><a href="http://madeinjlm.org/why-jerusalem/">Why Jerusalem</a></li>
+							<li><a href="http://madeinjlm.org/companies/">Companies</a></li>
+							<li><a href="http://madeinjlm.org/locations/">Locations</a></li>
+							<li><a href="https://flipboard.com/@madeinjlm/jerusalem-startups-ki68k6ory">News</a></li>
+							<li><a href="http://madeinjlm.org/events-1/">Events</a></li>
+							<li><a href="http://madeinjlm.org/jobs/">Jobs</a></li>
+							<li><a href="http://madeinjlm.org/helpjlm/">Get Involved</a></li>
+						</ul>
+                        <a ng-click="toggle()" class="button-close" ><i class="fa fa-times" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>

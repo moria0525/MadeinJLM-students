@@ -134,8 +134,8 @@ jlm.directive('profileItem', function () {
         },
 		template: function (element, attrs) {
 			var html = '';
-			html += '<label class="col-sm-4 profileItemLable" ng-click="showEditZone()" tooltip-placement="top-right" uib-tooltip="Edit">{{ title }}:</label>';
-			html += '<div class="col-sm-8">';
+			html += '<label class="col-md-4 col-sm-3 profileItemLable" ng-click="showEditZone()" tooltip-placement="top-right" uib-tooltip="Edit">{{ title }}:</label>';
+			html += '<div class="col-md-8 col-sm-9">';
 				if (typeof attrs.directiveView !== 'undefined' && attrs.directiveView == 'true') {
 					html += '<div ' + attrs.directiveName + '="value"></div>';
 				} else {

@@ -162,9 +162,11 @@ header .header-not-connected {
 header .header-not-connected h1 {
     font-weight: 100;
     font-size: 86px;
+    text-shadow: 2px 2px 1px #1a2944;
 }
 header .header-not-connected h2 {
     font-weight: 100;
+    text-shadow: 2px 2px 1px #1a2944;
 }
 
 header .header-connected {

@@ -1,7 +1,6 @@
 			<div class="container header-connected">
 				<profile-picture></profile-picture>
 				<div id="header-connected-top">
-					<span class="student-hi">Hi {{studentData.first_name}},</span>
 					<div class="student-action">
 						<div ng-controller="DropdownCtrl" tooltip-placement="top-right" uib-tooltip="Click here for user actions">
 							<span uib-dropdown on-toggle="toggled(open)">
@@ -15,9 +14,9 @@
 							  </ul>
 							</span>
 						</div>         
-						<switch-status  name="onOff" tooltip-placement="top-right" uib-tooltip="Click here to change your status" >
-						</switch-status>
+						<switch-status  name="onOff" tooltip-placement="top-right" uib-tooltip="Click here to change your status" ></switch-status>
 					</div>
+					<span class="student-hi">Hi {{studentData.first_name}},</span>
 				</div>
 				<div id="header-connected-bottom">
 					<div tooltip-placement="top-left" uib-tooltip="How many companies watched me?">{{studentData.counter_view}} companies watched you</div>

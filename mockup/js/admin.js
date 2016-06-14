@@ -6,7 +6,7 @@ jlm.controller('AdminNotConnected', function ($scope, $http, $routeParams, $loca
         
         $rootScope.adminData = data;
         if ($rootScope.adminData !== false) {
-            $location.path("/admin-login");
+            $location.path("/admin");
         }
         
     });

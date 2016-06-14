@@ -250,12 +250,12 @@ header .header-connected #change-status-btn.run {
 }
 .mb-40 {margin-bottom: 40px;}
 .form-control {
-    padding: 10px 10px;
+    padding: 7px 10px;
     height: auto;
     font-size: 17px;
 }
 select.form-control {
-    padding: 11px 10px;
+    padding: 8px 7px;
 }
 /* end header style */
 
@@ -404,24 +404,24 @@ img-crop canvas {
 	clear: both;
 	height: 0;
 }
-.profileItemLable {line-height: 46px;text-align: right;cursor: pointer;}
+.profileItemLable {line-height: 40px;text-align: right;cursor: pointer;}
 .no-edit-zone {
 	padding-left: 11px;
 	margin-bottom: 10px;
 	cursor: pointer;
 }
 .no-edit-zone > div {
-	line-height: 46px;
+	line-height: 40px;
 }
 .no-edit-zone > div:after {
 	content: "\00a0";
 }
 .edit-zone .input-group-btn > .btn {
-    padding: 10px 10px;
+    padding: 7px 10px;
     font-size: 17px;
 }
-.edit-zone .input-group-btn > .btn {
-    padding: 10px 10px;
+.edit-zone .form-group > .btn {
+    padding: 7px 10px;
     font-size: 17px;
 }
 .edit-zone .input-group {

@@ -29,6 +29,10 @@ jlm.config(function ($routeProvider, $locationProvider) {
             templateUrl: 'view/new-password.html',
             controller: 'UserNotConnected'
         }).
+        when('/activated/:hash', {
+            templateUrl: 'view/activated.html',
+            controller: 'StudentActivated'
+        }).
         when('/termOfUse', {
             templateUrl: 'view/termOfUse.html'
         }).

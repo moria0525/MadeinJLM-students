@@ -1,0 +1,18 @@
+		<header>
+			<div ng-include src="'view/include/nav.html'"></div>
+			<div ng-include src="'view/include/header-not-connected.html'"></div>
+		</header>
+
+		<section class="main-context">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 text-center col-md-offset-3">
+						<h2 class="mb-40">Activate account</h2>
+						<uib-alert ng-show="alerts.activated.msg != null" type="{{alerts.activated.type}}" close="closeAlert('activated')"><span ng-bind-html="alerts.activated.msg"></span></uib-alert>
+						<p><a href="#/">Back to home</a></p>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<div ng-include src="'view/include/footer.html'"></div>

@@ -15,24 +15,20 @@ class sendMail {
                 <title>' . $subject . '</title>
             </head>
             <body style="margin: 0;padding:0;background-color:#FFBF00;">
-                <div style="background-color:#EFF3F8;padding: 60px 0;">
-                    <div style= "text-align:center;">
-                    <img src="https://raw.githubusercontent.com/moria0525/MadeinJLM-students/master/logo.png" align="middle">                    
-                    </div>    
-                    <div style="max-width:680px; background-color:#F5DA81; border-radius:2px; margin:auto; font-family: Calibri;  font-weight: 100;">
-                        <div style="width:100%;">
-                            <a href="http://job.madeinjlm.org">madeinJLM Jobs Home-page</a>
-                        </div>
-                        <div style="padding: 45px 30px;background-color:#F5F6CE;" dir="LTR">
-                            <h1 style="  font-size: 2.8em;color: #002b5b;margin: 0;font-weight: 100;">' . $subject . '</h1>
-                            <div style=" font-size: 1.8em">' . $message . '</div>
-                        </div>
-                        <div style="width:100%;text-align:center;  padding: 45px 0;  color: darkgray;">
-                            madeinJLM jobs © 2016 
-                        </div>
-
-                    </div>
-                </div>
+				<div style="background-color:#192944;margin:auto;font-family: Calibri;font-weight: 100;">
+					<div>
+						<a href="http://job.madeinjlm.org">
+							<img src="https://raw.githubusercontent.com/moria0525/MadeinJLM-students/master/logo.png" style="width:100%;">
+						</a>
+					</div>
+					<div style="padding: 45px 30px;background-color:#f4f8ff;" dir="LTR">
+						<h1 style="font-size: 2.8em;color: #192944;margin: 0;font-weight: 100;">' . $subject . '</h1>
+						<div style="font-size: 1.8em;color: #192944;">' . $message . '</div>
+					</div>
+					<div style="width:100%;text-align:center;  padding: 45px 0;  color: #FFF;">
+						madeinJLM jobs © 2016 
+					</div>
+				</div>
             </body>
         </html>
         ';

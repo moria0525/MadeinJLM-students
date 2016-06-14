@@ -28,8 +28,6 @@ jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $locat
             }
         });
     };
-    
-
 	
     $scope.resetPassword = function () {
         student.resetPassword($scope.data.resetPassword.Email).success(function (data) {
@@ -53,6 +51,22 @@ jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $locat
 			});
 		}
     };
+});
+jlm.controller('StudentActivated', function ($scope, $http, $routeParams, $location, student, $rootScope) {
+    "use strict";
+    $scope.activatedStatus = false;
+	student.init().success(function (data) {
+		$scope.alerts.activated = {type: 'warning', msg: 'Please wait for the server.'};
+        if ($rootScope.studentData !== false) {
+            $location.path("/profile");
+        } else {
+			student.activated().success(function ($routeParams.hash) {
+				if (data.status === 'error')
+					$scope.alerts.activated = {type: 'danger', msg: data.errors.join('<br>')};
+				else $scope.alerts.activated = {type: 'success', msg: 'Activated successfully.'};
+			}
+		}
+    });
 });
 
 jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location, student, general, $rootScope,$uibModal) {
@@ -306,6 +320,16 @@ jlm.factory('student', ['$http', '$httpParamSerializerJQLike', function ($http, 
                 method  : 'POST',
                 url     : 'API/Student/register',
                 data    : $httpParamSerializerJQLike(data),  // pass in data as strings
+                headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }).success(function (data) {
+                return data;
+            }).error(function () {return {'status': 'error', 'errors': 'Please try again later.'}; });
+        },
+        activated: function (hash) {
+            return $http({
+                method  : 'GET',
+                url     : 'API/Student/activated',
+                data    : $httpParamSerializerJQLike({c:hash}),  // pass in data as strings
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (data) {
                 return data;

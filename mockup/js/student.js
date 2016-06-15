@@ -142,7 +142,7 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
 jlm.controller('ProfileStrength', function ($scope, $http, $routeParams, $location, $rootScope) {
     "use strict";
 	var arrayTips = {
-			0: "Good! just dont forget to update your Data! ",
+			0: "Awsome! just don't forget to update your data every once in a while! ",
 			1: "To raise your profile strength you need to fill Department of Study field ",
 			2: "If you'll add a Phone Number your Profile strength will jump with 5%! ",
 			3: "Everyone have Linkedin account, so add yours! ",

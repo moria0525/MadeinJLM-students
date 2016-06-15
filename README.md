@@ -24,7 +24,7 @@ This project is developed as part of the requirements for a [Software Engineerin
 
 Please visit our wiki for furthur project info: 
 
-### [User Manual](../../wiki/user-manual) (Under constructions)
+### [User Manual](../../wiki/user-manual)
 
 ### [Team Page](../../wiki/team)
 [![Alon](https://avatars1.githubusercontent.com/u/17544440?v=3&s=80)](https://github.com/alonshmilo)

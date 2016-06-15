@@ -17,12 +17,12 @@
 									<p>{{strength}}% </p>
 								</div>
 							</div>
-							<div class="alert alert-info" tooltip-placement="bottom-left" uib-tooltip="The Companies filter profiles also according to Profile Strength. So look on the Tips and make your profile Better & Fuller">
-								 <strong>Tip!</strong> {{strengthTips}}
+							<div class="alert alert-info" tooltip-placement="bottom-left" uib-tooltip="Companies filters profiles also according to How much your profile is strong. Check yor tip and make your profile Better!">
+								 <strong>Get a Tip!</strong> {{strengthTips}}
 							</div>
 						</div>
 						<div class="alert alert-danger" ng-show="!studentData.status">
-							<strong>Attention!</strong> Your Status is off!   Turn On your Status so the companies will know you are looking for a job! <a href="#" ng-click="switchStatusClick(1); $event.preventDefault()">Turn on</a>
+							<strong>Attention!</strong> Your Status is off! Turn On your Status so that companies will know that you are looking for a job! <a href="#" ng-click="switchStatusClick(1); $event.preventDefault()">Turn on</a>
 						</div>
 					</div>
 				</div>
@@ -33,7 +33,7 @@
                         <li profile-item="skils" directive-name="input-skill" directive-view="true" title="'Skills'" value="studentData.skils" options="options"></li>
                         <li profile-item="cv" directive-name="input-file" directive-view="true" title="'CV'" value="studentData.cv"></li>
 						
-						<li profile-item="phone_number" directive-name="input-text" title="'Phone number'" value="studentData.phone_number" multy="false" save-function="update" maxlength="16"></li>
+						
 						<!--
                         <li profile-item="basic_education_years" directive-name="input-select" title="'Basic education years'" value="studentData.basic_education_years" options="options.basic_education_years" multy="false" save-function="update" view-template="options[value]"></li> -->
 						<li profile-item="basic_education_subject" directive-name="input-text" title="'Department of Study'" value="studentData.basic_education_subject" multy="false" save-function="update" maxlength="250"></li>
@@ -49,10 +49,11 @@
 						<!--<li profile-item="job_weekend" directive-name="input-select" title="'Weekends'" value="studentData.job_weekend" options="options.possible" multy="false" save-function="update" view-template="options[value]"></li>-->
 						<li profile-item="current_work" directive-name="input-text" title="'Current work'" value="studentData.current_work" multy="false" save-function="update" maxlength="250"></li>
 						
-						<li profile-item="summary" directive-name="input-textarea" title="'Summary'" value="studentData.summary" multy="false" save-function="update" maxlength="150" breaks="true"></li>
+						<li profile-item="summary" directive-name="input-textarea" title="'Summary (up to 150 characters)'" value="studentData.summary" multy="false" save-function="update" maxlength="150" breaks="true"></li>
 						<li profile-item="experience" directive-name="input-textarea" title="'Experience'" value="studentData.experience" multy="false" save-function="update" maxlength="500" breaks="true"></li>
 						<li profile-item="linkedin" directive-name="input-text" title="'Linkedin link'" value="studentData.linkedin" multy="false" save-function="update" maxlength="150"></li>
 						<li profile-item="github" directive-name="input-text" title="'Github link'" value="studentData.github" multy="false" save-function="update" maxlength="150"></li>
+                        <li profile-item="phone_number" directive-name="input-text" title="'Phone number'" value="studentData.phone_number" multy="false" save-function="update" maxlength="16"></li>
 					</ul>
 				</div>
 			</div>

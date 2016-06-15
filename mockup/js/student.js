@@ -143,15 +143,15 @@ jlm.controller('ProfileStrength', function ($scope, $http, $routeParams, $locati
     "use strict";
 	var arrayTips = {
 			0: "Good! just dont forget to update your Data! ",
-			1: "Tip: To raise your profile strength you need to fill Department of Study field ",
-			2: "Tip: If you will add a Phone Number your Profile strength will jump with 5 precents! ",
-			3: "Tip: Everyone have Linkedin acount, so add yours! ",
-			4: "Tip: Your college name filed is blank. ",
-			5: "If you will fill the Degree field your profile strength will grow with 5% ",
-			6: "Tip: fill the Semester Left field for raise your Profile Strength!",
-			7: "Tip: The Position wanted field will help you find job that suitable for you! ",
+			1: "To raise your profile strength you need to fill Department of Study field ",
+			2: "If you'll add a Phone Number your Profile strength will jump with 5%! ",
+			3: "Everyone have Linkedin account, so add yours! ",
+			4: "Your college name field is blank. ",
+			5: "If you'll fill the Degree field your profile strength will grow with 5% ",
+			6: "fill the Semester Left field for raise your Profile Strength!",
+			7: "The Position wanted field will help you find job that suits for you! ",
 			8: "Hi there, fill your experience so the companies will appreciate you much better",
-			9: "your Grade average is importent  so if you will fill it more job options will open for you",
+			9: "your Grade average is important  so if you will fill it more job options will open for you!",
 			10: "This profile not covering all! upload cv file so the companies will know you better!",
 			11: "The Summary field is your place to tell about your self and very importent for the companies witch looking for students",
 			12: "The most powerfull strength is your Skills! it's obvious that you have at least 6 skills!"

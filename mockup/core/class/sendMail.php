@@ -14,8 +14,8 @@ class sendMail {
             <head>
                 <title>' . $subject . '</title>
             </head>
-            <body style="margin: 0;padding:0;background-color:#FFBF00;">
-				<div style="background-color:#192944;margin:auto;font-family: Calibri;font-weight: 100;">
+            <body style="margin: 0;padding:0;">
+				<div style="background-color:#192944;margin:auto;font-family: Calibri;font-weight: 100;max-width: 600px;">
 					<div>
 						<a href="http://job.madeinjlm.org">
 							<img src="https://raw.githubusercontent.com/moria0525/MadeinJLM-students/master/logo.png" style="width:100%;">
@@ -25,7 +25,7 @@ class sendMail {
 						<h1 style="font-size: 2.8em;color: #192944;margin: 0;font-weight: 100;">' . $subject . '</h1>
 						<div style="font-size: 1.8em;color: #192944;">' . $message . '</div>
 					</div>
-					<div style="width:100%;text-align:center;  padding: 45px 0;  color: #FFF;">
+					<div style="width:100%;text-align:center;padding: 45px 0;color: #FFF;font-size: 20px;">
 						madeinJLM jobs © 2016 
 					</div>
 				</div>

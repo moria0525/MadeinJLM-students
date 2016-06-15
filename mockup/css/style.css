@@ -276,6 +276,11 @@ footer {
     padding: 40px 0;
     text-align: center;
 }
+footer a:visited,
+footer a {
+    color: #FFF;
+    font-weight: bold;
+}
 /* end footer style */
 
 /* profile picture */

@@ -118,7 +118,7 @@ jlm.controller('DropdownCtrl', function ($scope, $log) {
 	$scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
 });
 
-// mobile nav
+// mobile nav contorller
 jlm.controller('pageslideCtrl',['$scope',function($scope){
 
 	$scope.checked = false;

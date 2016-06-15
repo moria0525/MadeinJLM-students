@@ -1,9 +1,19 @@
 <?php
+
+/** 
+  * This is student API
+  * extends API
+  * Here are all the functions that are in use
+  *
+  */
+
 class API_Student extends API {
+    
     public function index() {
         $student = new Student();
         return $student->userData();
     }
+    
     public function login() {
         
         if (isset($_POST['Email']))
@@ -39,6 +49,7 @@ class API_Student extends API {
         
         return $return_arr;
     }
+    
     public function sendActivated($email) {
         $student = new Student();
         $user = $student->table->getRow(array('Email' => $email));
@@ -59,6 +70,7 @@ class API_Student extends API {
 				If you didn\'t signed out for this website, please notify us at: madeinjlm.jce@gmail.com
 			</p>');
     }
+    
     public function register() {
         
         $student = new Student();
@@ -89,7 +101,8 @@ class API_Student extends API {
         
         return $return_arr;
     }
-    public function activated() {
+    
+    public function activated() { //acticate your account
 		
 		$student = new Student();
         $return_arr = array();
@@ -117,6 +130,7 @@ class API_Student extends API {
         
         return $return_arr;
     }
+    
     public function logOut() {
         
         $student = new Student();
@@ -125,7 +139,8 @@ class API_Student extends API {
         return ['status' => "success"];
         
     }
-    public function resetPassword() {
+    
+    public function resetPassword() { //This is for forgot password
         if (isset($_POST['Email']))
             $email = $_POST['Email'];
         else $email = '';
@@ -148,7 +163,8 @@ class API_Student extends API {
         
         return $return_arr;
     }
-    public function newPassword() {
+    
+    public function newPassword() { //make a new passowrd, for login
         if (isset($_POST['hash']))
             $hash = $_POST['hash'];
         else $hash = '';
@@ -173,6 +189,7 @@ class API_Student extends API {
         
         return $return_arr;
     }
+    
     public function changePassword() {
         $student = new Student();
         
@@ -188,8 +205,8 @@ class API_Student extends API {
         return $return_arr;
 
     }
-    public function changeStatus()
-    {
+    
+    public function changeStatus() { //change user's status
 		$student = new Student();
 		if($student->isSigned()){
 			if ($data = $student->changeStatus($_POST)) {
@@ -208,6 +225,7 @@ class API_Student extends API {
         
         return $return_arr;
     }
+    
     public function update() {
         $student = new Student();
         
@@ -222,12 +240,15 @@ class API_Student extends API {
         }
         return $return_arr;
     }
-    public function managementTableInfo() {
+    
+    /*public function managementTableInfo() {
 
     }
+    
     public function deleteTableInfo() {
 
-    }
+    }*/
+    
     public function addSkill() {
 		$student = new Student();
 		if($student->isSigned()){
@@ -248,6 +269,7 @@ class API_Student extends API {
         }
         return $return_arr;
     }
+    
     public function deleteSkill() {
 		$student = new Student();
 		if (!isset($_POST['id'])) {
@@ -273,6 +295,7 @@ class API_Student extends API {
         }
         return $return_arr;
     }
+    
     public function uploadProfile() {
 		$student = new Student();
 		
@@ -296,6 +319,8 @@ class API_Student extends API {
         return $return_arr;
 		
     }
+    
+    //from now on - cv functions
     public function uploadCV() {
 		$student = new Student();
 		
@@ -319,6 +344,7 @@ class API_Student extends API {
         
         return $return_arr;
     }
+    
     public function getCV() {
 		if (!isset($_GET['id']) || empty($_GET['id'])) {
 			die();
@@ -354,6 +380,7 @@ class API_Student extends API {
 		}
 		die();
     }
+    
     public function myCV() {
 		$student = new Student();
 		
@@ -385,7 +412,8 @@ class API_Student extends API {
         return $return_arr;
 		
     }
-    public function deleteCV() {
+    
+    public function deleteCV() { //delete cv
 		$student = new Student();
 		
 		if($student->isSigned()){

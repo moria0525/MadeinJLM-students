@@ -1,14 +1,20 @@
 <?php
-
+/**
+ * Student Class
+ * All functions was written for student, with extending of the User class
+ * Deals with every thing the student needs to do in his profile
+ */
 class Student extends User {
-	public function __construct()
+	
+    public function __construct() //constructor
 	{
 		parent::__construct();
 		$this->config->userTableName = 'student';
 		// Start object construction
 		$this->start();
 	}
-    public function userData()
+    
+    public function userData() //get user data
     {
 		// header('Content-Type: text/html; charset=utf-8');
         if ((bool) $this->session->signed) {
@@ -23,7 +29,8 @@ class Student extends User {
         }
         return false;
     }
-    public function uploadProfile($profile)
+    
+    public function uploadProfile($profile) //deals with uploading profile picture
 	{
         $this->log->channel('update profile picture');
 		
@@ -74,7 +81,8 @@ class Student extends User {
             return false;
         }
 	}
-    public function deleteCV() {
+    
+    public function deleteCV() { //to delete a cv
 		
 		if ($this->_data['cv'] == '')
 			return true;
@@ -106,7 +114,8 @@ class Student extends User {
 			return false;
 		}
 	}
-    public function uploadCV($cv)
+    
+    public function uploadCV($cv) //upload a cv, shuld get the cv file
 	{
         $this->log->channel('update CV picture');
 		
@@ -165,7 +174,9 @@ class Student extends User {
 		}
 		return $this->_data['cv'];
 	}
-	public function changeStatus($info) {
+	
+    public function changeStatus($info) //change user's status from looking for a job to not looking
+    { 
 		// checking if get all info we need
 		if (!isset($info['status']) || 
 			($info['status'] == 0 && 
@@ -188,7 +199,7 @@ class Student extends User {
 		if ($this->table->runQuery($sql, $data)) {
             
 			$this->log->report('Information Updated(ChangeStatus)');
-			// יפה זה חשוב - זה בעצם דואג לעדכן את הסשיין! כל הכבוד שעליתם על זה לבד
+			
             if ($this->clone === 0) {
                 $this->session->update = true;
             }
@@ -232,8 +243,10 @@ class Student extends User {
         }
 		return true;
 	}
-	private function checkSkillExist($skill_name) {
-		$skill_name = strtolower($skill_name);
+	
+    private function checkSkillExist($skill_name) 
+    {
+		$skill_name = strtolower($skill_name); //the name of the skill, in simple
 		$db_action = new DB_Action();
         $sql = 'SELECT id FROM skills WHERE LOWER(name)=:name LIMIT 1';
         if (!$stmt = $db_action->getStatement($sql, array('name' => $skill_name))) {
@@ -245,7 +258,9 @@ class Student extends User {
 			else return false;
         }
 	}
-	public function addSkill($info) {
+	
+    public function addSkill($info)  //add a skill to user
+    {
 		if (!isset($info['name']) || !isset($info['years'])) {
 			$this->log->error(2);
 			return false;
@@ -310,7 +325,7 @@ class Student extends User {
 			}
 			if (!$data['skill_id']) {
 				// add new skill
-				$sql = "INSERT INTO skills (name) VALUES(:name)";
+				$sql = "INSERT INTO skills (name) VALUES(:name)"; //this is the sql query
 				
 				if ($db_action->runQuery($sql, array('name' => $info['name']))) {
 					$this->log->report('Information Updated(addSkill)');
@@ -329,7 +344,7 @@ class Student extends User {
 			$intoStr = implode(', ', $into);
 			$values = ':' . implode(', :', $into);
 			
-			$sql = "INSERT INTO student_skills ({$intoStr}) VALUES({$values})";
+			$sql = "INSERT INTO student_skills ({$intoStr}) VALUES({$values})"; //this is the sql query
 			
 			if ($db_action->runQuery($sql, $data)) {
 				$this->log->report('Information Updated(addSkill)');
@@ -349,8 +364,10 @@ class Student extends User {
 		}
 		return true;
 	}
-	public function deleteSkill($id) {
-		$sql = 'DELETE FROM student_skills WHERE id='.$id.' AND student_id='.$this->_data['ID'];
+	
+    public function deleteSkill($id) //delete a skill to a user
+    {
+		$sql = 'DELETE FROM student_skills WHERE id='.$id.' AND student_id='.$this->_data['ID']; //this is the sql query
 		$db_action = new DB_Action();
 		
 		if ($db_action->query($sql)){

@@ -1,4 +1,10 @@
 <?php
+
+/**
+  *This one is about sql queries, the most common
+  *API_General
+  **/
+
 class API_General extends API {
 	public function index() {}
     

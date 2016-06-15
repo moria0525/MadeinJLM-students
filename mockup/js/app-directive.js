@@ -253,6 +253,7 @@ jlm.directive('inputTextarea', function () {
 		template: '<form ng-submit="editZoneSave(editValue,key)">' +
 						'<div class="form-group"><textarea class="form-control" rows="7" ng-model="editValue" maxlength="{{maxlength}}"></textarea></div> ' +
 						'<div class="text-right form-group">' +
+							'<p class="help-block pull-left">{{maxlength ? \'up to \'+maxlength+\' characters.\' : \'\'}}</p>'+
 							'<button type="button" class="btn btn-success" ng-click="editZoneSave(editValue,key)" ng-disabled="value == editValue">Save</button> ' +
 							'<button type="button" class="btn btn-warning" ng-click="editValue = value" ng-disabled="value == editValue">Reset</button> ' +
 							'<button type="button" class="btn btn-default" ng-show="!multy" ng-click="editZoneClose()">Cancel</button>' +

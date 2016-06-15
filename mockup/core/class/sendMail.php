@@ -18,7 +18,7 @@ class sendMail {
 				<div style="background-color:#192944;margin:auto;font-family: Calibri;font-weight: 100;max-width: 600px;">
 					<div>
 						<a href="http://job.madeinjlm.org">
-							<img src="https://raw.githubusercontent.com/moria0525/MadeinJLM-students/master/logo.png" style="width:100%;">
+							<img src="https://raw.githubusercontent.com/moria0525/MadeinJLM-students/master/logo.png" style="width:100%;display: block;">
 						</a>
 					</div>
 					<div style="padding: 45px 30px;background-color:#f4f8ff;" dir="LTR">

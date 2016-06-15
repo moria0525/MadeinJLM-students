@@ -44,7 +44,10 @@ class API_Student extends API {
         $user = $student->table->getRow(array('Email' => $email));
         sendMail::send($user->Email, 'Activated your account', 
 			'<p>
-				Hello ' . $user->first_name . ', Welcome to madeinJLM Jobs!
+				Hello ' . $user->first_name . ',
+			</p>
+			<p>
+				Welcome to madeinJLM Jobs!
 			</p>
 			<p>
 				Please click on the link at the bottom to activated your account.

@@ -1,8 +1,8 @@
 <?php
 
 /** 
-  * This is student API
-  * extends API
+  * This is student's API
+  * extends the class API
   * Here are all the functions that are in use
   *
   */
@@ -14,6 +14,10 @@ class API_Student extends API {
         return $student->userData();
     }
     
+    /*
+     *login
+     *returns return_arr with data
+    */
     public function login() {
         
         if (isset($_POST['Email']))
@@ -50,6 +54,7 @@ class API_Student extends API {
         return $return_arr;
     }
     
+    //send activation mail
     public function sendActivated($email) {
         $student = new Student();
         $user = $student->table->getRow(array('Email' => $email));
@@ -71,6 +76,11 @@ class API_Student extends API {
 			</p>');
     }
     
+     /*
+      * register function
+      * returns return_arr with data
+      * for sign up
+      */
     public function register() {
         
         $student = new Student();
@@ -102,6 +112,11 @@ class API_Student extends API {
         return $return_arr;
     }
     
+     /*
+      * activated function
+      * for activating the new account opened
+      * returns return_arr with data
+      */
     public function activated() { //acticate your account
 		
 		$student = new Student();
@@ -131,6 +146,7 @@ class API_Student extends API {
         return $return_arr;
     }
     
+    //log out the system
     public function logOut() {
         
         $student = new Student();
@@ -140,7 +156,13 @@ class API_Student extends API {
         
     }
     
-    public function resetPassword() { //This is for forgot password
+     /*
+      * reset password function
+      * to be used in forgot password and change password functions
+      * returns return_arr with data
+      */
+    
+    public function resetPassword() { 
         if (isset($_POST['Email']))
             $email = $_POST['Email'];
         else $email = '';
@@ -164,7 +186,12 @@ class API_Student extends API {
         return $return_arr;
     }
     
-    public function newPassword() { //make a new passowrd, for login
+     /*
+      * new password function
+      * to be used in forgot password and change password functions
+      * returns return_arr with data
+      */
+    public function newPassword() { 
         if (isset($_POST['hash']))
             $hash = $_POST['hash'];
         else $hash = '';
@@ -190,6 +217,11 @@ class API_Student extends API {
         return $return_arr;
     }
     
+     /*
+      * change password function
+      * changing the password
+      * returns return_arr with data
+      */
     public function changePassword() {
         $student = new Student();
         
@@ -206,6 +238,11 @@ class API_Student extends API {
 
     }
     
+    /*
+     * change status function
+     * changing the user's status - looking for job or nor
+     * returns return_arr with needed data
+     */
     public function changeStatus() { //change user's status
 		$student = new Student();
 		if($student->isSigned()){
@@ -226,6 +263,10 @@ class API_Student extends API {
         return $return_arr;
     }
     
+     /*
+      * update data function
+      * returns return_arr with changed data
+      */
     public function update() {
         $student = new Student();
         

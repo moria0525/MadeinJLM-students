@@ -1,10 +1,18 @@
 <?php
 
+/****
+    *This is an API for admin
+    *Including all the functions needed
+    *
+    */
+
 class API_Admin extends API {
+    
     public function index() {
         $admin = new Admin();
         return $admin;
     }
+    
     public function login() {
         
         if (isset($_POST['Email']))
@@ -41,7 +49,8 @@ class API_Admin extends API {
         
         return $return_arr;
     }
-	public function logOut() {
+	
+    public function logOut() {
         
         $admin = new Admin();
         
@@ -72,6 +81,7 @@ class API_Admin extends API {
         
         return $return_arr;
     }
+    
     public function newPassword() {
         if (isset($_POST['hash']))
             $hash = $_POST['hash'];
@@ -97,6 +107,7 @@ class API_Admin extends API {
         
         return $return_arr;
     }
+    
     public function changePassword() {
         $admin = new Admin();
         
@@ -112,7 +123,8 @@ class API_Admin extends API {
         return $return_arr;
 
     }
-	  public function update() {
+    
+    public function update() {
         $admin = new Admin();
         
         if ($data = $admin->update($_POST)) {

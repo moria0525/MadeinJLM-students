@@ -8,27 +8,35 @@
 class API_General extends API {
 	public function index() {}
     
-    
+    //SQL query for all college
     public function GetCollege() {
         $db = new DB_Action();
 		$sql = 'SELECT * FROM college ORDER BY id ASC';
 		return $db->getQuery($sql);
     }
+    
+    //SQL query for all degrees
     public function GetDegree() {
         $db = new DB_Action();
 		$sql = 'SELECT * FROM degree ORDER BY id ASC';
 		return $db->getQuery($sql);
     }
+    
+    //SQL query for all languages
     public function GetLanguages() {
         $db = new DB_Action();
 		$sql = 'SELECT * FROM languages ORDER BY id ASC';
 		return $db->getQuery($sql);
     }
+
+    //SQL query for all skills
     public function GetSkills() {
 		$db = new DB_Action();
 		$sql = 'SELECT * FROM skills ORDER BY id ASC';
 		return $db->getQuery($sql);
     }
+   
+    //SQL query for all options when there is selection of skills, degrees etc
     public function getOptions() {
 		$return_array = array();
 		$db = new DB_Action();

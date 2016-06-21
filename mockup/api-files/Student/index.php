@@ -290,6 +290,12 @@ class API_Student extends API {
 
     }*/
     
+    
+   /*
+    * add skill function
+    * returns return_arr with changed data
+    * if there is an error it return the error as an array with the error
+    */
     public function addSkill() {
 		$student = new Student();
 		if($student->isSigned()){
@@ -310,6 +316,12 @@ class API_Student extends API {
         }
         return $return_arr;
     }
+    
+   /*
+    * delete skill function
+    * returns return_arr with changed data
+    * if there is an error it return the error as an array with the error
+    */
     
     public function deleteSkill() {
 		$student = new Student();
@@ -337,6 +349,12 @@ class API_Student extends API {
         return $return_arr;
     }
     
+    
+   /*
+    * upload profile picture - deals with picture profile
+    * returns return_arr with changed data
+    * if there is an error it return the error as an array with the error
+    */
     public function uploadProfile() {
 		$student = new Student();
 		
@@ -361,7 +379,12 @@ class API_Student extends API {
 		
     }
     
-    //from now on - cv functions
+   /*
+    * upload cv file using upload class
+    * returns return_arr with changed data
+    * if there is an error it return the error as an array with the error
+    */
+    
     public function uploadCV() {
 		$student = new Student();
 		
@@ -385,7 +408,12 @@ class API_Student extends API {
         
         return $return_arr;
     }
+ 
     
+   /*
+    * get cv file
+    * void function
+    */
     public function getCV() {
 		if (!isset($_GET['id']) || empty($_GET['id'])) {
 			die();
@@ -454,7 +482,13 @@ class API_Student extends API {
 		
     }
     
-    public function deleteCV() { //delete cv
+   /*
+    * delete cv file using upload class
+    * returns return_arr with changed data
+    * if there is an error it return the error as an array with the error
+    */
+    
+    public function deleteCV() { 
 		$student = new Student();
 		
 		if($student->isSigned()){

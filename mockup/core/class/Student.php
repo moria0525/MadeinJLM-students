@@ -1,8 +1,10 @@
 <?php
 /**
+ *
  * Student Class
  * All functions was written for student, with extending of the User class
  * Deals with every thing the student needs to do in his profile
+ *
  */
 class Student extends User {
 	
@@ -30,7 +32,14 @@ class Student extends User {
         return false;
     }
     
-    public function uploadProfile($profile) //deals with uploading profile picture
+    
+    /*
+     * Upload profile picture function
+     * @param $profile for id
+     * bool function
+     * return true in success
+     */
+    public function uploadProfile($profile) 
 	{
         $this->log->channel('update profile picture');
 		
@@ -130,7 +139,7 @@ class Student extends User {
 		
 		$extensions = array("jpeg","jpg","png","pdf","doc","dot","docx");        
 		if(in_array($file_ext,$extensions )=== false)
-			 $this->log->error("file extension not allowed, please choose a JPEG or PNG or PDF or DOC file.");
+			 $this->log->error("File extension not allowed, please choose a JPEG or PNG or PDF or DOC file.");
 		
 		if($file_size > 5*1024*1024)
 			 $this->log->error("File size cannot exceed 5 MB");
@@ -175,6 +184,14 @@ class Student extends User {
 		return $this->_data['cv'];
 	}
 	
+    
+    /*
+     * Change user's status function
+     * @param $info array with data on user
+     * bool function
+     * return true in success
+     */
+    
     public function changeStatus($info) //change user's status from looking for a job to not looking
     { 
 		// checking if get all info we need
@@ -244,6 +261,16 @@ class Student extends User {
 		return true;
 	}
 	
+    /*
+     * Check skills function
+     * Checks if the skill entered exists on database
+     * If skill doesn't exist - it adds it
+     * @param $skill_name
+     * bool function
+     * return true in success
+     */
+    
+    
     private function checkSkillExist($skill_name) 
     {
 		$skill_name = strtolower($skill_name); //the name of the skill, in simple
@@ -365,7 +392,17 @@ class Student extends User {
 		return true;
 	}
 	
-    public function deleteSkill($id) //delete a skill to a user
+    
+    /*
+     * Delete skill function
+     * Delete a certain skill to a certain user, not from the general db
+     * @param $id for skill's id
+     * bool function
+     * return true in success
+     */
+    
+    
+    public function deleteSkill($id) //delete a skill to a user, not from db general
     {
 		$sql = 'DELETE FROM student_skills WHERE id='.$id.' AND student_id='.$this->_data['ID']; //this is the sql query
 		$db_action = new DB_Action();

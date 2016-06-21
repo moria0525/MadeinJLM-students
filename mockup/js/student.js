@@ -1,4 +1,16 @@
+/*
+ *
+ * This file contains:
+ * Controllers
+ * Directives
+ * factory
+ *
+ */
+
+
 /* --- controlers --- */
+
+//Conteroller that controles when user is not connected
 jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $location, student, $rootScope) {
     "use strict";
     student.init().success(function (data) {
@@ -52,6 +64,9 @@ jlm.controller('UserNotConnected', function ($scope, $http, $routeParams, $locat
 		}
     };
 });
+
+//Conteroller that controles when student is activated
+
 jlm.controller('StudentActivated', function ($scope, $http, $routeParams, $location, student, $rootScope) {
     "use strict";
     $scope.activatedStatus = false;
@@ -69,6 +84,9 @@ jlm.controller('StudentActivated', function ($scope, $http, $routeParams, $locat
 		}
     });
 });
+
+//Conteroller that controles when user is connected
+
 
 jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location, student, general, $rootScope,$uibModal) {
     "use strict";
@@ -139,30 +157,33 @@ jlm.controller('UserConnected', function ($scope, $http, $routeParams, $location
 	};
 });
 
+
+//controller for profile strength
+//shows tips and makes te calculation for the profile strength on client side only
 jlm.controller('ProfileStrength', function ($scope, $http, $routeParams, $location, $rootScope) {
     "use strict";
 	var arrayTips = {
-			0: "Awsome! just don't forget to update your data every once in a while! ",
+			0: "Awsome! Your profile is an All-star. Just don't forget to update your data every once in a while! ",
 			1: "To raise your profile strength you need to fill Department of Study field ",
-			2: "If you'll add a Phone Number your Profile strength will jump with 5%! ",
+			2: "If you'll add a Phone Number, your Profile strength will jump with 5%! ",
 			3: "Everyone have Linkedin account, so add yours! ",
 			4: "Your college name field is blank. ",
 			5: "If you'll fill the Degree field your profile strength will grow with 5% ",
-			6: "fill the Semester Left field for raise your Profile Strength!",
+			6: "fill the Semester Left field to raise your Profile Strength!",
 			7: "The Position wanted field will help you find job that suits for you! ",
-			8: "Hi there, fill your experience so the companies will appreciate you much better",
+			8: "Hey there, fill your experience so that companies will appreciate you much better",
 			9: "your Grade average is important  so if you will fill it more job options will open for you!",
-			10: "This profile not covering all! upload cv file so the companies will know you better!",
+			10: "Your profile doesn't tell anything about you! upload cv file so that companies will know you better!",
 			11: "The Summary field is your place to tell about your self and very importent for the companies witch looking for students",
-			12: "The most powerfull strength is your Skills! it's obvious that you have at least 6 skills!"
+			12: "The most powerfull strength is your Skills! It's obvious that you have at least 6 skills! So add them..."
 		};
 	$scope.strength = 0;
 	$scope.strengthTips = arrayTips[0];    
 	$rootScope.$watch("studentData", function(newValue, oldValue) {
 		if ($rootScope.studentData) {
-			var tipSelect = [];
+			var tipSelect = []; //an array for the relevant tips
 			var strength = 0;
-			
+			//this is the calculation:
 			if($rootScope.studentData.basic_education_subject!=="")
 				strength += 5;
 			else tipSelect.push(1);
@@ -232,6 +253,9 @@ jlm.directive('profilePicture', function () {
 		templateUrl: 'view/directive/profile-picture.html'
 	};
 });
+
+//Controller for the profile picture
+
 jlm.controller('profilePictureCtrl', function ($scope, $uibModal, $log) {
 	'use strict';
 	$scope.openChangeProfileImage = function () {
@@ -252,6 +276,8 @@ jlm.controller('profilePictureCtrl', function ($scope, $uibModal, $log) {
 		
 		
 });
+
+
 jlm.controller('ModalProfileCtrl', ['$scope', '$uibModalInstance', '$log', 'student', '$rootScope', function ($scope, $uibModalInstance, $log, student, $rootScope) {
 	'use strict';
 	$scope.cancel = function () {

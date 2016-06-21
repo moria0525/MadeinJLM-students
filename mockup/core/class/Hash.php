@@ -3,6 +3,7 @@
 /**
  * Class Hash
  *
+ * Credit for
  * @package ptejada\uFlex
  * @author  Pablo Tejada <pablo@ptejada.com>
  */

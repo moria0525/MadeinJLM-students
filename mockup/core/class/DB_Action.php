@@ -3,6 +3,7 @@
 /**
  * Class DB_Table
  *
+ * Credit for
  * @package ptejada\uFlex
  * @author  Pablo Tejada <pablo@ptejada.com>
  */

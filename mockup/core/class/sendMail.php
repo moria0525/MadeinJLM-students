@@ -1,4 +1,17 @@
 <?php
+
+ /*
+  *
+  * sendMail Class
+  * Using mail function to send mails
+  * @param $message for the message itself
+  * @param $subject for the subject of the mail
+  * @param $html get all the html code
+  * @param $to is the sender's adress
+  *
+  */
+
+
 class sendMail {
     public static function send($to, $subject, $message) {
         

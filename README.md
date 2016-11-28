@@ -22,9 +22,9 @@ This final project is developed as part of the requirements for a [Azrieli - Jer
 
 Please visit our wiki for furthur project info: 
 
-### [User Manual](../../wiki/user-manual)
+### [User Manual]
 
-### [Team Page](../../wiki/team)
+### [Team Page]
 [![Lior](https://avatars3.githubusercontent.com/u/17621187?v=3&s=80)](https://github.com/liorsap1)
 [![Yoad](https://avatars3.githubusercontent.com/u/17547266?v=3&s=80)](https://github.com/sh00ki)
 

@@ -2,7 +2,7 @@
 <br />
 
 
-![project logo]https://www.dropbox.com/s/bviuc7g39vrw10x/temp_logo.png?dl=0)
+![project logo](https://www.dropbox.com/s/bviuc7g39vrw10x/temp_logo.png?dl=0)
 
 
 ## Contact Info
@@ -25,7 +25,7 @@ Please visit our wiki for furthur project info:
 ### [User Manual](../../wiki/user-manual)
 
 ### [Team Page](../../wiki/team)
-[![Lior](https://avatars1.githubusercontent.com/u/17621187?v=3&s=400)](https://github.com/liorsap1)
+[![Lior](https://avatars3.githubusercontent.com/u/17621187?v=3&s=80)](https://github.com/liorsap1)
 [![Yoad](https://avatars3.githubusercontent.com/u/17547266?v=3&s=80)](https://github.com/sh00ki)
 
 ### Project Documents

@@ -29,16 +29,16 @@ Please visit our wiki for furthur project info:
 [![Yoad](https://avatars3.githubusercontent.com/u/17547266?v=3&s=80)](https://github.com/sh00ki)
 
 ### Project Documents
-- [Project Inception](../../wiki/Project-Inception-and-Planing)
-- [Software Requirements Specification](../../wiki/srs)
-- [Software Design Specification](../../wiki/sds)
+- [Project Inception]
+- [Software Requirements Specification]
+- [Software Design Specification]
 
 ### Iteration Pages
-- [Iteration 0 - ZFR]()
-- [Iteration 1 - MVP]()
-- [Iteration 2 - BPA]()
-- [Iteration 3 - PES]()
-- [Iteration 4 - SMF]()
+- [Iteration 0 - ZFR]
+- [Iteration 1 - MVP]
+- [Iteration 2 - BPA]
+- [Iteration 3 - PES]
+- [Iteration 4 - SMF]
 
 
 

@@ -2,7 +2,7 @@
 <br />
 
 
-![project logo](https://www.dropbox.com/s/bviuc7g39vrw10x/temp_logo.png?dl=0)
+![project logo](https://www.dropbox.com/s/bviuc7g39vrw10x/temp_logo.png)
 
 
 ## Contact Info
